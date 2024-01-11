@@ -1,5 +1,11 @@
 # @norges-domstoler/dds-page-generator
 
+## 2.7.11
+
+### Patch Changes
+
+- 5fa0cda: Ingen endringer. Tester ny release pipeline.
+
 ## 2.7.10
 
 ### Patch Changes
