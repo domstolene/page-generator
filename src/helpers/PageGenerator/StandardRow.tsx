@@ -3,9 +3,9 @@ import {
   getLiteralScreenSize,
 } from '@norges-domstoler/dds-components';
 import styled, { css } from 'styled-components';
-import { PageGeneratorTokens } from '../tokens';
+import { PageGeneratorTokens } from '../../tokens';
 
-export const SubContainer = styled.div<{
+export const StandardRow = styled.div<{
   screenSize: ScreenSize;
   length: number;
   breakpoint?: ScreenSize;

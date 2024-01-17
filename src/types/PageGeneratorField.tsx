@@ -2,7 +2,7 @@ import {
   CardProps,
   CheckboxProps,
   CheckboxGroupProps,
-  DatepickerProps,
+  DatePickerProps,
   DescriptionListProps,
   DescriptionListGroupProps,
   DescriptionListTermProps,
@@ -112,8 +112,9 @@ interface CheckboxGroupField {
 }
 
 interface DatepickerField {
-  component: PageGeneratorSupportedFields.Datepicker;
-  props: DatepickerProps;
+  component: PageGeneratorSupportedFields.DatePicker;
+  props: DatePickerProps;
+  name: string;
   hide?: boolean;
 }
 

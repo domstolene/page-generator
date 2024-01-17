@@ -44,12 +44,12 @@ export const FormFields: (PageGeneratorField | PageGeneratorRow)[] = [
     rowType: 'standard',
     fields: [
       {
-        component: PageGeneratorSupportedFields.Datepicker,
+        component: PageGeneratorSupportedFields.DatePicker,
         props: {
           label: 'Fødselsdato',
           name: 'dateOfBirth',
-          width: '320px',
         },
+        name: 'dateOfBirth',
       },
       {
         component: PageGeneratorSupportedFields.Select,

@@ -5,20 +5,17 @@ const { spacing: Spacing } = ddsBaseTokens;
 
 export const PageGeneratorTokens = {
   columnGaps: {
-    [ScreenSize.XSmall]: Spacing.SizesDdsSpacingLocalX1,
-    [ScreenSize.Small]: Spacing.SizesDdsSpacingLocalX1,
-    [ScreenSize.Medium]: Spacing.SizesDdsSpacingLocalX1,
-    [ScreenSize.Large]: Spacing.SizesDdsSpacingLocalX1,
-    [ScreenSize.XLarge]: Spacing.SizesDdsSpacingLocalX15,
+    [ScreenSize.XSmall]: Spacing.SizesDdsSpacingX1,
+    [ScreenSize.Small]: Spacing.SizesDdsSpacingX1,
+    [ScreenSize.Medium]: Spacing.SizesDdsSpacingX1,
+    [ScreenSize.Large]: Spacing.SizesDdsSpacingX1,
+    [ScreenSize.XLarge]: Spacing.SizesDdsSpacingX15,
   },
   rowGaps: {
-    xs: Spacing.SizesDdsSpacingLocalX1,
-    sm: Spacing.SizesDdsSpacingLocalX1,
-    md: Spacing.SizesDdsSpacingLocalX1,
-    lg: Spacing.SizesDdsSpacingLocalX1,
-    xl: Spacing.SizesDdsSpacingLocalX15,
-  },
-  buttonRow: {
-    marginTop: Spacing.SizesDdsSpacingLocalX1,
+    xs: Spacing.SizesDdsSpacingX1,
+    sm: Spacing.SizesDdsSpacingX1,
+    md: Spacing.SizesDdsSpacingX1,
+    lg: Spacing.SizesDdsSpacingX1,
+    xl: Spacing.SizesDdsSpacingX15,
   },
 };

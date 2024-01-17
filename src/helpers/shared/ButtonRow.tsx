@@ -1,11 +1,17 @@
-import { ScreenSize, SelectOption } from '@norges-domstoler/dds-components';
-import { ButtonRow, PageGeneratorFlexContainer } from '../styles';
-import { PageGeneratorRow } from '../types';
+import {
+  GridChild,
+  HStack,
+  ScreenSize,
+  SelectOption,
+} from '@norges-domstoler/dds-components';
+import '../../styles/main.css';
+import { PageGeneratorRow } from '../../types';
 import { MultiValue, SingleValue } from 'react-select';
 import { ChangeEvent } from 'react';
-import { getComponent } from '.';
+import { getComponent } from '..';
+import { CalendarDate } from '@internationalized/date';
 
-export const getButtonRow = (
+export const ButtonRow = (
   index: number,
   obj: PageGeneratorRow,
   fieldOnChange: (
@@ -19,11 +25,12 @@ export const getButtonRow = (
       | MultiValue<SelectOption<unknown>>,
     name: string,
   ) => void,
+  datePickerOnChange: (value: CalendarDate, name: string) => void,
   screenSize: ScreenSize,
 ) => {
   return (
-    <ButtonRow columnsOccupied="all" key={index}>
-      <PageGeneratorFlexContainer screenSize={screenSize}>
+    <GridChild className="small-top-margin" columnsOccupied="all" key={index}>
+      <HStack gap="x1" className="button-row">
         {obj.fields.map((field, groupedIndex) => {
           return (
             !field.hide &&
@@ -32,11 +39,12 @@ export const getButtonRow = (
               groupedIndex,
               fieldOnChange,
               selectOnChange,
+              datePickerOnChange,
               screenSize,
             )
           );
         })}
-      </PageGeneratorFlexContainer>
-    </ButtonRow>
+      </HStack>
+    </GridChild>
   );
 };

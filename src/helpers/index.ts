@@ -1,6 +1,5 @@
 export * from './addFieldToState';
-export * from './getButtonRow';
-export * from './getComponent';
+export * from './shared/getComponent';
 export * from './isFieldWithValidations';
 export * from './isMultiValue';
 export * from './isPageGeneratorRow';
