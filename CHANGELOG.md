@@ -1,5 +1,11 @@
 # @norges-domstoler/dds-page-generator
 
+## 3.0.0
+
+### Major Changes
+
+- e728274: Oppdater avhengighet @norges-domstoler/dds-components til siste major- versjon og gjør endringer tilknyttet spacing-tokens og DatePicker
+
 ## 2.7.11
 
 ### Patch Changes
