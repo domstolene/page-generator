@@ -15,16 +15,17 @@ import {
   PageGeneratorStateOptionTypes,
   PageGeneratorValidation,
 } from '../types';
-import { SubContainer } from '../styles';
 import { PageGeneratorTokens } from '../tokens';
 import {
   addFieldToState,
-  getButtonRow,
   getComponent,
   isFieldWithValidations,
   isMultiValue,
   isPageGeneratorRow,
 } from '../helpers';
+import { CalendarDate } from '@internationalized/date';
+import { ButtonRow } from '../helpers/shared/ButtonRow';
+import { StandardRow } from '../helpers/PageGenerator/StandardRow';
 
 /**
  * Generer komponenter fra @norges-domstoler/dds-components i et Grid view, basert på `fields` propertien. PageGenerator bruker Grid-komponenten fra @norges-domstoler/dds-components, slik at den håndterer alt av riktige marginer, mellomrom og responsivt design.
@@ -158,6 +159,15 @@ export const PageGenerator = (props: PageGeneratorProps) => {
     setState(newState);
   };
 
+  const datePickerOnChange = (value: CalendarDate, name: string) => {
+    setErrorMessage(name, ''); //clear errormessage when user types
+    const newState = {
+      ...state,
+      [name]: value,
+    };
+    setState(newState);
+  };
+
   const screenSize = useScreenSize();
 
   return (
@@ -171,11 +181,12 @@ export const PageGenerator = (props: PageGeneratorProps) => {
           if (obj.rowType === 'button') {
             return (
               !obj.hide &&
-              getButtonRow(
+              ButtonRow(
                 index,
                 obj,
                 fieldOnChange,
                 selectOnChange,
+                datePickerOnChange,
                 screenSize,
               )
             );
@@ -183,7 +194,7 @@ export const PageGenerator = (props: PageGeneratorProps) => {
             return (
               !obj.hide && (
                 <GridChild columnsOccupied="all" key={index}>
-                  <SubContainer
+                  <StandardRow
                     screenSize={screenSize}
                     length={obj.fields.length}
                     breakpoint={obj.breakpoint}
@@ -196,12 +207,13 @@ export const PageGenerator = (props: PageGeneratorProps) => {
                           groupedIndex,
                           fieldOnChange,
                           selectOnChange,
+                          datePickerOnChange,
                           screenSize,
                           onBlur,
                         )
                       );
                     })}
-                  </SubContainer>
+                  </StandardRow>
                 </GridChild>
               )
             );
@@ -215,6 +227,7 @@ export const PageGenerator = (props: PageGeneratorProps) => {
                   index,
                   fieldOnChange,
                   selectOnChange,
+                  datePickerOnChange,
                   screenSize,
                   onBlur,
                 )}

@@ -3,7 +3,7 @@ export enum PageGeneratorSupportedFields {
   Card = 'Card',
   Checkbox = 'Checkbox',
   CheckboxGroup = 'CheckboxGroup',
-  Datepicker = 'Datepicker',
+  DatePicker = 'DatePicker',
   DescriptionList = 'DescriptionList',
   DescriptionListGroup = 'DescriptionListGroup',
   DescriptionListDesc = 'DescriptionListDesc',

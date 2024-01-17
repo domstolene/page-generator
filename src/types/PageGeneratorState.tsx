@@ -1,5 +1,6 @@
 import { SelectOption } from '@norges-domstoler/dds-components';
 import { PropsValue } from 'react-select';
+import { CalendarDate } from '@internationalized/date';
 
 export type PageGeneratorStateOptionTypes =
   | string
@@ -7,6 +8,7 @@ export type PageGeneratorStateOptionTypes =
   | boolean
   | readonly string[]
   | undefined
+  | CalendarDate
   | PropsValue<SelectOption<unknown>>;
 
 export type PageGeneratorState<StateOptionTypes> = Record<

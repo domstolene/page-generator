@@ -3,11 +3,12 @@ import {
   ScreenSize,
   SelectOption,
 } from '@norges-domstoler/dds-components';
-import { SectionGeneratorRow } from '../types';
+import { SectionGeneratorRow } from '../../types';
 import { MultiValue, SingleValue } from 'react-select';
 import { ChangeEvent } from 'react';
-import { getComponent } from '.';
+import { getComponent } from '..';
 import React from 'react';
+import { CalendarDate } from '@internationalized/date';
 
 const Row = (props: SectionGeneratorRow) => {
   const { id, className, htmlProps, ...rest } = props;
@@ -25,7 +26,7 @@ const Row = (props: SectionGeneratorRow) => {
   }
 };
 
-export const getStandardRow = (
+export const StandardRow = (
   index: number,
   obj: SectionGeneratorRow,
   fieldOnChange: (
@@ -39,6 +40,7 @@ export const getStandardRow = (
       | MultiValue<SelectOption<unknown>>,
     name: string,
   ) => void,
+  datePickerOnChange: (value: CalendarDate, name: string) => void,
   screenSize: ScreenSize,
 ) => {
   return (
@@ -51,6 +53,7 @@ export const getStandardRow = (
             groupedIndex,
             fieldOnChange,
             selectOnChange,
+            datePickerOnChange,
             screenSize,
           )
         );

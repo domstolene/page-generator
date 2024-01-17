@@ -42,7 +42,7 @@ export const addFieldToState = (
         [key]: field.props.defaultValue,
       };
       return state;
-    case PageGeneratorSupportedFields.Datepicker:
+    case PageGeneratorSupportedFields.DatePicker:
     case PageGeneratorSupportedFields.TextInput:
       key = field.props.name ?? field.props.id ?? FIELD_MISSING_NAME_OR_ID;
       state = {

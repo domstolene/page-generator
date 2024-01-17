@@ -3,7 +3,7 @@ import {
   Card,
   Checkbox,
   CheckboxGroup,
-  Datepicker,
+  DatePicker,
   DescriptionList,
   DescriptionListGroup,
   DescriptionListDesc,
@@ -35,10 +35,11 @@ import {
   Paragraph,
   Typography,
 } from '@norges-domstoler/dds-components';
-import { PageGeneratorField, PageGeneratorSupportedFields } from '../types';
+import { PageGeneratorField, PageGeneratorSupportedFields } from '../../types';
 import { MultiValue, SingleValue } from 'react-select';
 import { FocusEvent, ChangeEvent } from 'react';
-import { SectionGenerator } from '../components';
+import { SectionGenerator } from '../../components';
+import { CalendarDate } from '@internationalized/date';
 
 type TElement = HTMLInputElement | HTMLTextAreaElement;
 
@@ -52,6 +53,7 @@ export const getComponent = (
       | MultiValue<SelectOption<unknown>>,
     name: string,
   ) => void,
+  datePickerOnChange: (value: CalendarDate, name: string) => void,
   screenSize: ScreenSize,
   onBlur?: <T extends TElement>(event: FocusEvent<T>) => void,
 ) => {
@@ -93,18 +95,19 @@ export const getComponent = (
                 childIndex,
                 fieldOnChange,
                 selectOnChange,
+                datePickerOnChange,
                 screenSize,
               )
             );
           })}
         </CheckboxGroup>
       );
-    case PageGeneratorSupportedFields.Datepicker:
+    case PageGeneratorSupportedFields.DatePicker:
       return (
-        <Datepicker
+        <DatePicker
           {...field.props}
           key={index}
-          onChange={inputFieldOnChange}
+          onChange={value => datePickerOnChange(value, field.name)}
         />
       );
     case PageGeneratorSupportedFields.DescriptionList:
@@ -118,6 +121,7 @@ export const getComponent = (
                 childIndex,
                 fieldOnChange,
                 selectOnChange,
+                datePickerOnChange,
                 screenSize,
               )
             );
@@ -135,6 +139,7 @@ export const getComponent = (
                 childIndex,
                 fieldOnChange,
                 selectOnChange,
+                datePickerOnChange,
                 screenSize,
               )
             );
@@ -172,6 +177,7 @@ export const getComponent = (
                 childIndex,
                 fieldOnChange,
                 selectOnChange,
+                datePickerOnChange,
                 screenSize,
               )
             );
@@ -201,6 +207,7 @@ export const getComponent = (
                 childIndex,
                 fieldOnChange,
                 selectOnChange,
+                datePickerOnChange,
                 screenSize,
               )
             );
@@ -232,6 +239,7 @@ export const getComponent = (
                 childIndex,
                 fieldOnChange,
                 selectOnChange,
+                datePickerOnChange,
                 screenSize,
               )
             );
@@ -276,6 +284,7 @@ export const getComponent = (
                 childIndex,
                 fieldOnChange,
                 selectOnChange,
+                datePickerOnChange,
                 screenSize,
               )
             );
@@ -329,6 +338,7 @@ export const getComponent = (
                 childIndex,
                 fieldOnChange,
                 selectOnChange,
+                datePickerOnChange,
                 screenSize,
               )
             );
@@ -358,6 +368,7 @@ export const getComponent = (
                 childIndex,
                 fieldOnChange,
                 selectOnChange,
+                datePickerOnChange,
                 screenSize,
               )
             );

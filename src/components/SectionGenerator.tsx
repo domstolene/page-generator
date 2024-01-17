@@ -15,12 +15,13 @@ import {
 import React from 'react';
 import {
   addFieldToState,
-  getButtonRow,
   getComponent,
   isMultiValue,
   isSectionGeneratorRow,
 } from '../helpers';
-import { getStandardRow } from '../helpers/getStandardRow';
+import { StandardRow } from '../helpers/SectionGenerator/StandardRow';
+import { CalendarDate } from '@internationalized/date';
+import { ButtonRow } from '../helpers/shared/ButtonRow';
 
 /**
  * Generer komponenter fra @norges-domstoler/dds-components, basert på `fields` propertien. SectionGenerator legger på en wrapper, basert på `as` propertien.
@@ -83,6 +84,14 @@ export const SectionGenerator = (props: SectionGeneratorProps) => {
     setState(newState);
   };
 
+  const datePickerOnChange = (value: CalendarDate, name: string) => {
+    const newState = {
+      ...state,
+      [name]: value,
+    };
+    setState(newState);
+  };
+
   const screenSize = useScreenSize();
 
   const Parent = (props: { children: (false | JSX.Element)[] }) => {
@@ -112,22 +121,24 @@ export const SectionGenerator = (props: SectionGeneratorProps) => {
           if (obj.rowType === 'button') {
             return (
               !obj.hide &&
-              getButtonRow(
+              ButtonRow(
                 index,
                 obj,
                 fieldOnChange,
                 selectOnChange,
+                datePickerOnChange,
                 screenSize,
               )
             );
           } else {
             return (
               !obj.hide &&
-              getStandardRow(
+              StandardRow(
                 index,
                 obj,
                 fieldOnChange,
                 selectOnChange,
+                datePickerOnChange,
                 screenSize,
               )
             );
@@ -141,6 +152,7 @@ export const SectionGenerator = (props: SectionGeneratorProps) => {
                   index,
                   fieldOnChange,
                   selectOnChange,
+                  datePickerOnChange,
                   screenSize,
                 )}
               </React.Fragment>
