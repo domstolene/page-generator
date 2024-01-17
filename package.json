@@ -69,8 +69,9 @@
     "vitest": "^1.1.1"
   },
   "dependencies": {
-    "@norges-domstoler/dds-components": "^13.13.0",
-    "@norges-domstoler/dds-design-tokens": "^3.0.3",
+    "@internationalized/date": "^3.5.1",
+    "@norges-domstoler/dds-components": "^14.2.0",
+    "@norges-domstoler/dds-design-tokens": "^4.0.0",
     "react-select": "^5.8.0"
   },
   "peerDependencies": {
