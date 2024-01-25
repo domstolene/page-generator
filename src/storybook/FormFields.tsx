@@ -177,6 +177,31 @@ export const FormFields: (PageGeneratorField | PageGeneratorRow)[] = [
     ],
   },
   {
+    component: PageGeneratorSupportedFields.ToggleBar,
+    props: {
+      label: 'Ja eller nei',
+      name: 'yesno',
+    },
+    children: [
+      {
+        component: PageGeneratorSupportedFields.ToggleRadio,
+        props: {
+          label: 'Ja',
+          value: 'yes',
+          name: 'yesno',
+        },
+      },
+      {
+        component: PageGeneratorSupportedFields.ToggleRadio,
+        props: {
+          label: 'Nei',
+          value: 'no',
+          name: 'yesno',
+        },
+      },
+    ],
+  },
+  {
     rowType: 'button',
     fields: [
       {

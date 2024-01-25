@@ -34,6 +34,8 @@ import {
   Link,
   Paragraph,
   Typography,
+  ToggleBar,
+  ToggleRadio,
 } from '@norges-domstoler/dds-components';
 import { PageGeneratorField, PageGeneratorSupportedFields } from '../../types';
 import { MultiValue, SingleValue } from 'react-select';
@@ -319,6 +321,24 @@ export const getComponent = (
           onBlur={onBlur}
         />
       );
+    case PageGeneratorSupportedFields.ToggleBar:
+      return (
+        <ToggleBar {...field.props} key={index}>
+          {field.children.map((child, childIndex) => {
+            return (
+              !child.hide &&
+              getComponent(
+                child,
+                childIndex,
+                fieldOnChange,
+                selectOnChange,
+                datePickerOnChange,
+                screenSize,
+              )
+            );
+          })}
+        </ToggleBar>
+      );
     case PageGeneratorSupportedFields.ToggleButton:
       return (
         <ToggleButton
@@ -344,6 +364,14 @@ export const getComponent = (
             );
           })}
         </ToggleButtonGroup>
+      );
+    case PageGeneratorSupportedFields.ToggleRadio:
+      return (
+        <ToggleRadio
+          {...field.props}
+          key={index}
+          onChange={inputFieldOnChange}
+        />
       );
     case PageGeneratorSupportedFields.Typography:
       return (

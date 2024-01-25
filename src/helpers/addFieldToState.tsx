@@ -29,6 +29,8 @@ export const addFieldToState = (
       return state;
     case PageGeneratorSupportedFields.RadioButton:
     case PageGeneratorSupportedFields.RadioButtonGroup:
+    case PageGeneratorSupportedFields.ToggleBar:
+    case PageGeneratorSupportedFields.ToggleRadio:
       key = field.props.name ?? field.props.id ?? FIELD_MISSING_NAME_OR_ID;
       state = {
         ...state,
