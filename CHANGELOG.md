@@ -1,5 +1,11 @@
 # @norges-domstoler/dds-page-generator
 
+## 3.1.0
+
+### Minor Changes
+
+- 8e90a31: Legg til støtte for bruk av ToggleBar og ToggleRadio
+
 ## 3.0.0
 
 ### Major Changes
