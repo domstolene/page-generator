@@ -27,6 +27,8 @@ export enum PageGeneratorSupportedFields {
   Spinner = 'Spinner',
   TextArea = 'TextArea',
   TextInput = 'TextInput',
+  ToggleBar = 'ToggleBar',
+  ToggleRadio = 'ToggleRadio',
   ToggleButton = 'ToggleButton',
   ToggleButtonGroup = 'ToggleButtonGroup',
   Typography = 'Typography',

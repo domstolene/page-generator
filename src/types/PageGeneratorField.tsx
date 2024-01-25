@@ -32,6 +32,8 @@ import {
   LinkProps,
   ParagraphProps,
   TypographyProps,
+  ToggleBarProps,
+  ToggleRadioProps,
 } from '@norges-domstoler/dds-components';
 import { PageGeneratorSupportedFields } from './PageGeneratorSupportedFields';
 import { ComponentProps } from 'react';
@@ -55,6 +57,7 @@ type FieldWithChildren =
   | HStackField
   | ListField
   | RadioButtonGroupField
+  | ToggleBarField
   | ToggleButtonGroupField
   | VStackField;
 
@@ -79,6 +82,7 @@ type FieldWithoutChildren =
   | SelectField
   | SpinnerField
   | ToggleButtonField
+  | ToggleRadioField
   | TypographyField
   | VisuallyHiddenField;
 
@@ -272,6 +276,19 @@ interface TextInputField {
   component: PageGeneratorSupportedFields.TextInput;
   props: TextInputProps;
   validations?: PageGeneratorValidation[];
+  hide?: boolean;
+}
+
+interface ToggleBarField {
+  component: PageGeneratorSupportedFields.ToggleBar;
+  props: ToggleBarProps<string>;
+  hide?: boolean;
+  children: ToggleRadioField[];
+}
+
+interface ToggleRadioField {
+  component: PageGeneratorSupportedFields.ToggleRadio;
+  props: ToggleRadioProps;
   hide?: boolean;
 }
 
