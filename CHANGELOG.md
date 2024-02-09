@@ -1,5 +1,11 @@
 # @norges-domstoler/dds-page-generator
 
+## 3.1.1
+
+### Patch Changes
+
+- b10bb7e: Bump the non-major group with 18 updates
+
 ## 3.1.0
 
 ### Minor Changes
