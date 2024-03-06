@@ -1,5 +1,11 @@
 # @norges-domstoler/dds-page-generator
 
+## 3.1.2
+
+### Patch Changes
+
+- 6ecc4d5: Returner verdi for TextArea i stateOnChange
+
 ## 3.1.1
 
 ### Patch Changes
