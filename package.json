@@ -70,7 +70,7 @@
   },
   "dependencies": {
     "@internationalized/date": "^3.5.1",
-    "@norges-domstoler/dds-components": "^14.2.0",
+    "@norges-domstoler/dds-components": "^15.4.1",
     "@norges-domstoler/dds-design-tokens": "^4.0.0",
     "react-select": "^5.8.0"
   },
