@@ -46,6 +46,7 @@ export const addFieldToState = (
       return state;
     case PageGeneratorSupportedFields.DatePicker:
     case PageGeneratorSupportedFields.TextInput:
+    case PageGeneratorSupportedFields.TextArea:
       key = field.props.name ?? field.props.id ?? FIELD_MISSING_NAME_OR_ID;
       state = {
         ...state,
