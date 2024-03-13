@@ -43,7 +43,7 @@
     "@changesets/cli": "^2.27.1",
     "@storybook/addon-docs": "^8.0.0",
     "@storybook/addon-essentials": "^8.0.0",
-    "@storybook/addon-storysource": "^7.6.7",
+    "@storybook/addon-storysource": "^8.0.0",
     "@storybook/blocks": "^7.6.7",
     "@storybook/core-common": "^7.6.7",
     "@storybook/react": "^7.6.7",
