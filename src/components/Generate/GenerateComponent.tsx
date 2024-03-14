@@ -11,8 +11,10 @@ import {
   Divider,
   Drawer,
   DrawerGroup,
+  Fieldset,
   GlobalMessage,
   InputMessage,
+  Legend,
   List,
   ListItem,
   LocalMessage,
@@ -28,7 +30,6 @@ import {
   VisuallyHidden,
   HStack,
   VStack,
-  SelectOption,
   Heading,
   Label,
   Link,
@@ -36,35 +37,33 @@ import {
   Typography,
   ToggleBar,
   ToggleRadio,
+  useScreenSize,
+  GridChild,
+  getHooksGridStyling,
 } from '@norges-domstoler/dds-components';
 import { PageGeneratorField, PageGeneratorSupportedFields } from '../../types';
-import { MultiValue, SingleValue } from 'react-select';
-import { FocusEvent, ChangeEvent } from 'react';
+import { ChangeEvent, useContext } from 'react';
 import { SectionGenerator } from '../../components';
-import { CalendarDate } from '@internationalized/date';
+import { isPageGeneratorRow } from '../../helpers';
+import { GenerateRow } from './GenerateRow';
+import { PageGeneratorContext } from '../PageGenerator/PageGeneratorContext';
+import { GenerateGridChildren } from './GenerateGridChildren';
+import { GenerateGridChild } from './GenerateGridChild';
 
-type TElement = HTMLInputElement | HTMLTextAreaElement;
+export const GenerateComponent = (index: number, field: PageGeneratorField) => {
+  const { fieldOnChange, selectOnChange, datePickerOnChange, onBlur } =
+    useContext(PageGeneratorContext);
 
-export const getComponent = (
-  field: PageGeneratorField,
-  index: number,
-  fieldOnChange: (event: ChangeEvent<TElement & Record<string, never>>) => void,
-  selectOnChange: (
-    chosen:
-      | SingleValue<SelectOption<unknown>>
-      | MultiValue<SelectOption<unknown>>,
-    name: string,
-  ) => void,
-  datePickerOnChange: (value: CalendarDate, name: string) => void,
-  screenSize: ScreenSize,
-  onBlur?: <T extends TElement>(event: FocusEvent<T>) => void,
-) => {
   const inputFieldOnChange = (
     event: ChangeEvent<HTMLInputElement & Record<string, never>>,
   ) => fieldOnChange(event);
   const textAreaFieldOnChange = (
     event: ChangeEvent<HTMLTextAreaElement & Record<string, never>>,
   ) => fieldOnChange(event);
+
+  const screenSize = useScreenSize();
+  const GridStyling = getHooksGridStyling(screenSize);
+  console.log(GridStyling);
 
   switch (field.component) {
     case PageGeneratorSupportedFields.Button:
@@ -90,17 +89,7 @@ export const getComponent = (
       return (
         <CheckboxGroup {...field.props} key={index}>
           {field.children.map((child, childIndex) => {
-            return (
-              !child.hide &&
-              getComponent(
-                child,
-                childIndex,
-                fieldOnChange,
-                selectOnChange,
-                datePickerOnChange,
-                screenSize,
-              )
-            );
+            return !child.hide && GenerateComponent(childIndex, child);
           })}
         </CheckboxGroup>
       );
@@ -116,17 +105,7 @@ export const getComponent = (
       return (
         <DescriptionList {...field.props} key={index}>
           {field.children.map((child, childIndex) => {
-            return (
-              !child.hide &&
-              getComponent(
-                child,
-                childIndex,
-                fieldOnChange,
-                selectOnChange,
-                datePickerOnChange,
-                screenSize,
-              )
-            );
+            return !child.hide && GenerateComponent(childIndex, child);
           })}
         </DescriptionList>
       );
@@ -134,17 +113,7 @@ export const getComponent = (
       return (
         <DescriptionListGroup {...field.props} key={index}>
           {field.children.map((child, childIndex) => {
-            return (
-              !child.hide &&
-              getComponent(
-                child,
-                childIndex,
-                fieldOnChange,
-                selectOnChange,
-                datePickerOnChange,
-                screenSize,
-              )
-            );
+            return !child.hide && GenerateComponent(childIndex, child);
           })}
         </DescriptionListGroup>
       );
@@ -172,19 +141,33 @@ export const getComponent = (
       return (
         <DrawerGroup {...field.props} key={index}>
           {field.children.map((child, childIndex) => {
-            return (
-              !child.hide &&
-              getComponent(
-                child,
-                childIndex,
-                fieldOnChange,
-                selectOnChange,
-                datePickerOnChange,
-                screenSize,
-              )
-            );
+            return !child.hide && GenerateComponent(childIndex, child);
           })}
         </DrawerGroup>
+      );
+    case PageGeneratorSupportedFields.Fieldset:
+      return (
+        <Fieldset
+          {...field.props}
+          htmlProps={{
+            ...field.props.htmlProps,
+            style: {
+              ...GridStyling,
+              display: 'grid',
+              marginLeft: '0',
+              marginRight: '0',
+            },
+          }}
+          key={index}
+        >
+          {field.children.map((child, childIndex) => {
+            if ((child as PageGeneratorField).component === 'Legend') {
+              return GenerateComponent(childIndex, child as PageGeneratorField);
+            } else {
+              return GenerateGridChild(child, childIndex);
+            }
+          })}
+        </Fieldset>
       );
     case PageGeneratorSupportedFields.GlobalMessage:
       return (
@@ -202,17 +185,7 @@ export const getComponent = (
       return (
         <HStack {...field.props} key={index}>
           {field.children.map((child, childIndex) => {
-            return (
-              !child.hide &&
-              getComponent(
-                child,
-                childIndex,
-                fieldOnChange,
-                selectOnChange,
-                datePickerOnChange,
-                screenSize,
-              )
-            );
+            return !child.hide && GenerateComponent(childIndex, child);
           })}
         </HStack>
       );
@@ -224,6 +197,12 @@ export const getComponent = (
           {field.innerHTML}
         </Label>
       );
+    case PageGeneratorSupportedFields.Legend:
+      return (
+        <Legend {...field.props} key={index}>
+          {field.innerHTML}
+        </Legend>
+      );
     case PageGeneratorSupportedFields.Link:
       return (
         <Link {...field.props} key={index}>
@@ -234,17 +213,7 @@ export const getComponent = (
       return (
         <List {...field.props} key={index}>
           {field.children.map((child, childIndex) => {
-            return (
-              !child.hide &&
-              getComponent(
-                child,
-                childIndex,
-                fieldOnChange,
-                selectOnChange,
-                datePickerOnChange,
-                screenSize,
-              )
-            );
+            return !child.hide && GenerateComponent(childIndex, child);
           })}
         </List>
       );
@@ -279,17 +248,7 @@ export const getComponent = (
       return (
         <RadioButtonGroup {...field.props} key={index}>
           {field.children.map((child, childIndex) => {
-            return (
-              !child.hide &&
-              getComponent(
-                child,
-                childIndex,
-                fieldOnChange,
-                selectOnChange,
-                datePickerOnChange,
-                screenSize,
-              )
-            );
+            return !child.hide && GenerateComponent(childIndex, child);
           })}
         </RadioButtonGroup>
       );
@@ -325,17 +284,7 @@ export const getComponent = (
       return (
         <ToggleBar {...field.props} key={index}>
           {field.children.map((child, childIndex) => {
-            return (
-              !child.hide &&
-              getComponent(
-                child,
-                childIndex,
-                fieldOnChange,
-                selectOnChange,
-                datePickerOnChange,
-                screenSize,
-              )
-            );
+            return !child.hide && GenerateComponent(childIndex, child);
           })}
         </ToggleBar>
       );
@@ -351,17 +300,7 @@ export const getComponent = (
       return (
         <ToggleButtonGroup {...field.props} key={index}>
           {field.children.map((child, childIndex) => {
-            return (
-              !child.hide &&
-              getComponent(
-                child,
-                childIndex,
-                fieldOnChange,
-                selectOnChange,
-                datePickerOnChange,
-                screenSize,
-              )
-            );
+            return !child.hide && GenerateComponent(childIndex, child);
           })}
         </ToggleButtonGroup>
       );
@@ -389,17 +328,7 @@ export const getComponent = (
       return (
         <VStack {...field.props} key={index}>
           {field.children.map((child, childIndex) => {
-            return (
-              !child.hide &&
-              getComponent(
-                child,
-                childIndex,
-                fieldOnChange,
-                selectOnChange,
-                datePickerOnChange,
-                screenSize,
-              )
-            );
+            return !child.hide && GenerateComponent(childIndex, child);
           })}
         </VStack>
       );

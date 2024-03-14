@@ -3,11 +3,11 @@ import {
   PageGeneratorState,
   PageGeneratorSupportedFields,
   PageGeneratorStateOptionTypes,
-} from '../types';
+} from '../../types';
 
 const FIELD_MISSING_NAME_OR_ID = 'FIELD_MISSING_NAME_OR_ID';
 
-export const addFieldToState = (
+export const AddFieldToState = (
   field: PageGeneratorField,
   state: PageGeneratorState<PageGeneratorStateOptionTypes>,
 ) => {
@@ -24,7 +24,7 @@ export const addFieldToState = (
     case PageGeneratorSupportedFields.CheckboxGroup:
     case PageGeneratorSupportedFields.ToggleButtonGroup:
       field.children.forEach(child => {
-        state = addFieldToState(child, state);
+        state = AddFieldToState(child, state);
       });
       return state;
     case PageGeneratorSupportedFields.RadioButton:

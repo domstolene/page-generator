@@ -1,2 +1,2 @@
-export * from './PageGenerator';
-export * from './SectionGenerator';
+export * from './PageGenerator/PageGenerator';
+export * from './SectionGenerator/SectionGenerator';
