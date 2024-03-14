@@ -62,7 +62,6 @@
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
     "storybook": "^7.6.7",
-    "styled-components": "^6.1.6",
     "tsup": "^8.0.1",
     "typescript": "^5.3.3",
     "vite": "^5.0.10",
@@ -70,14 +69,13 @@
   },
   "dependencies": {
     "@internationalized/date": "^3.5.1",
-    "@norges-domstoler/dds-components": "^15.4.1",
+    "@norges-domstoler/dds-components": "^15.7.0",
     "@norges-domstoler/dds-design-tokens": "^4.0.0",
     "react-select": "^5.8.0"
   },
   "peerDependencies": {
     "react": "^16 || ^17 || ^18",
-    "react-dom": "^16 || ^17 || ^18",
-    "styled-components": "^5 || ^6"
+    "react-dom": "^16 || ^17 || ^18"
   },
   "publishConfig": {
     "provenance": true

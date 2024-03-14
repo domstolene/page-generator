@@ -8,6 +8,10 @@ Side- og skjemagenerering basert på JSON-input for bruk i domstolenes tjenester
 
 ```sh
 pnpm add @norges-domstoler/dds-page-generator
+
+or
+
+npm install @norges-domstoler/dds-page-generator
 ```
 
 ## 🔨 Bruk
