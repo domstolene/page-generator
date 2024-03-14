@@ -41,7 +41,6 @@ export const FormFields: (PageGeneratorField | PageGeneratorRow)[] = [
     ],
   },
   {
-    rowType: 'standard',
     fields: [
       {
         component: PageGeneratorSupportedFields.DatePicker,
@@ -80,7 +79,6 @@ export const FormFields: (PageGeneratorField | PageGeneratorRow)[] = [
     },
   },
   {
-    rowType: 'standard',
     fields: [
       {
         component: PageGeneratorSupportedFields.TextInput,
@@ -202,7 +200,6 @@ export const FormFields: (PageGeneratorField | PageGeneratorRow)[] = [
     ],
   },
   {
-    rowType: 'button',
     fields: [
       {
         component: PageGeneratorSupportedFields.Button,

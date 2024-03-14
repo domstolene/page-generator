@@ -23,8 +23,6 @@ import {
 } from '@norges-domstoler/dds-page-generator';
 
 const fields = [{
-    rowType: 'standard',
-    breakpoint: ScreenSize.Small,
     fields: [
     {
         component: FormGeneratorSupportedFields.TextInput,
