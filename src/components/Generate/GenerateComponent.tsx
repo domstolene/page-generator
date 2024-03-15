@@ -38,16 +38,12 @@ import {
   ToggleBar,
   ToggleRadio,
   useScreenSize,
-  GridChild,
   getHooksGridStyling,
 } from '@norges-domstoler/dds-components';
 import { PageGeneratorField, PageGeneratorSupportedFields } from '../../types';
 import { ChangeEvent, useContext } from 'react';
 import { SectionGenerator } from '../../components';
-import { isPageGeneratorRow } from '../../helpers';
-import { GenerateRow } from './GenerateRow';
 import { PageGeneratorContext } from '../PageGenerator/PageGeneratorContext';
-import { GenerateGridChildren } from './GenerateGridChildren';
 import { GenerateGridChild } from './GenerateGridChild';
 
 export const GenerateComponent = (index: number, field: PageGeneratorField) => {
@@ -63,7 +59,6 @@ export const GenerateComponent = (index: number, field: PageGeneratorField) => {
 
   const screenSize = useScreenSize();
   const GridStyling = getHooksGridStyling(screenSize);
-  console.log(GridStyling);
 
   switch (field.component) {
     case PageGeneratorSupportedFields.Button:
