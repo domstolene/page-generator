@@ -45,6 +45,7 @@ import { ChangeEvent, useContext } from 'react';
 import { SectionGenerator } from '../../components';
 import { PageGeneratorContext } from '../PageGenerator/PageGeneratorContext';
 import { GenerateGridChild } from './GenerateGridChild';
+import '../../styles/page-generator-fieldset.css';
 
 export const GenerateComponent = (index: number, field: PageGeneratorField) => {
   const { fieldOnChange, selectOnChange, datePickerOnChange, onBlur } =
@@ -58,7 +59,11 @@ export const GenerateComponent = (index: number, field: PageGeneratorField) => {
   ) => fieldOnChange(event);
 
   const screenSize = useScreenSize();
-  const GridStyling = getHooksGridStyling(screenSize);
+  const GridStyling = {
+    ...getHooksGridStyling(screenSize),
+    marginLeft: undefined,
+    marginRight: undefined,
+  };
 
   switch (field.component) {
     case PageGeneratorSupportedFields.Button:
@@ -146,11 +151,9 @@ export const GenerateComponent = (index: number, field: PageGeneratorField) => {
           {...field.props}
           htmlProps={{
             ...field.props.htmlProps,
+            className: 'page-generator-fieldset',
             style: {
               ...GridStyling,
-              display: 'grid',
-              marginLeft: '0',
-              marginRight: '0',
             },
           }}
           key={index}
