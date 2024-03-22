@@ -8,6 +8,10 @@ Side- og skjemagenerering basert på JSON-input for bruk i domstolenes tjenester
 
 ```sh
 pnpm add @norges-domstoler/dds-page-generator
+
+or
+
+npm install @norges-domstoler/dds-page-generator
 ```
 
 ## 🔨 Bruk
@@ -19,8 +23,6 @@ import {
 } from '@norges-domstoler/dds-page-generator';
 
 const fields = [{
-    rowType: 'standard',
-    breakpoint: ScreenSize.Small,
     fields: [
     {
         component: FormGeneratorSupportedFields.TextInput,

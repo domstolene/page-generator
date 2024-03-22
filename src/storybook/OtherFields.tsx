@@ -5,12 +5,6 @@ import {
   PageGeneratorSupportedFields,
 } from '../types';
 
-// type FieldWithChildren =
-//   | ListField
-
-// type FieldWithoutChildren =
-//   | ListItemField
-
 const getHeading = (innerHTML: string): PageGeneratorField => {
   return {
     component: PageGeneratorSupportedFields.Heading,

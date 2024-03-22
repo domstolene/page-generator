@@ -34,10 +34,13 @@ import {
   TypographyProps,
   ToggleBarProps,
   ToggleRadioProps,
+  FieldsetProps,
+  LegendProps,
 } from '@norges-domstoler/dds-components';
 import { PageGeneratorSupportedFields } from './PageGeneratorSupportedFields';
 import { ComponentProps } from 'react';
 import { SectionGeneratorRow } from './SectionGeneratorRow';
+import { PageGeneratorRow } from './PageGeneratorRow';
 
 export interface PageGeneratorValidation {
   message: string;
@@ -54,6 +57,7 @@ type FieldWithChildren =
   | DescriptionListField
   | DescriptionListGroupField
   | DrawerGroupField
+  | FieldsetField
   | HStackField
   | ListField
   | RadioButtonGroupField
@@ -74,6 +78,7 @@ type FieldWithoutChildren =
   | HeadingField
   | InputMessageField
   | LabelField
+  | LegendField
   | LinkField
   | ListItemField
   | LocalMessageField
@@ -170,6 +175,13 @@ interface DrawerGroupField {
   children: (ButtonField | DrawerField)[];
 }
 
+interface FieldsetField {
+  component: PageGeneratorSupportedFields.Fieldset;
+  props: FieldsetProps;
+  hide?: boolean;
+  children: (PageGeneratorField | PageGeneratorRow)[];
+}
+
 interface GlobalMessageField {
   component: PageGeneratorSupportedFields.GlobalMessage;
   props: GlobalMessageProps;
@@ -200,6 +212,13 @@ interface InputMessageField {
 interface LabelField {
   component: PageGeneratorSupportedFields.Label;
   props: LabelProps;
+  hide?: boolean;
+  innerHTML?: JSX.Element | string;
+}
+
+interface LegendField {
+  component: PageGeneratorSupportedFields.Legend;
+  props: LegendProps;
   hide?: boolean;
   innerHTML?: JSX.Element | string;
 }

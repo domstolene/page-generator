@@ -3,5 +3,6 @@ export * from './PageGeneratorProps';
 export * from './PageGeneratorRow';
 export * from './PageGeneratorState';
 export * from './PageGeneratorSupportedFields';
+export * from './PageGeneratorTokens';
 export * from './SectionGeneratorProps';
 export * from './SectionGeneratorRow';

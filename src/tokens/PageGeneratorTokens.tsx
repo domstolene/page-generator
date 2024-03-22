@@ -1,15 +1,16 @@
 import { ScreenSize } from '@norges-domstoler/dds-components';
 import { ddsBaseTokens } from '@norges-domstoler/dds-design-tokens';
+import { PageGeneratorTokens as PageGeneratorTokensType } from '../types';
 
 const { spacing: Spacing } = ddsBaseTokens;
 
-export const PageGeneratorTokens = {
-  columnGaps: {
-    [ScreenSize.XSmall]: Spacing.SizesDdsSpacingX1,
-    [ScreenSize.Small]: Spacing.SizesDdsSpacingX1,
-    [ScreenSize.Medium]: Spacing.SizesDdsSpacingX1,
-    [ScreenSize.Large]: Spacing.SizesDdsSpacingX1,
-    [ScreenSize.XLarge]: Spacing.SizesDdsSpacingX15,
+export const PageGeneratorTokens: PageGeneratorTokensType = {
+  Stack: {
+    [ScreenSize.XSmall]: 'x1',
+    [ScreenSize.Small]: 'x1',
+    [ScreenSize.Medium]: 'x1',
+    [ScreenSize.Large]: 'x1',
+    [ScreenSize.XLarge]: 'x1.5',
   },
   rowGaps: {
     xs: Spacing.SizesDdsSpacingX1,
