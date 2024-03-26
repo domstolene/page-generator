@@ -4,7 +4,7 @@ import { SelectOption } from '@norges-domstoler/dds-components';
 import { SingleValue, MultiValue } from 'react-select';
 import { CalendarDate } from '@internationalized/date';
 
-interface PageGeneratorContextModel {
+export interface PageGeneratorContextModel {
   fields: PageGeneratorProps['fields'];
   state: object;
   fieldOnChange: <T extends HTMLInputElement | HTMLTextAreaElement>(

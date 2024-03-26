@@ -1,10 +1,15 @@
-import { getBaseHTMLProps } from '@norges-domstoler/dds-components';
+import {
+  getBaseHTMLProps,
+  useScreenSize,
+} from '@norges-domstoler/dds-components';
 import { SectionGeneratorProps } from '../../types';
-import React from 'react';
+import React, { useContext } from 'react';
 import { isSectionGeneratorRow } from '../../helpers';
 import { GenerateRow } from '../Generate/GenerateRow';
 import { GenerateComponent } from '../Generate/GenerateComponent';
 import { PageGeneratorProvider } from '../PageGenerator/PageGeneratorProvider';
+import { PageGeneratorContext } from '../PageGenerator/PageGeneratorContext';
+import { GenerateGridChildProperties } from '../Generate/GenerateGridChild';
 
 /**
  * Generer komponenter fra @norges-domstoler/dds-components, basert på `fields` propertien. SectionGenerator legger på en wrapper, basert på `as` propertien.
@@ -13,6 +18,16 @@ import { PageGeneratorProvider } from '../PageGenerator/PageGeneratorProvider';
 export const SectionGenerator = (props: SectionGeneratorProps) => {
   const { fields = [], stateOnChange, as } = props;
   const { id, className, htmlProps, ...rest } = props;
+  const { fieldOnChange, selectOnChange, datePickerOnChange, onBlur } =
+    useContext(PageGeneratorContext);
+  const screenSize = useScreenSize();
+  const generateGridChildProps: GenerateGridChildProperties = {
+    fieldOnChange,
+    selectOnChange,
+    datePickerOnChange,
+    onBlur,
+    screenSize,
+  };
 
   const Parent = (props: { children: (false | JSX.Element)[] }) => {
     if (as === 'div') {
@@ -41,10 +56,12 @@ export const SectionGenerator = (props: SectionGeneratorProps) => {
           const isRow = isSectionGeneratorRow(obj);
           return (
             !obj.hide && (
-              <>
-                {isRow && GenerateRow(index, obj.fields)}
-                {!isRow && GenerateComponent(index, obj)}
-              </>
+              <React.Fragment key={index}>
+                {isRow &&
+                  GenerateRow(index, obj.fields, generateGridChildProps)}
+                {!isRow &&
+                  GenerateComponent(index, obj, generateGridChildProps)}
+              </React.Fragment>
             )
           );
         })}

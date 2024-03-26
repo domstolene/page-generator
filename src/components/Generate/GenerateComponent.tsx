@@ -44,12 +44,24 @@ import { PageGeneratorField, PageGeneratorSupportedFields } from '../../types';
 import { ChangeEvent, useContext } from 'react';
 import { SectionGenerator } from '../../components';
 import { PageGeneratorContext } from '../PageGenerator/PageGeneratorContext';
-import { GenerateGridChild } from './GenerateGridChild';
+import {
+  GenerateGridChild,
+  GenerateGridChildProperties,
+} from './GenerateGridChild';
 import '../../styles/page-generator-fieldset.css';
 
-export const GenerateComponent = (index: number, field: PageGeneratorField) => {
-  const { fieldOnChange, selectOnChange, datePickerOnChange, onBlur } =
-    useContext(PageGeneratorContext);
+export const GenerateComponent = (
+  index: number,
+  field: PageGeneratorField,
+  props: GenerateGridChildProperties,
+) => {
+  const {
+    fieldOnChange,
+    selectOnChange,
+    datePickerOnChange,
+    onBlur,
+    screenSize,
+  } = props;
 
   const inputFieldOnChange = (
     event: ChangeEvent<HTMLInputElement & Record<string, never>>,
@@ -58,7 +70,6 @@ export const GenerateComponent = (index: number, field: PageGeneratorField) => {
     event: ChangeEvent<HTMLTextAreaElement & Record<string, never>>,
   ) => fieldOnChange(event);
 
-  const screenSize = useScreenSize();
   const GridStyling = {
     ...getHooksGridStyling(screenSize),
     marginLeft: undefined,
@@ -89,7 +100,7 @@ export const GenerateComponent = (index: number, field: PageGeneratorField) => {
       return (
         <CheckboxGroup {...field.props} key={index}>
           {field.children.map((child, childIndex) => {
-            return !child.hide && GenerateComponent(childIndex, child);
+            return !child.hide && GenerateComponent(childIndex, child, props);
           })}
         </CheckboxGroup>
       );
@@ -105,7 +116,7 @@ export const GenerateComponent = (index: number, field: PageGeneratorField) => {
       return (
         <DescriptionList {...field.props} key={index}>
           {field.children.map((child, childIndex) => {
-            return !child.hide && GenerateComponent(childIndex, child);
+            return !child.hide && GenerateComponent(childIndex, child, props);
           })}
         </DescriptionList>
       );
@@ -113,7 +124,7 @@ export const GenerateComponent = (index: number, field: PageGeneratorField) => {
       return (
         <DescriptionListGroup {...field.props} key={index}>
           {field.children.map((child, childIndex) => {
-            return !child.hide && GenerateComponent(childIndex, child);
+            return !child.hide && GenerateComponent(childIndex, child, props);
           })}
         </DescriptionListGroup>
       );
@@ -141,7 +152,7 @@ export const GenerateComponent = (index: number, field: PageGeneratorField) => {
       return (
         <DrawerGroup {...field.props} key={index}>
           {field.children.map((child, childIndex) => {
-            return !child.hide && GenerateComponent(childIndex, child);
+            return !child.hide && GenerateComponent(childIndex, child, props);
           })}
         </DrawerGroup>
       );
@@ -160,7 +171,11 @@ export const GenerateComponent = (index: number, field: PageGeneratorField) => {
         >
           {field.children.map((child, childIndex) => {
             if ((child as PageGeneratorField).component === 'Legend') {
-              return GenerateComponent(childIndex, child as PageGeneratorField);
+              return GenerateComponent(
+                childIndex,
+                child as PageGeneratorField,
+                props,
+              );
             } else {
               return GenerateGridChild(child, childIndex);
             }
@@ -183,7 +198,7 @@ export const GenerateComponent = (index: number, field: PageGeneratorField) => {
       return (
         <HStack {...field.props} key={index}>
           {field.children.map((child, childIndex) => {
-            return !child.hide && GenerateComponent(childIndex, child);
+            return !child.hide && GenerateComponent(childIndex, child, props);
           })}
         </HStack>
       );
@@ -211,7 +226,7 @@ export const GenerateComponent = (index: number, field: PageGeneratorField) => {
       return (
         <List {...field.props} key={index}>
           {field.children.map((child, childIndex) => {
-            return !child.hide && GenerateComponent(childIndex, child);
+            return !child.hide && GenerateComponent(childIndex, child, props);
           })}
         </List>
       );
@@ -246,7 +261,7 @@ export const GenerateComponent = (index: number, field: PageGeneratorField) => {
       return (
         <RadioButtonGroup {...field.props} key={index}>
           {field.children.map((child, childIndex) => {
-            return !child.hide && GenerateComponent(childIndex, child);
+            return !child.hide && GenerateComponent(childIndex, child, props);
           })}
         </RadioButtonGroup>
       );
@@ -282,7 +297,7 @@ export const GenerateComponent = (index: number, field: PageGeneratorField) => {
       return (
         <ToggleBar {...field.props} key={index}>
           {field.children.map((child, childIndex) => {
-            return !child.hide && GenerateComponent(childIndex, child);
+            return !child.hide && GenerateComponent(childIndex, child, props);
           })}
         </ToggleBar>
       );
@@ -298,7 +313,7 @@ export const GenerateComponent = (index: number, field: PageGeneratorField) => {
       return (
         <ToggleButtonGroup {...field.props} key={index}>
           {field.children.map((child, childIndex) => {
-            return !child.hide && GenerateComponent(childIndex, child);
+            return !child.hide && GenerateComponent(childIndex, child, props);
           })}
         </ToggleButtonGroup>
       );
@@ -326,7 +341,7 @@ export const GenerateComponent = (index: number, field: PageGeneratorField) => {
       return (
         <VStack {...field.props} key={index}>
           {field.children.map((child, childIndex) => {
-            return !child.hide && GenerateComponent(childIndex, child);
+            return !child.hide && GenerateComponent(childIndex, child, props);
           })}
         </VStack>
       );
