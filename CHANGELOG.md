@@ -1,5 +1,11 @@
 # @norges-domstoler/dds-page-generator
 
+## 4.0.1
+
+### Patch Changes
+
+- 4ab2c9f: fix: flytt hooks call lenger opp i pagegenerator og sectiongenerator
+
 ## 4.0.0
 
 ### Major Changes
