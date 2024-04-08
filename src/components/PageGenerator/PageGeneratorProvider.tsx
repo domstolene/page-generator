@@ -17,6 +17,7 @@ import {
   isMultiValue,
 } from '../../helpers';
 import { AddFieldToState } from './AddFieldToState';
+import { AddErrorToState } from './AddErrorToState';
 
 interface PageGeneratorProviderProps {
   fields: PageGeneratorProps['fields'];
@@ -34,16 +35,20 @@ export const PageGeneratorProvider = ({
 
   useEffect(() => {
     let state: PageGeneratorState<PageGeneratorStateOptionTypes> = {};
+    let errors: object = {};
     fields.forEach((field: PageGeneratorField | PageGeneratorRow) => {
       if (isPageGeneratorRow(field)) {
         field.fields.forEach((field: PageGeneratorField) => {
           state = AddFieldToState(field, state);
+          errors = AddErrorToState(field, errors);
         });
       } else {
         state = AddFieldToState(field, state);
+        errors = AddErrorToState(field, errors);
       }
     });
     setState(state);
+    setErrors(errors);
   }, []);
 
   useEffect(() => {

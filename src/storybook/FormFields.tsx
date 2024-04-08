@@ -24,6 +24,7 @@ export const FormFields: (PageGeneratorField | PageGeneratorRow)[] = [
     props: {
       label: 'Fødselsnummer',
       name: 'nin',
+      defaultValue: 'aowfdm',
     },
     validations: [
       {
