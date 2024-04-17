@@ -12,6 +12,7 @@ export const GenerateRow = (
   return (
     <HStack
       gap={PageGeneratorTokens.Stack[props.screenSize] || 0}
+      align="flex-start"
       htmlProps={{ style: { flexWrap: 'wrap' } }}
       key={index}
     >
