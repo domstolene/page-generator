@@ -1,5 +1,11 @@
 # @norges-domstoler/dds-page-generator
 
+## 4.0.2
+
+### Patch Changes
+
+- bef04d3: Fix design error der felt i en Row ikke var alignet vertikalt med flex-start
+
 ## 4.0.1
 
 ### Patch Changes
