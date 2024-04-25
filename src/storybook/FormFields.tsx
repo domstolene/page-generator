@@ -1,4 +1,10 @@
 import {
+  DateOfBirthDatepicker,
+  EmailInput,
+  NinInput,
+  PhoneNumberRow,
+} from '../helpers';
+import {
   PageGeneratorField,
   PageGeneratorRow,
   PageGeneratorSupportedFields,
@@ -19,37 +25,27 @@ export const FormFields: (PageGeneratorField | PageGeneratorRow)[] = [
     },
     innerHTML: 'Personinformasjon',
   },
-  {
-    component: PageGeneratorSupportedFields.TextInput,
-    props: {
-      label: 'Fødselsnummer',
-      name: 'nin',
+  NinInput({
+    fieldProps: {
+      validations: [
+        {
+          message: 'Påkrevd',
+          rule: (value: string) => {
+            return value.length > 0;
+          },
+        },
+        {
+          message: 'Må være omg',
+          rule: (value: string) => {
+            return value === 'omg';
+          },
+        },
+      ],
     },
-    validations: [
-      {
-        message: 'Påkrevd',
-        rule: (value: string) => {
-          return value.length > 0;
-        },
-      },
-      {
-        message: 'Må være omg',
-        rule: (value: string) => {
-          return value === 'omg';
-        },
-      },
-    ],
-  },
+  }),
   {
     fields: [
-      {
-        component: PageGeneratorSupportedFields.DatePicker,
-        props: {
-          label: 'Fødselsdato',
-          name: 'dateOfBirth',
-        },
-        name: 'dateOfBirth',
-      },
+      DateOfBirthDatepicker(),
       {
         component: PageGeneratorSupportedFields.Select,
         props: {
@@ -71,40 +67,19 @@ export const FormFields: (PageGeneratorField | PageGeneratorRow)[] = [
     },
     innerHTML: 'Kontaktinformasjon',
   },
-  {
-    component: PageGeneratorSupportedFields.TextInput,
-    props: {
-      label: 'E-post',
-      name: 'email',
-    },
-  },
-  {
-    fields: [
-      {
-        component: PageGeneratorSupportedFields.TextInput,
-        props: {
-          label: 'Landkode',
-          width: '90px',
-          name: 'countryCode',
-        },
-        validations: [
-          {
-            message: 'Må være +47',
-            rule: (value: string) => {
-              return value === '+47';
-            },
+  EmailInput({}),
+  PhoneNumberRow({
+    fieldProps: {
+      validations: [
+        {
+          message: 'Må være +47',
+          rule: (value: string) => {
+            return value === '+47';
           },
-        ],
-      },
-      {
-        component: PageGeneratorSupportedFields.TextInput,
-        props: {
-          label: 'Telefon',
-          name: 'phoneNumber',
         },
-      },
-    ],
-  },
+      ],
+    },
+  }),
   {
     component: PageGeneratorSupportedFields.TextArea,
     props: {
