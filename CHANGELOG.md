@@ -1,5 +1,11 @@
 # @norges-domstoler/dds-page-generator
 
+## 4.1.0
+
+### Minor Changes
+
+- 9c6807d: Legg til hjelpemetoder for common input fields
+
 ## 4.0.2
 
 ### Patch Changes
