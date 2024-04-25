@@ -291,7 +291,7 @@ interface TextAreaField {
   hide?: boolean;
 }
 
-interface TextInputField {
+export interface TextInputField {
   component: PageGeneratorSupportedFields.TextInput;
   props: TextInputProps;
   validations?: PageGeneratorValidation[];
