@@ -9,8 +9,15 @@ import { GenerateGridChildren } from '../Generate/GenerateGridChildren';
  * @param props - `fields` inneholder felter eller rader med felter. `stateOnChange` er callback for statehåndtering. `as` setter HTML-element rundt hele PageGenerator.
  */
 export const PageGenerator = (props: PageGeneratorProps) => {
-  const { fields = [], stateOnChange, as } = props;
-  const { id, className, htmlProps, ...rest } = props;
+  const {
+    id,
+    className,
+    htmlProps,
+    fields = [],
+    stateOnChange,
+    as,
+    ...rest
+  } = props;
 
   return (
     <PageGeneratorProvider fields={fields} stateOnChange={stateOnChange}>
