@@ -9,10 +9,11 @@ export default {
 };
 
 export const Form = () => {
+  const fields = FormFields();
   return (
     <PageGenerator
       as="form"
-      fields={FormFields}
+      fields={fields}
       stateOnChange={(newState?: object, errors?: object) => {
         console.log(newState, errors);
       }}
@@ -48,7 +49,7 @@ export const Section = () => {
   return (
     <SectionGenerator
       as="form"
-      fields={FormFields}
+      fields={FormFields()}
       stateOnChange={(newState?: object, errors?: object) => {
         console.log(newState, errors);
       }}
