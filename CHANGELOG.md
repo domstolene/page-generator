@@ -1,5 +1,12 @@
 # @norges-domstoler/dds-page-generator
 
+## 4.1.1
+
+### Patch Changes
+
+- 8d30c79: fix: skriv om FormFields til funksjon for å støtte bruk av useScreenSize hook i hjelpemetode for inputfelt
+- 40f2a14: Fix console error for stateOnChange property
+
 ## 4.1.0
 
 ### Minor Changes
