@@ -1,3 +1,4 @@
+export * from './getFieldByName';
 export * from './isFieldWithValidations';
 export * from './isMultiValue';
 export * from './isPageGeneratorRow';

@@ -11,5 +11,7 @@ export type PageGeneratorProps = BaseComponentPropsWithChildren<
     stateOnChange?: (newState: object, errors?: object) => void;
     /** Setter form eller div på Grid-komponenten */
     as: 'div' | 'form';
+    /** For å oppdatere field */
+    updateField?: (fieldId: string, errorMessage: string) => void;
   }
 >;

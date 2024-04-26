@@ -15,12 +15,14 @@ import {
   isPageGeneratorRow,
   isFieldWithValidations,
   isMultiValue,
+  getFieldByName,
 } from '../../helpers';
 import { AddFieldToState } from './AddFieldToState';
 
 interface PageGeneratorProviderProps {
   fields: PageGeneratorProps['fields'];
   stateOnChange: PageGeneratorProps['stateOnChange'];
+  updateField: PageGeneratorProps['updateField'];
   children: JSX.Element;
 }
 
@@ -28,6 +30,7 @@ export const PageGeneratorProvider = ({
   children,
   fields,
   stateOnChange,
+  updateField,
 }: PageGeneratorProviderProps) => {
   const [state, setState] = useState({});
   const [errors, setErrors] = useState({});
@@ -53,34 +56,10 @@ export const PageGeneratorProvider = ({
   }, [state, errors]);
 
   const setErrorMessage = (name: string, errorMessage: string) => {
-    const field = getFieldByName(name);
-    if (field && isFieldWithValidations(field)) {
-      field.props.errorMessage = errorMessage;
+    const field = getFieldByName(name, fields);
+    if (field && isFieldWithValidations(field) && field.props.name) {
+      updateField && updateField(field.props.name, errorMessage);
     }
-  };
-
-  const findFieldByNameInternal = (
-    name: string,
-    fieldsToSearch: (PageGeneratorField | PageGeneratorRow)[],
-  ): PageGeneratorField | PageGeneratorRow | null => {
-    for (const f of fieldsToSearch) {
-      // Search for fields with validation named name
-      if (isFieldWithValidations(f) && f.props && f.props.name === name) {
-        return f;
-      }
-      // If it's a row, search through it's fields recursively
-      if (isPageGeneratorRow(f) && f.fields && Array.isArray(f.fields)) {
-        const result = findFieldByNameInternal(name, f.fields);
-        if (result) {
-          return result;
-        }
-      }
-    }
-    return null;
-  };
-
-  const getFieldByName = (name: string) => {
-    return findFieldByNameInternal(name, fields);
   };
 
   const updateErrors = (
@@ -99,7 +78,7 @@ export const PageGeneratorProvider = ({
   };
 
   const validateFields = (name: string, value: string) => {
-    const field = getFieldByName(name);
+    const field = getFieldByName(name, fields);
     if (field && isFieldWithValidations(field)) {
       const fieldErrors =
         field.validations?.filter(

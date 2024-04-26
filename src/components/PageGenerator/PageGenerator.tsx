@@ -15,12 +15,17 @@ export const PageGenerator = (props: PageGeneratorProps) => {
     htmlProps,
     fields = [],
     stateOnChange,
+    updateField,
     as,
     ...rest
   } = props;
 
   return (
-    <PageGeneratorProvider fields={fields} stateOnChange={stateOnChange}>
+    <PageGeneratorProvider
+      fields={fields}
+      stateOnChange={stateOnChange}
+      updateField={updateField}
+    >
       <Grid
         {...getBaseHTMLProps(id, className, htmlProps, rest)}
         as={as}
