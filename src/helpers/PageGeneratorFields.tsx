@@ -202,7 +202,7 @@ export const PostalCodeInput = ({
 export const NameRow = (
   firstNameProps?: TextInputAndFieldProps,
   lastNameProps?: TextInputAndFieldProps,
-  rowProps?: PageGeneratorRow,
+  rowProps?: Pick<PageGeneratorRow, 'hide'>,
 ) => {
   return {
     fields: [
@@ -216,7 +216,7 @@ export const NameRow = (
 export const StreetAddressRow = (
   streetNameProps?: TextInputAndFieldProps,
   houseNumberProps?: TextInputAndFieldProps,
-  rowProps?: PageGeneratorRow,
+  rowProps?: Pick<PageGeneratorRow, 'hide'>,
 ) => {
   return {
     fields: [
@@ -244,7 +244,7 @@ export const PhoneNumberRow = (
 export const PostalRow = (
   postalNumberProps?: TextInputAndFieldProps,
   postalCodeProps?: TextInputAndFieldProps,
-  rowProps?: PageGeneratorRow,
+  rowProps?: Pick<PageGeneratorRow, 'hide'>,
 ) => {
   return {
     fields: [
