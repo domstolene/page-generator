@@ -1,5 +1,11 @@
 # @norges-domstoler/dds-page-generator
 
+## 4.1.2
+
+### Patch Changes
+
+- 9dceeee: fix: sett korrekt type for rowProps i helpers
+
 ## 4.1.1
 
 ### Patch Changes
