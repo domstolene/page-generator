@@ -63,7 +63,6 @@ export const FormFields = (
           props: {
             label: 'Status',
             name: 'status',
-            value: state.status,
             options: [
               { label: 'Glad', value: 'glad' },
               { label: 'Superglad', value: 'superglad' },
