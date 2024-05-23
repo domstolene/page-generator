@@ -1,4 +1,3 @@
-import { Dispatch, SetStateAction } from 'react';
 import {
   DateOfBirthDatepicker,
   EmailInput,
@@ -10,7 +9,6 @@ import {
   PageGeneratorRow,
   PageGeneratorSetState,
   PageGeneratorState,
-  PageGeneratorStateOptionTypes,
   PageGeneratorSupportedFields,
 } from '../types';
 import { CalendarDate } from '@internationalized/date';

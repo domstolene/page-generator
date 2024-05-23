@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react';
+import { useState } from 'react';
 import { PageGenerator, SectionGenerator } from '.';
 import { FieldsetFields } from '../storybook/FieldsetFields';
 import { FormFields } from '../storybook/FormFields';
@@ -17,9 +17,6 @@ export const Form = () => {
     email: null,
   });
   const fields = FormFields(state, setState);
-  useEffect(() => {
-    console.log(state);
-  }, [state]);
   return (
     <PageGenerator
       as="form"
