@@ -1,3 +1,4 @@
+import { Dispatch, SetStateAction } from 'react';
 import {
   DateOfBirthDatepicker,
   EmailInput,
@@ -7,10 +8,17 @@ import {
 import {
   PageGeneratorField,
   PageGeneratorRow,
+  PageGeneratorSetState,
+  PageGeneratorState,
+  PageGeneratorStateOptionTypes,
   PageGeneratorSupportedFields,
 } from '../types';
+import { CalendarDate } from '@internationalized/date';
 
-export const FormFields = (): (PageGeneratorField | PageGeneratorRow)[] => {
+export const FormFields = (
+  state: PageGeneratorState,
+  setState: PageGeneratorSetState,
+): (PageGeneratorField | PageGeneratorRow)[] => {
   return [
     {
       component: PageGeneratorSupportedFields.Heading,
@@ -27,6 +35,9 @@ export const FormFields = (): (PageGeneratorField | PageGeneratorRow)[] => {
       innerHTML: 'Personinformasjon',
     },
     NinInput({
+      props: {
+        value: state.nin as string,
+      },
       fieldProps: {
         validations: [
           {
@@ -46,12 +57,15 @@ export const FormFields = (): (PageGeneratorField | PageGeneratorRow)[] => {
     }),
     {
       fields: [
-        DateOfBirthDatepicker(),
+        DateOfBirthDatepicker({
+          value: state.dateOfBirth as CalendarDate,
+        }),
         {
           component: PageGeneratorSupportedFields.Select,
           props: {
             label: 'Status',
             name: 'status',
+            value: state.status,
             options: [
               { label: 'Glad', value: 'glad' },
               { label: 'Superglad', value: 'superglad' },
@@ -68,7 +82,11 @@ export const FormFields = (): (PageGeneratorField | PageGeneratorRow)[] => {
       },
       innerHTML: 'Kontaktinformasjon',
     },
-    EmailInput({}),
+    EmailInput({
+      props: {
+        value: state.email as string,
+      },
+    }),
     PhoneNumberRow(
       {
         fieldProps: {
@@ -205,6 +223,24 @@ export const FormFields = (): (PageGeneratorField | PageGeneratorRow)[] => {
             onClick: event => {
               event.preventDefault();
               console.log('Du superlagret!');
+              console.log('current state:', state);
+            },
+          },
+        },
+        {
+          component: PageGeneratorSupportedFields.Button,
+          props: {
+            label: 'Nullstill',
+            purpose: 'secondary',
+            onClick: event => {
+              event.preventDefault();
+              setState({
+                nin: 'start',
+                dateOfBirth: null,
+                status: null,
+                email: '',
+              });
+              console.log('current state:', state);
             },
           },
         },
