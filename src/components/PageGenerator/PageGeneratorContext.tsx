@@ -6,7 +6,7 @@ import { CalendarDate } from '@internationalized/date';
 
 export interface PageGeneratorContextModel {
   fields: PageGeneratorProps['fields'];
-  state: object;
+  state?: PageGeneratorProps['state'];
   fieldOnChange: <T extends HTMLInputElement | HTMLTextAreaElement>(
     event: ChangeEvent<T>,
   ) => void;

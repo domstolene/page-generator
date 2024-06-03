@@ -3,8 +3,6 @@ import {
   PageGeneratorField,
   PageGeneratorProps,
   PageGeneratorRow,
-  PageGeneratorState,
-  PageGeneratorStateOptionTypes,
   PageGeneratorValidation,
 } from '../../types';
 import { ChangeEvent, FocusEvent, useEffect, useState } from 'react';
@@ -16,41 +14,36 @@ import {
   isFieldWithValidations,
   isMultiValue,
 } from '../../helpers';
-import { AddFieldToState } from './AddFieldToState';
+import { PageGeneratorErrors } from '../../types/PageGeneratorErrors';
 
 interface PageGeneratorProviderProps {
   fields: PageGeneratorProps['fields'];
-  stateOnChange: PageGeneratorProps['stateOnChange'];
+  errorsOnChange: PageGeneratorProps['errorsOnChange'];
   children: JSX.Element;
+  state?: PageGeneratorProps['state'];
+  setState?: PageGeneratorProps['setState'];
 }
 
 export const PageGeneratorProvider = ({
   children,
   fields,
-  stateOnChange,
+  errorsOnChange,
+  state,
+  setState,
 }: PageGeneratorProviderProps) => {
-  const [state, setState] = useState({});
-  const [errors, setErrors] = useState({});
+  const [errors, setErrors] = useState<PageGeneratorErrors>({});
 
   useEffect(() => {
-    let state: PageGeneratorState<PageGeneratorStateOptionTypes> = {};
-    fields.forEach((field: PageGeneratorField | PageGeneratorRow) => {
-      if (isPageGeneratorRow(field)) {
-        field.fields.forEach((field: PageGeneratorField) => {
-          state = AddFieldToState(field, state);
-        });
-      } else {
-        state = AddFieldToState(field, state);
+    Object.keys(errors).forEach((key: string) => {
+      const error = errors[key];
+      if (error.errors.length > 0) {
+        setErrorMessage(key, error.errors[0].message);
       }
     });
-    setState(state);
-  }, []);
-
-  useEffect(() => {
-    if (stateOnChange) {
-      stateOnChange(state, errors);
+    if (errorsOnChange) {
+      errorsOnChange(errors);
     }
-  }, [state, errors]);
+  }, [errors]);
 
   const setErrorMessage = (name: string, errorMessage: string) => {
     const field = getFieldByName(name);
@@ -98,7 +91,7 @@ export const PageGeneratorProvider = ({
     setErrors(newErrors);
   };
 
-  const validateFields = (name: string, value: string) => {
+  const validateField = (name: string, value: string) => {
     const field = getFieldByName(name);
     if (field && isFieldWithValidations(field)) {
       const fieldErrors =
@@ -106,10 +99,6 @@ export const PageGeneratorProvider = ({
           (v: PageGeneratorValidation) => !v.rule(value),
         ) ?? [];
       updateErrors(fieldErrors, name, value);
-      setErrorMessage(
-        name,
-        fieldErrors.length > 0 ? fieldErrors[0].message : '',
-      );
     }
   };
 
@@ -117,7 +106,7 @@ export const PageGeneratorProvider = ({
     event: FocusEvent<T>,
   ) => {
     const { name, value } = event.target;
-    validateFields(name, value);
+    validateField(name, value);
   };
 
   const fieldOnChange = <T extends HTMLInputElement | HTMLTextAreaElement>(
@@ -130,7 +119,7 @@ export const PageGeneratorProvider = ({
       ...state,
       [name || id]: event.target.type === 'checkbox' ? checked : value,
     };
-    setState(newState);
+    setState && setState(newState);
   };
 
   const selectOnChange = (
@@ -149,7 +138,7 @@ export const PageGeneratorProvider = ({
       ...state,
       [name]: value,
     };
-    setState(newState);
+    setState && setState(newState);
   };
 
   const datePickerOnChange = (value: CalendarDate, name: string) => {
@@ -158,7 +147,7 @@ export const PageGeneratorProvider = ({
       ...state,
       [name]: value,
     };
-    setState(newState);
+    setState && setState(newState);
   };
 
   return (

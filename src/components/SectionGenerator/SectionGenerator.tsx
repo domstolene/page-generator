@@ -13,11 +13,20 @@ import { GenerateGridChildProperties } from '../Generate/GenerateGridChild';
 
 /**
  * Generer komponenter fra @norges-domstoler/dds-components, basert på `fields` propertien. SectionGenerator legger på en wrapper, basert på `as` propertien.
- * @param props - `fields` inneholder felter eller rader med felter. `stateOnChange` er callback for statehåndtering. `as` setter HTML-element rundt hele SectionGenerator.
+ * @param props - `fields` inneholder felter eller rader med felter. `errorsOnChange` er callback for statehåndtering. `as` setter HTML-element rundt hele SectionGenerator.
  */
 export const SectionGenerator = (props: SectionGeneratorProps) => {
-  const { fields = [], stateOnChange, as } = props;
-  const { id, className, htmlProps, ...rest } = props;
+  const {
+    fields = [],
+    errorsOnChange,
+    state,
+    setState,
+    as,
+    id,
+    className,
+    htmlProps,
+    ...rest
+  } = props;
   const { fieldOnChange, selectOnChange, datePickerOnChange, onBlur } =
     useContext(PageGeneratorContext);
   const screenSize = useScreenSize();
@@ -50,7 +59,12 @@ export const SectionGenerator = (props: SectionGeneratorProps) => {
   };
 
   return (
-    <PageGeneratorProvider fields={fields} stateOnChange={stateOnChange}>
+    <PageGeneratorProvider
+      fields={fields}
+      errorsOnChange={errorsOnChange}
+      state={state}
+      setState={setState}
+    >
       <Parent>
         {fields.map((obj, index) => {
           const isRow = isSectionGeneratorRow(obj);

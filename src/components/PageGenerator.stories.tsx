@@ -1,7 +1,9 @@
+import { useState } from 'react';
 import { PageGenerator, SectionGenerator } from '.';
 import { FieldsetFields } from '../storybook/FieldsetFields';
 import { FormFields } from '../storybook/FormFields';
 import { OtherFields } from '../storybook/OtherFields';
+import { PageGeneratorState } from '../types';
 
 export default {
   title: 'dds-page-generator/PageGenerator',
@@ -9,50 +11,31 @@ export default {
 };
 
 export const Form = () => {
-  const fields = FormFields();
+  const [state, setState] = useState<PageGeneratorState>({
+    nin: 'start',
+    dateOfBirth: null,
+    email: null,
+  });
+  const fields = FormFields(state, setState);
   return (
     <PageGenerator
       as="form"
       fields={fields}
-      stateOnChange={(newState?: object, errors?: object) => {
-        console.log(newState, errors);
-      }}
+      state={state}
+      setState={setState}
     />
   );
 };
 
 export const Fieldset = () => {
-  return (
-    <PageGenerator
-      as="form"
-      fields={FieldsetFields}
-      stateOnChange={(newState?: object, errors?: object) => {
-        console.log(newState, errors);
-      }}
-    />
-  );
+  return <PageGenerator as="form" fields={FieldsetFields} />;
 };
 
 export const Other = () => {
-  return (
-    <PageGenerator
-      as="form"
-      fields={OtherFields()}
-      stateOnChange={(newState?: object) => {
-        console.log(newState);
-      }}
-    />
-  );
+  return <PageGenerator as="form" fields={OtherFields()} />;
 };
 
 export const Section = () => {
-  return (
-    <SectionGenerator
-      as="form"
-      fields={FormFields()}
-      stateOnChange={(newState?: object, errors?: object) => {
-        console.log(newState, errors);
-      }}
-    />
-  );
+  const [state, setState] = useState<PageGeneratorState>({});
+  return <SectionGenerator as="form" fields={FormFields(state, setState)} />;
 };

@@ -7,10 +7,16 @@ import {
 import {
   PageGeneratorField,
   PageGeneratorRow,
+  PageGeneratorSetState,
+  PageGeneratorState,
   PageGeneratorSupportedFields,
 } from '../types';
+import { CalendarDate } from '@internationalized/date';
 
-export const FormFields = (): (PageGeneratorField | PageGeneratorRow)[] => {
+export const FormFields = (
+  state: PageGeneratorState,
+  setState: PageGeneratorSetState,
+): (PageGeneratorField | PageGeneratorRow)[] => {
   return [
     {
       component: PageGeneratorSupportedFields.Heading,
@@ -27,6 +33,9 @@ export const FormFields = (): (PageGeneratorField | PageGeneratorRow)[] => {
       innerHTML: 'Personinformasjon',
     },
     NinInput({
+      props: {
+        value: state.nin as string,
+      },
       fieldProps: {
         validations: [
           {
@@ -46,7 +55,9 @@ export const FormFields = (): (PageGeneratorField | PageGeneratorRow)[] => {
     }),
     {
       fields: [
-        DateOfBirthDatepicker(),
+        DateOfBirthDatepicker({
+          value: state.dateOfBirth as CalendarDate,
+        }),
         {
           component: PageGeneratorSupportedFields.Select,
           props: {
@@ -68,7 +79,11 @@ export const FormFields = (): (PageGeneratorField | PageGeneratorRow)[] => {
       },
       innerHTML: 'Kontaktinformasjon',
     },
-    EmailInput({}),
+    EmailInput({
+      props: {
+        value: state.email as string,
+      },
+    }),
     PhoneNumberRow(
       {
         fieldProps: {
@@ -205,6 +220,24 @@ export const FormFields = (): (PageGeneratorField | PageGeneratorRow)[] => {
             onClick: event => {
               event.preventDefault();
               console.log('Du superlagret!');
+              console.log('current state:', state);
+            },
+          },
+        },
+        {
+          component: PageGeneratorSupportedFields.Button,
+          props: {
+            label: 'Nullstill',
+            purpose: 'secondary',
+            onClick: event => {
+              event.preventDefault();
+              setState({
+                nin: 'start',
+                dateOfBirth: null,
+                status: null,
+                email: '',
+              });
+              console.log('current state:', state);
             },
           },
         },

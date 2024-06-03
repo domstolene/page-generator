@@ -20,7 +20,13 @@ npm install @norges-domstoler/dds-page-generator
 import {
   PageGenerator,
   SectionGenerator,
+  PageGeneratorState
 } from '@norges-domstoler/dds-page-generator';
+
+const [myState, setMyState] = useState<PageGeneratorState>({
+    firstName: '',
+    lastName: '',
+});
 
 const fields = [{
     fields: [
@@ -30,6 +36,7 @@ const fields = [{
             label: 'Fornavn',
             type: 'text',
             name: 'firstName',
+            value: myState.firstName as string
         },
     },
     {
@@ -38,42 +45,11 @@ const fields = [{
             label: 'Etternavn',
             type: 'text',
             name: 'lastName',
-        },
-    }],
-},
-{
-    component: FormGeneratorSupportedFields.RadioButtonGroup,
-    props: {
-        label: 'Kjønn',
-        name: 'kjønn',
-    },
-    children: [{
-        component: FormGeneratorSupportedFields.RadioButton,
-        props: {
-            label: 'Kvinne',
-            value: 'female',
-        },
-    },
-    {
-        component: FormGeneratorSupportedFields.RadioButton,
-        props: {
-            label: 'Mann',
-            value: 'male',
-        },
-    },
-    {
-        component: FormGeneratorSupportedFields.RadioButton,
-        props: {
-            label: 'Annet',
-            value: 'other',
+            value: myState.lastName as string
         },
     }],
 }];
 
-const stateOnChange = (newState: object) => {
-    console.log(newState);
-}
-
-<PageGenerator as="form" fields={fields} stateOnChange={stateOnChange} />
-<SectionGenerator as="form" fields={fields} stateOnChange={stateOnChange} />
+<PageGenerator as="form" fields={fields} state={myState} setState={setMyState} />
+<SectionGenerator as="form" fields={fields} state={myState} setState={setMyState} />
 ```
