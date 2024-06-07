@@ -1,5 +1,11 @@
 # @norges-domstoler/dds-page-generator
 
+## 5.0.0
+
+### Major Changes
+
+- c5c4aa1: Legg til støtte for å sende inn parent state og parent setState istedenfor at parent og PageGenerator har hver sin state
+
 ## 4.1.2
 
 ### Patch Changes
