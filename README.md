@@ -50,6 +50,22 @@ const fields = [{
     }],
 }];
 
+useEffect(() => {
+    console.log('updated state', state);
+}, [state]);
+
 <PageGenerator as="form" fields={fields} state={myState} setState={setMyState} />
 <SectionGenerator as="form" fields={fields} state={myState} setState={setMyState} />
 ```
+
+## Migreringsguide fra v4 til v5
+
+Det er gjort endringer i state-håndtering for å unngå duplikater av state. I tidligere versjoner hadde PageGenerator sin egen kopi av state. Dette kunne forårsake feil i state-håndteringen for parent vs child. I ny versjon kan man sende inn state og setState, slik at det kun er én versjon av state. Dette medfører at man må gjøre noen endringer.
+
+- `stateOnChange` er ikke lenger støttet som property.
+- `state` og `setState` må settes som property.
+- Man bør bruke typen `PageGeneratorState`.
+- Man bør bruke property'en `value` for en skjema-komponent og den bør castes til riktig type. Alle aktuelle typer kan finnes i `PageGeneratorStateOptionTypes`
+- Om man vil fange opp endringer på state, kan man bruke `useEffect`.
+
+Se i eksempelet over for hvordan dette kan gjøres.
