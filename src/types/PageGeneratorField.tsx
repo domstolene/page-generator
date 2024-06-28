@@ -44,6 +44,7 @@ import { PageGeneratorRow } from './PageGeneratorRow';
 
 export interface PageGeneratorValidation {
   message: string;
+  formMessage?: string;
   rule: (value: string) => boolean;
 }
 

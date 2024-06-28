@@ -1,3 +1,4 @@
+export * from './PageGeneratorErrors';
 export * from './PageGeneratorField';
 export * from './PageGeneratorProps';
 export * from './PageGeneratorRow';

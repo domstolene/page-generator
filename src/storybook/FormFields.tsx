@@ -1,3 +1,4 @@
+import { useValidation } from '../components/Validation/useValidation';
 import {
   DateOfBirthDatepicker,
   EmailInput,
@@ -12,11 +13,17 @@ import {
   PageGeneratorSupportedFields,
 } from '../types';
 import { CalendarDate } from '@internationalized/date';
+import { PageGeneratorErrors } from '../types/PageGeneratorErrors';
 
 export const FormFields = (
   state: PageGeneratorState,
   setState: PageGeneratorSetState,
+  errors: PageGeneratorErrors,
+  formSubmitted: boolean,
 ): (PageGeneratorField | PageGeneratorRow)[] => {
+  const { valid, getFieldErrorMessage, getFormErrorMessage } =
+    useValidation(errors);
+
   return [
     {
       component: PageGeneratorSupportedFields.Heading,
@@ -35,6 +42,7 @@ export const FormFields = (
     NinInput({
       props: {
         value: state.nin as string,
+        errorMessage: getFieldErrorMessage('nin'),
       },
       fieldProps: {
         validations: [
@@ -46,6 +54,7 @@ export const FormFields = (
           },
           {
             message: 'Må være omg',
+            formMessage: 'Fødselsnummer må være omg',
             rule: (value: string) => {
               return value === 'omg';
             },
@@ -114,6 +123,7 @@ export const FormFields = (
       props: {
         label: 'Adresse',
         name: 'adresse',
+        errorMessage: getFieldErrorMessage('adresse'),
       },
       validations: [
         {
@@ -202,6 +212,14 @@ export const FormFields = (
           },
         },
       ],
+    },
+    {
+      component: PageGeneratorSupportedFields.LocalMessage,
+      props: {
+        purpose: 'danger',
+      },
+      innerHTML: getFormErrorMessage(),
+      hide: !(formSubmitted && !valid),
     },
     {
       fields: [
