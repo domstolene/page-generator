@@ -1,5 +1,11 @@
 # @norges-domstoler/dds-page-generator
 
+## 5.1.0
+
+### Minor Changes
+
+- 955f784: Legg til støtte for enkel validering i PageGenerator
+
 ## 5.0.0
 
 ### Major Changes
