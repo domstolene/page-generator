@@ -37,13 +37,11 @@ import {
   Typography,
   ToggleBar,
   ToggleRadio,
-  useScreenSize,
   getHooksGridStyling,
 } from '@norges-domstoler/dds-components';
 import { PageGeneratorField, PageGeneratorSupportedFields } from '../../types';
-import { ChangeEvent, useContext } from 'react';
+import { ChangeEvent } from 'react';
 import { SectionGenerator } from '../../components';
-import { PageGeneratorContext } from '../PageGenerator/PageGeneratorContext';
 import {
   GenerateGridChild,
   GenerateGridChildProperties,

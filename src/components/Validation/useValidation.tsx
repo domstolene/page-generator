@@ -19,15 +19,6 @@ export const useValidation = (errors: PageGeneratorErrors) => {
     setValid(validateErrors());
   }, [errors]);
 
-  const getFieldErrorMessage = (name: string): string => {
-    let errorMessage = '';
-    const obj = errors[name];
-    if (obj && obj.errors.length > 0) {
-      errorMessage = obj.errors[0].message;
-    }
-    return errorMessage;
-  };
-
   const getFormErrorMessage = (): JSX.Element => {
     const actualErrors = Object.keys(errors).filter(
       key => errors[key].errors.length > 0,
@@ -51,5 +42,5 @@ export const useValidation = (errors: PageGeneratorErrors) => {
     );
   };
 
-  return { valid, getFieldErrorMessage, getFormErrorMessage };
+  return { valid, getFormErrorMessage };
 };

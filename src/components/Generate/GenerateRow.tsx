@@ -1,4 +1,4 @@
-import { HStack, useScreenSize } from '@norges-domstoler/dds-components';
+import { HStack } from '@norges-domstoler/dds-components';
 import { PageGeneratorField } from '../../types';
 import { PageGeneratorTokens } from '../../tokens';
 import { GenerateComponent } from './GenerateComponent';

@@ -1,5 +1,6 @@
 import { PageGeneratorContext } from './PageGeneratorContext';
 import {
+  PageGeneratorErrorMessages,
   PageGeneratorField,
   PageGeneratorProps,
   PageGeneratorRow,
@@ -32,12 +33,16 @@ export const PageGeneratorProvider = ({
   setState,
 }: PageGeneratorProviderProps) => {
   const [errors, setErrors] = useState<PageGeneratorErrors>({});
+  const [errorMessages, setErrorMessages] =
+    useState<PageGeneratorErrorMessages>({});
 
   useEffect(() => {
     Object.keys(errors).forEach((key: string) => {
       const error = errors[key];
       if (error.errors.length > 0) {
         setErrorMessage(key, error.errors[0].message);
+      } else {
+        removeErrorMessage(key);
       }
     });
     if (errorsOnChange) {
@@ -45,11 +50,18 @@ export const PageGeneratorProvider = ({
     }
   }, [errors]);
 
-  const setErrorMessage = (name: string, errorMessage: string) => {
-    const field = getFieldByName(name);
-    if (field && isFieldWithValidations(field)) {
-      field.props.errorMessage = errorMessage;
-    }
+  const removeErrorMessage = (name: string) => {
+    setErrorMessages({
+      ...errorMessages,
+      [name]: '',
+    });
+  };
+
+  const setErrorMessage = (name: string, message: string) => {
+    setErrorMessages({
+      ...errorMessages,
+      [name]: message,
+    });
   };
 
   const findFieldByNameInternal = (
@@ -159,6 +171,7 @@ export const PageGeneratorProvider = ({
         selectOnChange,
         datePickerOnChange,
         onBlur,
+        errorMessages,
       }}
     >
       {children}
