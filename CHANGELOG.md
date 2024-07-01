@@ -1,5 +1,11 @@
 # @norges-domstoler/dds-page-generator
 
+## 5.2.0
+
+### Minor Changes
+
+- e251141: Forbedre validering ved at klient slipper å sette errorMessage selv og at errorMessage forsvinner når man skriver inn
+
 ## 5.1.0
 
 ### Minor Changes
