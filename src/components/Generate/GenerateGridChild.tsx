@@ -3,7 +3,7 @@ import {
   ScreenSize,
   useScreenSize,
 } from '@norges-domstoler/dds-components';
-import { isPageGeneratorRow } from '../../helpers';
+import { isFieldWithValidations, isPageGeneratorRow } from '../../helpers';
 import { PageGeneratorField, PageGeneratorRow } from '../../types';
 import { GenerateComponent } from './GenerateComponent';
 import { GenerateRow } from './GenerateRow';
@@ -26,8 +26,13 @@ export const GenerateGridChild = (
   index: number,
 ) => {
   const isRow = isPageGeneratorRow(obj);
-  const { fieldOnChange, selectOnChange, datePickerOnChange, onBlur } =
-    useContext(PageGeneratorContext);
+  const {
+    fieldOnChange,
+    selectOnChange,
+    datePickerOnChange,
+    onBlur,
+    errorMessages,
+  } = useContext(PageGeneratorContext);
   const screenSize = useScreenSize();
 
   const props: GenerateGridChildProperties = {
@@ -37,6 +42,12 @@ export const GenerateGridChild = (
     onBlur,
     screenSize,
   };
+  if (isFieldWithValidations(obj) && obj.props.name) {
+    obj.props = {
+      ...obj.props,
+      errorMessage: errorMessages[obj.props.name],
+    };
+  }
   return (
     !obj.hide && (
       <GridChild columnsOccupied="all" key={index}>

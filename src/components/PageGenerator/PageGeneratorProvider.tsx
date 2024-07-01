@@ -1,5 +1,6 @@
 import { PageGeneratorContext } from './PageGeneratorContext';
 import {
+  PageGeneratorErrorMessages,
   PageGeneratorField,
   PageGeneratorProps,
   PageGeneratorRow,
@@ -32,25 +33,28 @@ export const PageGeneratorProvider = ({
   setState,
 }: PageGeneratorProviderProps) => {
   const [errors, setErrors] = useState<PageGeneratorErrors>({});
+  const [errorMessages, setErrorMessages] =
+    useState<PageGeneratorErrorMessages>({});
 
   useEffect(() => {
     Object.keys(errors).forEach((key: string) => {
       const error = errors[key];
       if (error.errors.length > 0) {
-        setErrorMessage(key, error.errors[0].message);
+        setErrorMessages({
+          ...errorMessages,
+          [key]: error.errors[0].message,
+        });
+      } else {
+        setErrorMessages({
+          ...errorMessages,
+          [key]: '',
+        });
       }
     });
     if (errorsOnChange) {
       errorsOnChange(errors);
     }
   }, [errors]);
-
-  const setErrorMessage = (name: string, errorMessage: string) => {
-    const field = getFieldByName(name);
-    if (field && isFieldWithValidations(field)) {
-      field.props.errorMessage = errorMessage;
-    }
-  };
 
   const findFieldByNameInternal = (
     name: string,
@@ -114,7 +118,10 @@ export const PageGeneratorProvider = ({
   ) => {
     const { id, name, value } = event.target;
     const checked = (event as ChangeEvent<HTMLInputElement>).target?.checked;
-    setErrorMessage(name, ''); //clear errormessage when user types
+    setErrorMessages({
+      ...errorMessages,
+      [name]: '', //clear errormessage when user types
+    });
     const newState = {
       ...state,
       [name || id]: event.target.type === 'checkbox' ? checked : value,
@@ -142,7 +149,6 @@ export const PageGeneratorProvider = ({
   };
 
   const datePickerOnChange = (value: CalendarDate, name: string) => {
-    setErrorMessage(name, ''); //clear errormessage when user types
     const newState = {
       ...state,
       [name]: value,
@@ -159,6 +165,7 @@ export const PageGeneratorProvider = ({
         selectOnChange,
         datePickerOnChange,
         onBlur,
+        errorMessages,
       }}
     >
       {children}

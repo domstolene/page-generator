@@ -21,8 +21,7 @@ export const FormFields = (
   errors: PageGeneratorErrors,
   formSubmitted: boolean,
 ): (PageGeneratorField | PageGeneratorRow)[] => {
-  const { valid, getFieldErrorMessage, getFormErrorMessage } =
-    useValidation(errors);
+  const { valid, getFormErrorMessage } = useValidation(errors);
 
   return [
     {
@@ -42,7 +41,6 @@ export const FormFields = (
     NinInput({
       props: {
         value: state.nin as string,
-        errorMessage: getFieldErrorMessage('nin'),
       },
       fieldProps: {
         validations: [
@@ -123,7 +121,6 @@ export const FormFields = (
       props: {
         label: 'Adresse',
         name: 'adresse',
-        errorMessage: getFieldErrorMessage('adresse'),
       },
       validations: [
         {

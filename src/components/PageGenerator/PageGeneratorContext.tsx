@@ -3,6 +3,7 @@ import { PageGeneratorProps } from '../../types/PageGeneratorProps';
 import { SelectOption } from '@norges-domstoler/dds-components';
 import { SingleValue, MultiValue } from 'react-select';
 import { CalendarDate } from '@internationalized/date';
+import { PageGeneratorErrorMessages } from '../../types';
 
 export interface PageGeneratorContextModel {
   fields: PageGeneratorProps['fields'];
@@ -20,6 +21,7 @@ export interface PageGeneratorContextModel {
   onBlur: <T extends HTMLInputElement | HTMLTextAreaElement>(
     event: FocusEvent<T>,
   ) => void;
+  errorMessages: PageGeneratorErrorMessages;
 }
 
 export const PageGeneratorContext = createContext<PageGeneratorContextModel>({
@@ -29,4 +31,5 @@ export const PageGeneratorContext = createContext<PageGeneratorContextModel>({
   selectOnChange: () => {},
   datePickerOnChange: () => {},
   onBlur: () => {},
+  errorMessages: {},
 });
