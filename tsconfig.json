@@ -1,11 +1,11 @@
 {
   "compilerOptions": {
     "target": "esnext",
-    "module": "esnext",
+    "module": "nodenext",
     "lib": ["dom", "esnext"],
     "declaration": true,
     "sourceMap": true,
-    "moduleResolution": "node",
+    "moduleResolution": "NodeNext",
     "skipLibCheck": true,
     "strict": true,
     "isolatedModules": true,
