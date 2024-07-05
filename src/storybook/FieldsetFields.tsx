@@ -113,20 +113,20 @@ export const FieldsetFields: (PageGeneratorField | PageGeneratorRow)[] = [
           {
             component: PageGeneratorSupportedFields.Button,
             props: {
-              label: 'Lagre',
               type: 'submit',
             },
+            innerHTML: 'Lagre',
           },
           {
             component: PageGeneratorSupportedFields.Button,
             props: {
-              label: 'Superlagre',
               purpose: 'secondary',
               onClick: event => {
                 event.preventDefault();
                 console.log('Du superlagret!');
               },
             },
+            innerHTML: 'Superlagre',
           },
         ],
       },

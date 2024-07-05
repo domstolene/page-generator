@@ -223,14 +223,13 @@ export const FormFields = (
         {
           component: PageGeneratorSupportedFields.Button,
           props: {
-            label: 'Lagre',
             type: 'submit',
           },
+          innerHTML: 'Lagre',
         },
         {
           component: PageGeneratorSupportedFields.Button,
           props: {
-            label: 'Superlagre',
             purpose: 'secondary',
             onClick: event => {
               event.preventDefault();
@@ -238,11 +237,11 @@ export const FormFields = (
               console.log('current state:', state);
             },
           },
+          innerHTML: 'Superlagre',
         },
         {
           component: PageGeneratorSupportedFields.Button,
           props: {
-            label: 'Nullstill',
             purpose: 'secondary',
             onClick: event => {
               event.preventDefault();
@@ -255,6 +254,7 @@ export const FormFields = (
               console.log('current state:', state);
             },
           },
+          innerHTML: 'Nullstill',
         },
       ],
     },

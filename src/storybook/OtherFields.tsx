@@ -77,7 +77,6 @@ export const OtherFields = (): (PageGeneratorField | PageGeneratorRow)[] => {
       component: PageGeneratorSupportedFields.Card,
       props: {
         cardType: 'info',
-        color: 'strokeLight',
       },
       innerHTML: 'Dette er et Card',
     },
@@ -91,8 +90,8 @@ export const OtherFields = (): (PageGeneratorField | PageGeneratorRow)[] => {
           component: PageGeneratorSupportedFields.Button,
           props: {
             purpose: 'secondary',
-            label: 'Trigger Drawer',
           },
+          innerHTML: 'Trigger Drawer',
         },
         {
           component: PageGeneratorSupportedFields.Drawer,
