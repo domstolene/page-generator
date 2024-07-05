@@ -37,7 +37,6 @@ import {
   Typography,
   ToggleBar,
   ToggleRadio,
-  getHooksGridStyling,
 } from '@norges-domstoler/dds-components';
 import { PageGeneratorField, PageGeneratorSupportedFields } from '../../types';
 import { ChangeEvent } from 'react';
@@ -69,14 +68,17 @@ export const GenerateComponent = (
   ) => fieldOnChange(event);
 
   const GridStyling = {
-    ...getHooksGridStyling(screenSize),
     marginLeft: undefined,
     marginRight: undefined,
   };
 
   switch (field.component) {
     case PageGeneratorSupportedFields.Button:
-      return <Button {...field.props} key={index} />;
+      return (
+        <Button {...field.props} key={index}>
+          {field.innerHTML}
+        </Button>
+      );
     case PageGeneratorSupportedFields.Card:
       if (field.innerHTML) {
         return (

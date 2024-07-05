@@ -98,6 +98,7 @@ interface ButtonField {
   component: PageGeneratorSupportedFields.Button;
   props: ComponentProps<typeof Button>;
   hide?: boolean;
+  innerHTML: JSX.Element | string;
 }
 
 interface CardField {
