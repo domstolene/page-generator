@@ -1,5 +1,11 @@
 # @norges-domstoler/dds-page-generator
 
+## 5.3.0
+
+### Minor Changes
+
+- a191b33: Oppgrader 3.parts pakker
+
 ## 5.2.0
 
 ### Minor Changes
