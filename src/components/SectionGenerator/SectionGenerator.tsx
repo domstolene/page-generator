@@ -2,7 +2,11 @@ import {
   getBaseHTMLProps,
   useScreenSize,
 } from '@norges-domstoler/dds-components';
-import { SectionGeneratorProps } from '../../types';
+import {
+  PageGeneratorField,
+  PageGeneratorRow,
+  SectionGeneratorProps,
+} from '../../types';
 import React, { useContext } from 'react';
 import { isSectionGeneratorRow } from '../../helpers';
 import { GenerateRow } from '../Generate/GenerateRow';
@@ -71,10 +75,20 @@ export const SectionGenerator = (props: SectionGeneratorProps) => {
           return (
             !obj.hide && (
               <React.Fragment key={index}>
-                {isRow &&
-                  GenerateRow(index, obj.fields, generateGridChildProps)}
-                {!isRow &&
-                  GenerateComponent(index, obj, generateGridChildProps)}
+                {isRow && (
+                  <GenerateRow
+                    index={index}
+                    fields={(obj as PageGeneratorRow).fields}
+                    gridChildProps={generateGridChildProps}
+                  />
+                )}
+                {!isRow && (
+                  <GenerateComponent
+                    index={index}
+                    field={obj as PageGeneratorField}
+                    gridChildProps={generateGridChildProps}
+                  />
+                )}
               </React.Fragment>
             )
           );

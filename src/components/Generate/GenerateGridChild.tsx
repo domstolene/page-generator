@@ -21,11 +21,13 @@ export interface GenerateGridChildProperties {
   screenSize: ScreenSize;
 }
 
-export const GenerateGridChild = (
-  obj: PageGeneratorField | PageGeneratorRow,
-  index: number,
-) => {
-  const isRow = isPageGeneratorRow(obj);
+interface GenerateGridChildProps {
+  obj: PageGeneratorField | PageGeneratorRow;
+  index: number;
+}
+
+export const GenerateGridChild = (props: GenerateGridChildProps) => {
+  const isRow = isPageGeneratorRow(props.obj);
   const {
     fieldOnChange,
     selectOnChange,
@@ -34,8 +36,9 @@ export const GenerateGridChild = (
     errorMessages,
   } = useContext(PageGeneratorContext);
   const screenSize = useScreenSize();
+  const { obj, index } = props;
 
-  const props: GenerateGridChildProperties = {
+  const gridChildProps: GenerateGridChildProperties = {
     fieldOnChange,
     selectOnChange,
     datePickerOnChange,
@@ -51,8 +54,20 @@ export const GenerateGridChild = (
   return (
     !obj.hide && (
       <GridChild columnsOccupied="all" key={index}>
-        {isRow && GenerateRow(index, obj.fields, props)}
-        {!isRow && GenerateComponent(index, obj, props)}
+        {isRow && (
+          <GenerateRow
+            index={index}
+            fields={(obj as PageGeneratorRow).fields}
+            gridChildProps={gridChildProps}
+          />
+        )}
+        {!isRow && (
+          <GenerateComponent
+            index={index}
+            field={obj as PageGeneratorField}
+            gridChildProps={gridChildProps}
+          />
+        )}
       </GridChild>
     )
   );

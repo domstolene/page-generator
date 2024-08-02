@@ -47,18 +47,21 @@ import {
 } from './GenerateGridChild';
 import '../../styles/page-generator-fieldset.css';
 
-export const GenerateComponent = (
-  index: number,
-  field: PageGeneratorField,
-  props: GenerateGridChildProperties,
-) => {
+interface GenerateComponentProps {
+  index: number;
+  field: PageGeneratorField;
+  gridChildProps: GenerateGridChildProperties;
+}
+
+export const GenerateComponent = (props: GenerateComponentProps) => {
+  const { index, field, gridChildProps } = props;
   const {
     fieldOnChange,
     selectOnChange,
     datePickerOnChange,
     onBlur,
     screenSize,
-  } = props;
+  } = gridChildProps;
 
   const inputFieldOnChange = (
     event: ChangeEvent<HTMLInputElement & Record<string, never>>,
@@ -100,7 +103,16 @@ export const GenerateComponent = (
       return (
         <CheckboxGroup {...field.props} key={index}>
           {field.children.map((child, childIndex) => {
-            return !child.hide && GenerateComponent(childIndex, child, props);
+            return (
+              !child.hide && (
+                <GenerateComponent
+                  key={childIndex}
+                  index={childIndex}
+                  field={child}
+                  gridChildProps={props.gridChildProps}
+                />
+              )
+            );
           })}
         </CheckboxGroup>
       );
@@ -116,7 +128,16 @@ export const GenerateComponent = (
       return (
         <DescriptionList {...field.props} key={index}>
           {field.children.map((child, childIndex) => {
-            return !child.hide && GenerateComponent(childIndex, child, props);
+            return (
+              !child.hide && (
+                <GenerateComponent
+                  key={childIndex}
+                  index={childIndex}
+                  field={child}
+                  gridChildProps={props.gridChildProps}
+                />
+              )
+            );
           })}
         </DescriptionList>
       );
@@ -124,7 +145,16 @@ export const GenerateComponent = (
       return (
         <DescriptionListGroup {...field.props} key={index}>
           {field.children.map((child, childIndex) => {
-            return !child.hide && GenerateComponent(childIndex, child, props);
+            return (
+              !child.hide && (
+                <GenerateComponent
+                  key={childIndex}
+                  index={childIndex}
+                  field={child}
+                  gridChildProps={props.gridChildProps}
+                />
+              )
+            );
           })}
         </DescriptionListGroup>
       );
@@ -152,7 +182,16 @@ export const GenerateComponent = (
       return (
         <DrawerGroup {...field.props} key={index}>
           {field.children.map((child, childIndex) => {
-            return !child.hide && GenerateComponent(childIndex, child, props);
+            return (
+              !child.hide && (
+                <GenerateComponent
+                  key={childIndex}
+                  index={childIndex}
+                  field={child}
+                  gridChildProps={props.gridChildProps}
+                />
+              )
+            );
           })}
         </DrawerGroup>
       );
@@ -171,13 +210,22 @@ export const GenerateComponent = (
         >
           {field.children.map((child, childIndex) => {
             if ((child as PageGeneratorField).component === 'Legend') {
-              return GenerateComponent(
-                childIndex,
-                child as PageGeneratorField,
-                props,
+              return (
+                <GenerateComponent
+                  key={childIndex}
+                  index={childIndex}
+                  field={child as PageGeneratorField}
+                  gridChildProps={props.gridChildProps}
+                />
               );
             } else {
-              return GenerateGridChild(child, childIndex);
+              return (
+                <GenerateGridChild
+                  key={childIndex}
+                  obj={child}
+                  index={childIndex}
+                />
+              );
             }
           })}
         </Fieldset>
@@ -198,7 +246,16 @@ export const GenerateComponent = (
       return (
         <HStack {...field.props} key={index}>
           {field.children.map((child, childIndex) => {
-            return !child.hide && GenerateComponent(childIndex, child, props);
+            return (
+              !child.hide && (
+                <GenerateComponent
+                  key={childIndex}
+                  index={childIndex}
+                  field={child}
+                  gridChildProps={props.gridChildProps}
+                />
+              )
+            );
           })}
         </HStack>
       );
@@ -226,7 +283,16 @@ export const GenerateComponent = (
       return (
         <List {...field.props} key={index}>
           {field.children.map((child, childIndex) => {
-            return !child.hide && GenerateComponent(childIndex, child, props);
+            return (
+              !child.hide && (
+                <GenerateComponent
+                  key={childIndex}
+                  index={childIndex}
+                  field={child}
+                  gridChildProps={props.gridChildProps}
+                />
+              )
+            );
           })}
         </List>
       );
@@ -261,7 +327,16 @@ export const GenerateComponent = (
       return (
         <RadioButtonGroup {...field.props} key={index}>
           {field.children.map((child, childIndex) => {
-            return !child.hide && GenerateComponent(childIndex, child, props);
+            return (
+              !child.hide && (
+                <GenerateComponent
+                  key={childIndex}
+                  index={childIndex}
+                  field={child}
+                  gridChildProps={props.gridChildProps}
+                />
+              )
+            );
           })}
         </RadioButtonGroup>
       );
@@ -297,7 +372,16 @@ export const GenerateComponent = (
       return (
         <ToggleBar {...field.props} key={index}>
           {field.children.map((child, childIndex) => {
-            return !child.hide && GenerateComponent(childIndex, child, props);
+            return (
+              !child.hide && (
+                <GenerateComponent
+                  key={childIndex}
+                  index={childIndex}
+                  field={child}
+                  gridChildProps={props.gridChildProps}
+                />
+              )
+            );
           })}
         </ToggleBar>
       );
@@ -313,7 +397,16 @@ export const GenerateComponent = (
       return (
         <ToggleButtonGroup {...field.props} key={index}>
           {field.children.map((child, childIndex) => {
-            return !child.hide && GenerateComponent(childIndex, child, props);
+            return (
+              !child.hide && (
+                <GenerateComponent
+                  key={childIndex}
+                  index={childIndex}
+                  field={child}
+                  gridChildProps={props.gridChildProps}
+                />
+              )
+            );
           })}
         </ToggleButtonGroup>
       );
@@ -341,7 +434,16 @@ export const GenerateComponent = (
       return (
         <VStack {...field.props} key={index}>
           {field.children.map((child, childIndex) => {
-            return !child.hide && GenerateComponent(childIndex, child, props);
+            return (
+              !child.hide && (
+                <GenerateComponent
+                  key={childIndex}
+                  index={childIndex}
+                  field={child}
+                  gridChildProps={props.gridChildProps}
+                />
+              )
+            );
           })}
         </VStack>
       );
