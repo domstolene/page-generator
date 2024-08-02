@@ -4,20 +4,32 @@ import { PageGeneratorTokens } from '../../tokens';
 import { GenerateComponent } from './GenerateComponent';
 import { GenerateGridChildProperties } from './GenerateGridChild';
 
-export const GenerateRow = (
-  index: number,
-  fields: PageGeneratorField[],
-  props: GenerateGridChildProperties,
-) => {
+interface GenerateRowProps {
+  index: number;
+  fields: PageGeneratorField[];
+  gridChildProps: GenerateGridChildProperties;
+}
+
+export const GenerateRow = (props: GenerateRowProps) => {
+  const { index, fields, gridChildProps } = props;
   return (
     <HStack
-      gap={PageGeneratorTokens.Stack[props.screenSize] || 0}
+      gap={PageGeneratorTokens.Stack[gridChildProps.screenSize] || 0}
       align="flex-start"
       htmlProps={{ style: { flexWrap: 'wrap' } }}
       key={index}
     >
       {fields.map((field, childIndex) => {
-        return !field.hide && GenerateComponent(childIndex, field, props);
+        return (
+          !field.hide && (
+            <GenerateComponent
+              key={childIndex}
+              index={childIndex}
+              field={field}
+              gridChildProps={gridChildProps}
+            />
+          )
+        );
       })}
     </HStack>
   );
