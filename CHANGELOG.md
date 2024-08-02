@@ -1,5 +1,11 @@
 # @norges-domstoler/dds-page-generator
 
+## 5.3.1
+
+### Patch Changes
+
+- b361e20: Fikser bug hvor det oppstod flere hooks mellom hver render av GenerateGridChild.
+
 ## 5.3.0
 
 ### Minor Changes
