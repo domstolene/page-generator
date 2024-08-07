@@ -30,9 +30,7 @@ export const useValidation = (errors: PageGeneratorErrors) => {
 
     return (
       <>
-        <Paragraph>
-          Disse feilene må rettes før du kan sende inn skjemaet:
-        </Paragraph>
+        <Paragraph>Disse feilene må rettes før du kan lagre:</Paragraph>
         <List>
           {formMessages.map((formMessage, index) => {
             return <ListItem key={index}>{formMessage}</ListItem>;
