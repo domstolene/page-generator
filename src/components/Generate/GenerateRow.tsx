@@ -3,6 +3,9 @@ import { PageGeneratorField } from '../../types';
 import { PageGeneratorTokens } from '../../tokens';
 import { GenerateComponent } from './GenerateComponent';
 import { GenerateGridChildProperties } from './GenerateGridChild';
+import { isFieldWithValidations } from '../../helpers';
+import { useContext } from 'react';
+import { PageGeneratorContext } from '../PageGenerator/PageGeneratorContext';
 
 interface GenerateRowProps {
   index: number;
@@ -12,6 +15,7 @@ interface GenerateRowProps {
 
 export const GenerateRow = (props: GenerateRowProps) => {
   const { index, fields, gridChildProps } = props;
+  const { errorMessages } = useContext(PageGeneratorContext);
   return (
     <HStack
       gap={PageGeneratorTokens.Stack[gridChildProps.screenSize] || 0}
@@ -20,6 +24,12 @@ export const GenerateRow = (props: GenerateRowProps) => {
       key={index}
     >
       {fields.map((field, childIndex) => {
+        if (isFieldWithValidations(field) && field.props.name) {
+          field.props = {
+            ...field.props,
+            errorMessage: errorMessages[field.props.name],
+          };
+        }
         return (
           !field.hide && (
             <GenerateComponent
