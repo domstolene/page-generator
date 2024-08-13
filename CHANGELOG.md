@@ -1,5 +1,11 @@
 # @norges-domstoler/dds-page-generator
 
+## 5.3.2
+
+### Patch Changes
+
+- c8cc816: Vis feilmelding for felt som ligger i PageGeneratorRow
+
 ## 5.3.1
 
 ### Patch Changes
