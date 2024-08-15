@@ -1,5 +1,11 @@
 # @norges-domstoler/dds-page-generator
 
+## 5.4.1
+
+### Patch Changes
+
+- 0606017: Eksporter validatorer
+
 ## 5.4.0
 
 ### Minor Changes
