@@ -1,5 +1,11 @@
 # @norges-domstoler/dds-page-generator
 
+## 5.4.0
+
+### Minor Changes
+
+- 0bd8489: Legg til validatorer for Required, Nin, PhoneNumber og Email
+
 ## 5.3.2
 
 ### Patch Changes
