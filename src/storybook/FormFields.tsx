@@ -14,6 +14,12 @@ import {
 } from '../types';
 import { CalendarDate } from '@internationalized/date';
 import { PageGeneratorErrors } from '../types/PageGeneratorErrors';
+import {
+  EmailValidator,
+  NinValidator,
+  PhoneNumberValidator,
+  RequiredValidator,
+} from '../helpers/Validators';
 
 export const FormFields = (
   state: PageGeneratorState,
@@ -44,19 +50,8 @@ export const FormFields = (
       },
       fieldProps: {
         validations: [
-          {
-            message: 'Påkrevd',
-            rule: (value: string) => {
-              return value.length > 0;
-            },
-          },
-          {
-            message: 'Må være omg',
-            formMessage: 'Fødselsnummer må være omg',
-            rule: (value: string) => {
-              return value === 'omg';
-            },
-          },
+          RequiredValidator(undefined, 'Fødselsnummer er påkrevd'),
+          NinValidator,
         ],
       },
     }),
@@ -90,29 +85,19 @@ export const FormFields = (
       props: {
         value: state.email as string,
       },
+      fieldProps: {
+        validations: [EmailValidator],
+      },
     }),
     PhoneNumberRow(
       {
         fieldProps: {
-          validations: [
-            {
-              message: 'Må være +47',
-              rule: (value: string) => {
-                return value === '+47';
-              },
-            },
-          ],
+          validations: [RequiredValidator(undefined, 'Landkode er påkrevd')],
         },
       },
       {
         fieldProps: {
-          validations: [
-            {
-              message: 'Telefonnummer kan bare inneholde tall',
-              rule: (value: string) =>
-                value.length === 0 || value.match(/^\d+$/) !== null,
-            },
-          ],
+          validations: [PhoneNumberValidator],
         },
       },
     ),
@@ -122,14 +107,7 @@ export const FormFields = (
         label: 'Adresse',
         name: 'adresse',
       },
-      validations: [
-        {
-          message: 'Må være omg',
-          rule: (value: string) => {
-            return value === 'omg';
-          },
-        },
-      ],
+      validations: [RequiredValidator(undefined, 'Adresse er påkrevd')],
     },
     {
       component: PageGeneratorSupportedFields.Heading,
