@@ -1,5 +1,11 @@
 # @norges-domstoler/dds-page-generator
 
+## 5.5.0
+
+### Minor Changes
+
+- fd36ee7: Legg til støtte for å bruke novalidate på et skjema
+
 ## 5.4.1
 
 ### Patch Changes
