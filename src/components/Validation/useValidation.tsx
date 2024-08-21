@@ -19,7 +19,7 @@ export const useValidation = (errors: PageGeneratorErrors) => {
     setValid(validateErrors());
   }, [errors]);
 
-  const getFormErrorMessage = (): JSX.Element => {
+  const getFormErrorMessage = (leadText?: string): JSX.Element => {
     const actualErrors = Object.keys(errors).filter(
       key => errors[key].errors.length > 0,
     );
@@ -30,7 +30,9 @@ export const useValidation = (errors: PageGeneratorErrors) => {
 
     return (
       <>
-        <Paragraph>Disse feilene må rettes før du kan lagre:</Paragraph>
+        <Paragraph>
+          {leadText || 'Disse feilene må rettes før du kan lagre:'}
+        </Paragraph>
         <List>
           {formMessages.map((formMessage, index) => {
             return <ListItem key={index}>{formMessage}</ListItem>;
