@@ -20,5 +20,7 @@ export type PageGeneratorProps = BaseComponentPropsWithChildren<
     state?: PageGeneratorState;
     /** Sende inn state slik at verdier kan oppdateres. */
     setState?: PageGeneratorSetState;
+    /** Velge om man ønsker validering fra browser eller ikke. Bør kun brukes når `as` er satt til `form`. */
+    noValidate?: boolean;
   }
 >;
