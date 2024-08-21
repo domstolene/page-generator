@@ -40,6 +40,7 @@ export const Form = () => {
           setFormSubmitted(true);
         },
       }}
+      noValidate={true}
     />
   );
 };
