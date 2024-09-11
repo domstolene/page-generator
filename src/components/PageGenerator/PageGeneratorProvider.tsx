@@ -126,7 +126,9 @@ export const PageGeneratorProvider = ({
       ...state,
       [name || id]: event.target.type === 'checkbox' ? checked : value,
     };
-    setState && setState(newState);
+    if (setState) {
+      setState(newState);
+    }
   };
 
   const selectOnChange = (
@@ -145,7 +147,9 @@ export const PageGeneratorProvider = ({
       ...state,
       [name]: value,
     };
-    setState && setState(newState);
+    if (setState) {
+      setState(newState);
+    }
   };
 
   const datePickerOnChange = (value: CalendarDate, name: string) => {
@@ -153,7 +157,9 @@ export const PageGeneratorProvider = ({
       ...state,
       [name]: value,
     };
-    setState && setState(newState);
+    if (setState) {
+      setState(newState);
+    }
   };
 
   return (
