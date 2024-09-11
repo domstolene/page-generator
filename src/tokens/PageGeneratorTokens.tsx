@@ -1,8 +1,6 @@
 import { ScreenSize } from '@norges-domstoler/dds-components';
-import { ddsBaseTokens } from '@norges-domstoler/dds-design-tokens';
+import { ddsTokens } from '@norges-domstoler/dds-design-tokens';
 import { PageGeneratorTokens as PageGeneratorTokensType } from '../types';
-
-const { spacing } = ddsBaseTokens;
 
 export const PageGeneratorTokens: PageGeneratorTokensType = {
   Stack: {
@@ -13,10 +11,10 @@ export const PageGeneratorTokens: PageGeneratorTokensType = {
     [ScreenSize.XLarge]: 'x1.5',
   },
   rowGaps: {
-    xs: spacing.DdsSpacingX1,
-    sm: spacing.DdsSpacingX1,
-    md: spacing.DdsSpacingX1,
-    lg: spacing.DdsSpacingX1,
-    xl: spacing.DdsSpacingX15,
+    xs: ddsTokens.DdsSpacingX1,
+    sm: ddsTokens.DdsSpacingX1,
+    md: ddsTokens.DdsSpacingX1,
+    lg: ddsTokens.DdsSpacingX1,
+    xl: ddsTokens.DdsSpacingX15,
   },
 };
