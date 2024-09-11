@@ -22,7 +22,7 @@
     "build:fast": "tsup",
     "dev": "pnpm build:fast -- --watch",
     "typecheck": "tsc --noEmit",
-    "lint": "eslint src --ext .js,.jsx,.ts,.tsx --config .eslintrc.cjs --cache",
+    "lint": "eslint src --c .js,.jsx,.ts,.tsx --config eslint.config.mjs --cache",
     "format:check": "prettier --check src --cache",
     "format:write": "prettier --write src --cache",
     "storybook": "storybook dev -p 6006",
@@ -69,6 +69,8 @@
     "vitest": "^2.0.5"
   },
   "dependencies": {
+    "@eslint/eslintrc": "^3.1.0",
+    "@eslint/js": "^9.10.0",
     "@internationalized/date": "^3.5.5",
     "@navikt/fnrvalidator": "^1.3.0",
     "@norges-domstoler/dds-components": "^17.2.1",

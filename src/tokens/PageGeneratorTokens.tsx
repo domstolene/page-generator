@@ -11,10 +11,10 @@ export const PageGeneratorTokens: PageGeneratorTokensType = {
     [ScreenSize.XLarge]: 'x1.5',
   },
   rowGaps: {
-    xs: ddsTokens.DdsSpacingX1,
-    sm: ddsTokens.DdsSpacingX1,
-    md: ddsTokens.DdsSpacingX1,
-    lg: ddsTokens.DdsSpacingX1,
-    xl: ddsTokens.DdsSpacingX15,
+    xs: ddsTokens.ddsSpacingX1,
+    sm: ddsTokens.ddsSpacingX1,
+    md: ddsTokens.ddsSpacingX1,
+    lg: ddsTokens.ddsSpacingX1,
+    xl: ddsTokens.ddsSpacingX15,
   },
 };
