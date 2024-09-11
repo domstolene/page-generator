@@ -1,5 +1,11 @@
 # @norges-domstoler/dds-page-generator
 
+## 5.6.0
+
+### Minor Changes
+
+- 9696557: Oppgrader pakker
+
 ## 5.5.0
 
 ### Minor Changes
