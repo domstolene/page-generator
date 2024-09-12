@@ -36,6 +36,10 @@ import {
   ToggleRadioProps,
   FieldsetProps,
   LegendProps,
+  DetailListDescProps,
+  DetailListTermProps,
+  DetailListRowProps,
+  DetailListProps,
 } from '@norges-domstoler/dds-components';
 import { PageGeneratorSupportedFields } from './PageGeneratorSupportedFields';
 import { ComponentProps } from 'react';
@@ -57,6 +61,8 @@ type FieldWithChildren =
   | CheckboxGroupField
   | DescriptionListField
   | DescriptionListGroupField
+  | DetailListField
+  | DetailListRowField
   | DrawerGroupField
   | FieldsetField
   | HStackField
@@ -73,6 +79,8 @@ type FieldWithoutChildren =
   | DatepickerField
   | DescriptionListTermField
   | DescriptionListDescField
+  | DetailListDescField
+  | DetailListTermField
   | DividerField
   | DrawerField
   | GlobalMessageField
@@ -153,6 +161,34 @@ interface DescriptionListTermField {
 interface DescriptionListDescField {
   component: PageGeneratorSupportedFields.DescriptionListDesc;
   props: DescriptionListDescProps;
+  hide?: boolean;
+  innerHTML: JSX.Element | string;
+}
+
+export interface DetailListField {
+  component: PageGeneratorSupportedFields.DetailList;
+  props: DetailListProps;
+  hide?: boolean;
+  children: DetailListRowField[];
+}
+
+export interface DetailListRowField {
+  component: PageGeneratorSupportedFields.DetailListRow;
+  props: DetailListRowProps;
+  hide?: boolean;
+  children: (DetailListTermField | DetailListDescField)[];
+}
+
+export interface DetailListTermField {
+  component: PageGeneratorSupportedFields.DetailListTerm;
+  props: DetailListTermProps;
+  hide?: boolean;
+  innerHTML: JSX.Element | string;
+}
+
+export interface DetailListDescField {
+  component: PageGeneratorSupportedFields.DetailListDesc;
+  props: DetailListDescProps;
   hide?: boolean;
   innerHTML: JSX.Element | string;
 }

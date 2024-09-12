@@ -1,3 +1,4 @@
+import { DetailList } from '../helpers';
 import {
   DescriptionListGroupField,
   PageGeneratorField,
@@ -55,6 +56,25 @@ const getDescriptionListGroup = (
 
 export const OtherFields = (): (PageGeneratorField | PageGeneratorRow)[] => {
   return [
+    getHeading('DetailList'),
+    DetailList([
+      {
+        term: 'Term 1',
+        desc: 'Desc 1',
+      },
+      {
+        term: 'Term 2',
+        desc: 'Desc 2',
+      },
+      {
+        term: 'Term 3',
+        desc: 'Desc 3',
+      },
+      {
+        term: 'Term 4',
+        desc: 'Desc 4',
+      },
+    ]),
     getHeading('DescriptionList - direction row'),
     getDescriptionList(
       [

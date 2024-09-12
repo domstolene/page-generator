@@ -3,8 +3,13 @@ import {
   DatePickerProps,
   useScreenSize,
   ScreenSize,
+  DetailListProps,
 } from '@norges-domstoler/dds-components';
 import {
+  DetailListDescField,
+  DetailListField,
+  DetailListRowField,
+  DetailListTermField,
   PageGeneratorField,
   PageGeneratorRow,
   PageGeneratorSupportedFields,
@@ -252,5 +257,45 @@ export const PostalRow = (
       PostalCodeInput(postalCodeProps || {}),
     ],
     ...rowProps,
+  };
+};
+
+/* DetailList */
+
+export const DetailList = (
+  rows: { term: string; desc: string }[],
+): DetailListField => {
+  return {
+    component: PageGeneratorSupportedFields.DetailList,
+    props: {},
+    children: rows.map(row => {
+      return {
+        component: PageGeneratorSupportedFields.DetailListRow,
+        props: {},
+        children: [
+          {
+            component: PageGeneratorSupportedFields.DetailListTerm,
+            props: {
+              style: {
+                paddingBlock: '8px',
+                backgroundColor: 'white',
+              },
+            },
+            innerHTML: row.term,
+          },
+          {
+            component: PageGeneratorSupportedFields.DetailListDesc,
+            props: {
+              style: {
+                paddingBlock: '8px',
+                backgroundColor: 'white',
+                textAlign: 'right',
+              },
+            },
+            innerHTML: row.desc,
+          },
+        ],
+      };
+    }),
   };
 };
