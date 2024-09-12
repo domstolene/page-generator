@@ -37,6 +37,10 @@ import {
   Typography,
   ToggleBar,
   ToggleRadio,
+  DetailList,
+  DetailListRow,
+  DetailListDesc,
+  DetailListTerm,
 } from '@norges-domstoler/dds-components';
 import { PageGeneratorField, PageGeneratorSupportedFields } from '../../types';
 import { ChangeEvent } from 'react';
@@ -169,6 +173,52 @@ export const GenerateComponent = (props: GenerateComponentProps) => {
         <DescriptionListTerm {...field.props} key={index}>
           {field.innerHTML}
         </DescriptionListTerm>
+      );
+    case PageGeneratorSupportedFields.DetailList:
+      return (
+        <DetailList {...field.props} key={index}>
+          {field.children.map((child, childIndex) => {
+            return (
+              !child.hide && (
+                <GenerateComponent
+                  key={childIndex}
+                  index={childIndex}
+                  field={child}
+                  gridChildProps={props.gridChildProps}
+                />
+              )
+            );
+          })}
+        </DetailList>
+      );
+    case PageGeneratorSupportedFields.DetailListRow:
+      return (
+        <DetailListRow {...field.props} key={index}>
+          {field.children.map((child, childIndex) => {
+            return (
+              !child.hide && (
+                <GenerateComponent
+                  key={childIndex}
+                  index={childIndex}
+                  field={child}
+                  gridChildProps={props.gridChildProps}
+                />
+              )
+            );
+          })}
+        </DetailListRow>
+      );
+    case PageGeneratorSupportedFields.DetailListDesc:
+      return (
+        <DetailListDesc {...field.props} key={index}>
+          {field.innerHTML}
+        </DetailListDesc>
+      );
+    case PageGeneratorSupportedFields.DetailListTerm:
+      return (
+        <DetailListTerm {...field.props} key={index}>
+          {field.innerHTML}
+        </DetailListTerm>
       );
     case PageGeneratorSupportedFields.Divider:
       return <Divider {...field.props} key={index} />;
