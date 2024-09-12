@@ -1,5 +1,11 @@
 # @norges-domstoler/dds-page-generator
 
+## 5.7.0
+
+### Minor Changes
+
+- 7f96cb9: Legg til støtte for ny komponent DetailList
+
 ## 5.6.0
 
 ### Minor Changes
