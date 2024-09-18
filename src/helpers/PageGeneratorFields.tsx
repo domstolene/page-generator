@@ -3,13 +3,9 @@ import {
   DatePickerProps,
   useScreenSize,
   ScreenSize,
-  DetailListProps,
 } from '@norges-domstoler/dds-components';
 import {
-  DetailListDescField,
   DetailListField,
-  DetailListRowField,
-  DetailListTermField,
   PageGeneratorField,
   PageGeneratorRow,
   PageGeneratorSupportedFields,
@@ -267,7 +263,10 @@ export const DetailList = (
 ): DetailListField => {
   return {
     component: PageGeneratorSupportedFields.DetailList,
-    props: {},
+    props: {
+      striped: false,
+      density: 'extraCompact',
+    },
     children: rows.map(row => {
       return {
         component: PageGeneratorSupportedFields.DetailListRow,
@@ -275,20 +274,13 @@ export const DetailList = (
         children: [
           {
             component: PageGeneratorSupportedFields.DetailListTerm,
-            props: {
-              style: {
-                paddingBlock: '8px',
-                backgroundColor: 'white',
-              },
-            },
+            props: {},
             innerHTML: row.term,
           },
           {
             component: PageGeneratorSupportedFields.DetailListDesc,
             props: {
               style: {
-                paddingBlock: '8px',
-                backgroundColor: 'white',
                 textAlign: 'right',
               },
             },
@@ -297,5 +289,12 @@ export const DetailList = (
         ],
       };
     }),
+  };
+};
+
+export const DetailListRow = (term: string, desc?: string | null) => {
+  return {
+    term,
+    desc: desc || '-',
   };
 };
