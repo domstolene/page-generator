@@ -1,5 +1,11 @@
 # @norges-domstoler/dds-page-generator
 
+## 5.7.1
+
+### Patch Changes
+
+- d1a3cb5: Legg til ny hjelpemetode for DetailListRow
+
 ## 5.7.0
 
 ### Minor Changes
