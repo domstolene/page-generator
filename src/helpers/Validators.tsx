@@ -12,6 +12,18 @@ export const RequiredValidator = (
   };
 };
 
+export const NumbersOnlyValidator = (
+  message?: string,
+  formMessage?: string,
+): PageGeneratorValidation => {
+  return {
+    message: message || 'Feltet kan bare inneholde tall',
+    formMessage: formMessage || 'Feltet kan bare inneholde tall',
+    rule: (value: string) =>
+      value.length > 0 ? value.match(/^\d+$/) !== null : true,
+  };
+};
+
 export const NinValidator: PageGeneratorValidation = {
   message: 'Fødselsnummer er ugyldig',
   formMessage: 'Fødselsnummer er ugyldig',
