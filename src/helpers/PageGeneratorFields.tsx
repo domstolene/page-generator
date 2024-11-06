@@ -171,7 +171,6 @@ export const PostalNumberInput = ({
     component: PageGeneratorSupportedFields.TextInput,
     props: {
       label: 'Postnummer',
-      type: 'number',
       width: '90px',
       name: 'postalNumber',
       ...props,
