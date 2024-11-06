@@ -1,5 +1,11 @@
 # @norges-domstoler/dds-page-generator
 
+## 5.7.2
+
+### Patch Changes
+
+- 4032c52: Legg til NumbersOnlyValidator
+
 ## 5.7.1
 
 ### Patch Changes
