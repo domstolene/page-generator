@@ -1,5 +1,5 @@
 import { idnr } from '@navikt/fnrvalidator';
-import { PageGeneratorValidation } from '../types';
+import { PageGeneratorSelectOption, PageGeneratorValidation } from '../types';
 
 export const RequiredValidator = (
   message?: string,
@@ -9,6 +9,22 @@ export const RequiredValidator = (
     message: message || 'Feltet er påkrevd',
     formMessage: formMessage || 'Feltet er påkrevd',
     rule: (value: string) => value.length > 0,
+  };
+};
+
+export const RequiredSelectValidator = (
+  message?: string,
+  formMessage?: string,
+): PageGeneratorValidation => {
+  return {
+    message: message || 'Feltet er påkrevd',
+    formMessage: formMessage || 'Feltet er påkrevd',
+    rule: (value: PageGeneratorSelectOption) => {
+      if (Array.isArray(value)) {
+        return value.length > 0;
+      }
+      return !!value;
+    },
   };
 };
 

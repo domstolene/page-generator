@@ -4,12 +4,12 @@ import {
   PageGeneratorField,
   PageGeneratorProps,
   PageGeneratorRow,
+  PageGeneratorSelectOption,
   PageGeneratorValidation,
+  PageGeneratorValidationValue,
 } from '../../types';
 import { ChangeEvent, FocusEvent, useEffect, useState } from 'react';
 import { CalendarDate } from '@internationalized/date';
-import { SelectOption } from '@norges-domstoler/dds-components';
-import { SingleValue, MultiValue } from 'react-select';
 import {
   isPageGeneratorRow,
   isFieldWithValidations,
@@ -83,7 +83,7 @@ export const PageGeneratorProvider = ({
   const updateErrors = (
     fieldErrors: PageGeneratorValidation[],
     name: string,
-    value: string,
+    value: string | PageGeneratorSelectOption,
   ) => {
     const newErrors = {
       ...errors,
@@ -95,7 +95,7 @@ export const PageGeneratorProvider = ({
     setErrors(newErrors);
   };
 
-  const validateField = (name: string, value: string) => {
+  const validateField = (name: string, value: PageGeneratorValidationValue) => {
     const field = getFieldByName(name);
     if (field && isFieldWithValidations(field)) {
       const fieldErrors =
@@ -106,11 +106,19 @@ export const PageGeneratorProvider = ({
     }
   };
 
-  const onBlur = <T extends HTMLInputElement | HTMLTextAreaElement>(
+  const onBlur = <
+    T extends HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement,
+  >(
     event: FocusEvent<T>,
   ) => {
     const { name, value } = event.target;
-    validateField(name, value);
+    validateField(name, value as PageGeneratorValidationValue);
+  };
+
+  const onBlurSelect = (name: string) => {
+    if (state) {
+      validateField(name, state[name] as PageGeneratorValidationValue);
+    }
   };
 
   const fieldOnChange = <T extends HTMLInputElement | HTMLTextAreaElement>(
@@ -131,12 +139,7 @@ export const PageGeneratorProvider = ({
     }
   };
 
-  const selectOnChange = (
-    chosen:
-      | SingleValue<SelectOption<unknown>>
-      | MultiValue<SelectOption<unknown>>,
-    name: string,
-  ) => {
+  const selectOnChange = (chosen: PageGeneratorSelectOption, name: string) => {
     let value = null;
     if (isMultiValue(chosen)) {
       value = Array.isArray(chosen) ? chosen : null;
@@ -147,6 +150,7 @@ export const PageGeneratorProvider = ({
       ...state,
       [name]: value,
     };
+    validateField(name, chosen as PageGeneratorValidationValue);
     if (setState) {
       setState(newState);
     }
@@ -171,6 +175,7 @@ export const PageGeneratorProvider = ({
         selectOnChange,
         datePickerOnChange,
         onBlur,
+        onBlurSelect,
         errorMessages,
       }}
     >

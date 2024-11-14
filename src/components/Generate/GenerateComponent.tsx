@@ -64,6 +64,7 @@ export const GenerateComponent = (props: GenerateComponentProps) => {
     selectOnChange,
     datePickerOnChange,
     onBlur,
+    onBlurSelect,
     screenSize,
   } = gridChildProps;
 
@@ -396,6 +397,9 @@ export const GenerateComponent = (props: GenerateComponentProps) => {
           {...field.props}
           key={index}
           onChange={option => selectOnChange(option, field.name)}
+          onBlur={_event => {
+            onBlurSelect(field.name);
+          }}
         />
       );
     case PageGeneratorSupportedFields.Spinner:
