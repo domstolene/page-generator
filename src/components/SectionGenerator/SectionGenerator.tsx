@@ -31,14 +31,20 @@ export const SectionGenerator = (props: SectionGeneratorProps) => {
     htmlProps,
     ...rest
   } = props;
-  const { fieldOnChange, selectOnChange, datePickerOnChange, onBlur } =
-    useContext(PageGeneratorContext);
+  const {
+    fieldOnChange,
+    selectOnChange,
+    datePickerOnChange,
+    onBlur,
+    onBlurSelect,
+  } = useContext(PageGeneratorContext);
   const screenSize = useScreenSize();
   const generateGridChildProps: GenerateGridChildProperties = {
     fieldOnChange,
     selectOnChange,
     datePickerOnChange,
     onBlur,
+    onBlurSelect,
     screenSize,
   };
 
