@@ -21,6 +21,7 @@ export interface PageGeneratorContextModel {
   onBlur: <T extends HTMLInputElement | HTMLTextAreaElement>(
     event: FocusEvent<T>,
   ) => void;
+  onBlurSelect: (name: string) => void;
   errorMessages: PageGeneratorErrorMessages;
 }
 
@@ -31,5 +32,6 @@ export const PageGeneratorContext = createContext<PageGeneratorContextModel>({
   selectOnChange: () => {},
   datePickerOnChange: () => {},
   onBlur: () => {},
+  onBlurSelect: () => {},
   errorMessages: {},
 });

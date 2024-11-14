@@ -18,6 +18,7 @@ import {
   EmailValidator,
   NinValidator,
   PhoneNumberValidator,
+  RequiredSelectValidator,
   RequiredValidator,
 } from '../helpers/Validators';
 
@@ -60,19 +61,21 @@ export const FormFields = (
         DateOfBirthDatepicker({
           value: state.dateOfBirth as CalendarDate,
         }),
-        {
-          component: PageGeneratorSupportedFields.Select,
-          props: {
-            label: 'Status',
-            name: 'status',
-            options: [
-              { label: 'Glad', value: 'glad' },
-              { label: 'Superglad', value: 'superglad' },
-            ],
-          },
-          name: 'status',
-        },
       ],
+    },
+    {
+      component: PageGeneratorSupportedFields.Select,
+      props: {
+        label: 'Status',
+        name: 'status',
+        options: [
+          { label: 'Glad', value: 'glad' },
+          { label: 'Superglad', value: 'superglad' },
+        ],
+        required: true,
+      },
+      validations: [RequiredSelectValidator()],
+      name: 'status',
     },
     {
       component: PageGeneratorSupportedFields.Heading,

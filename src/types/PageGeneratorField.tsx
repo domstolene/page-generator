@@ -45,12 +45,7 @@ import { PageGeneratorSupportedFields } from './PageGeneratorSupportedFields';
 import { ComponentProps } from 'react';
 import { SectionGeneratorRow } from './SectionGeneratorRow';
 import { PageGeneratorRow } from './PageGeneratorRow';
-
-export interface PageGeneratorValidation {
-  message: string;
-  formMessage?: string;
-  rule: (value: string) => boolean;
-}
+import { PageGeneratorValidation } from './PageGeneratorValidation';
 
 export type PageGeneratorField =
   | FieldWithChildren
@@ -93,14 +88,13 @@ type FieldWithoutChildren =
   | LocalMessageField
   | ParagraphField
   | RadioButtonField
-  | SelectField
   | SpinnerField
   | ToggleButtonField
   | ToggleRadioField
   | TypographyField
   | VisuallyHiddenField;
 
-export type FieldWithValidations = TextInputField | TextAreaField;
+export type FieldWithValidations = TextInputField | TextAreaField | SelectField;
 
 interface ButtonField {
   component: PageGeneratorSupportedFields.Button;
@@ -313,6 +307,7 @@ interface SelectField {
   component: PageGeneratorSupportedFields.Select;
   props: SelectProps<SelectOption<unknown>, boolean>;
   name: string;
+  validations?: PageGeneratorValidation[];
   hide?: boolean;
 }
 

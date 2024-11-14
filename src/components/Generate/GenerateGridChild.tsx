@@ -18,6 +18,7 @@ export interface GenerateGridChildProperties {
   selectOnChange: PageGeneratorContextModel['selectOnChange'];
   datePickerOnChange: PageGeneratorContextModel['datePickerOnChange'];
   onBlur: PageGeneratorContextModel['onBlur'];
+  onBlurSelect: PageGeneratorContextModel['onBlurSelect'];
   screenSize: ScreenSize;
 }
 
@@ -33,6 +34,7 @@ export const GenerateGridChild = (props: GenerateGridChildProps) => {
     selectOnChange,
     datePickerOnChange,
     onBlur,
+    onBlurSelect,
     errorMessages,
   } = useContext(PageGeneratorContext);
   const screenSize = useScreenSize();
@@ -43,6 +45,7 @@ export const GenerateGridChild = (props: GenerateGridChildProps) => {
     selectOnChange,
     datePickerOnChange,
     onBlur,
+    onBlurSelect,
     screenSize,
   };
   if (isFieldWithValidations(obj) && obj.props.name) {
