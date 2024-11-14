@@ -1,5 +1,11 @@
 # @norges-domstoler/dds-page-generator
 
+## 5.8.0
+
+### Minor Changes
+
+- e62f78a: Legg til validering for Select-komponent
+
 ## 5.7.2
 
 ### Patch Changes
