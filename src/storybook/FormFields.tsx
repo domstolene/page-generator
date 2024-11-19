@@ -48,6 +48,7 @@ export const FormFields = (
     NinInput({
       props: {
         value: state.nin as string,
+        required: true,
       },
       fieldProps: {
         validations: [
@@ -74,7 +75,7 @@ export const FormFields = (
         ],
         required: true,
       },
-      validations: [RequiredSelectValidator()],
+      validations: [RequiredSelectValidator(undefined, 'Status er påkrevd')],
       name: 'status',
     },
     {
@@ -109,6 +110,8 @@ export const FormFields = (
       props: {
         label: 'Adresse',
         name: 'adresse',
+        required: true,
+        value: state.adresse as string,
       },
       validations: [RequiredValidator(undefined, 'Adresse er påkrevd')],
     },

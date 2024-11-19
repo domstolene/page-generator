@@ -37,6 +37,7 @@ export const SectionGenerator = (props: SectionGeneratorProps) => {
     datePickerOnChange,
     onBlur,
     onBlurSelect,
+    validateAllFields,
   } = useContext(PageGeneratorContext);
   const screenSize = useScreenSize();
   const generateGridChildProps: GenerateGridChildProperties = {
@@ -68,13 +69,8 @@ export const SectionGenerator = (props: SectionGeneratorProps) => {
     }
   };
 
-  return (
-    <PageGeneratorProvider
-      fields={fields}
-      errorsOnChange={errorsOnChange}
-      state={state}
-      setState={setState}
-    >
+  const children = (validateAllFields: () => void) => {
+    return (
       <Parent>
         {fields.map((obj, index) => {
           const isRow = isSectionGeneratorRow(obj);
@@ -100,7 +96,17 @@ export const SectionGenerator = (props: SectionGeneratorProps) => {
           );
         })}
       </Parent>
-    </PageGeneratorProvider>
+    );
+  };
+
+  return (
+    <PageGeneratorProvider
+      fields={fields}
+      errorsOnChange={errorsOnChange}
+      state={state}
+      setState={setState}
+      children={children}
+    />
   );
 };
 

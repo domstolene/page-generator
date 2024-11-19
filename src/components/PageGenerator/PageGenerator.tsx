@@ -3,6 +3,7 @@ import { PageGeneratorProps } from '../../types';
 import { PageGeneratorTokens } from '../../tokens';
 import { PageGeneratorProvider } from './PageGeneratorProvider';
 import { GenerateGridChildren } from '../Generate/GenerateGridChildren';
+import { FormEvent } from 'react';
 
 /**
  * Generer komponenter fra @norges-domstoler/dds-components i et Grid view, basert på `fields` propertien. PageGenerator bruker Grid-komponenten fra @norges-domstoler/dds-components, slik at den håndterer alt av riktige marginer, mellomrom og responsivt design.
@@ -18,8 +19,30 @@ export const PageGenerator = (props: PageGeneratorProps) => {
     state,
     setState,
     as,
+    onSubmit,
     ...rest
   } = props;
+
+  const children = (validateAllFields: () => void) => {
+    return (
+      <Grid
+        {...getBaseHTMLProps(id, className, htmlProps, rest)}
+        as={as}
+        rowGap={PageGeneratorTokens.rowGaps}
+        htmlProps={{
+          onSubmit: (event: FormEvent) => {
+            event.preventDefault();
+            if (onSubmit) {
+              validateAllFields();
+              onSubmit();
+            }
+          },
+        }}
+      >
+        <GenerateGridChildren />
+      </Grid>
+    );
+  };
 
   return (
     <PageGeneratorProvider
@@ -27,15 +50,8 @@ export const PageGenerator = (props: PageGeneratorProps) => {
       errorsOnChange={errorsOnChange}
       state={state}
       setState={setState}
-    >
-      <Grid
-        {...getBaseHTMLProps(id, className, htmlProps, rest)}
-        as={as}
-        rowGap={PageGeneratorTokens.rowGaps}
-      >
-        <GenerateGridChildren />
-      </Grid>
-    </PageGeneratorProvider>
+      children={children}
+    />
   );
 };
 
