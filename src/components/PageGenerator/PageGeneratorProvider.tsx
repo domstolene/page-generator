@@ -20,7 +20,7 @@ import { PageGeneratorErrors } from '../../types/PageGeneratorErrors';
 interface PageGeneratorProviderProps {
   fields: PageGeneratorProps['fields'];
   errorsOnChange: PageGeneratorProps['errorsOnChange'];
-  children: JSX.Element;
+  children: (validateAllFields: () => void) => JSX.Element;
   state?: PageGeneratorProps['state'];
   setState?: PageGeneratorProps['setState'];
 }
@@ -37,20 +37,24 @@ export const PageGeneratorProvider = ({
     useState<PageGeneratorErrorMessages>({});
 
   useEffect(() => {
+    let myErrorMessages = {
+      ...errorMessages,
+    };
     Object.keys(errors).forEach((key: string) => {
       const error = errors[key];
       if (error.errors.length > 0) {
-        setErrorMessages({
-          ...errorMessages,
+        myErrorMessages = {
+          ...myErrorMessages,
           [key]: error.errors[0].message,
-        });
+        };
       } else {
-        setErrorMessages({
-          ...errorMessages,
+        myErrorMessages = {
+          ...myErrorMessages,
           [key]: '',
-        });
+        };
       }
     });
+    setErrorMessages(myErrorMessages);
     if (errorsOnChange) {
       errorsOnChange(errors);
     }
@@ -104,6 +108,28 @@ export const PageGeneratorProvider = ({
         ) ?? [];
       updateErrors(fieldErrors, name, value);
     }
+  };
+
+  const validateAllFields = () => {
+    let myErrors = {};
+    fields.forEach(field => {
+      if (isFieldWithValidations(field) && state && field.props?.name) {
+        const value = state[field.props.name] as PageGeneratorValidationValue;
+        const name = field.props.name;
+        const fieldErrors =
+          field.validations?.filter(
+            (v: PageGeneratorValidation) => !v.rule(value),
+          ) ?? [];
+        myErrors = {
+          ...myErrors,
+          [name]: {
+            value,
+            errors: fieldErrors,
+          },
+        };
+      }
+    });
+    setErrors(myErrors);
   };
 
   const onBlur = <
@@ -177,9 +203,10 @@ export const PageGeneratorProvider = ({
         onBlur,
         onBlurSelect,
         errorMessages,
+        validateAllFields,
       }}
     >
-      {children}
+      {children(validateAllFields)}
     </PageGeneratorContext.Provider>
   );
 };

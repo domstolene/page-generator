@@ -13,9 +13,10 @@ export default {
 
 export const Form = () => {
   const [state, setState] = useState<PageGeneratorState>({
-    nin: 'start',
+    nin: '',
     dateOfBirth: null,
     email: '',
+    adresse: '',
   });
   const [errors, setErrors] = useState({});
   const [formSubmitted, setFormSubmitted] = useState(false);
@@ -34,13 +35,13 @@ export const Form = () => {
       state={state}
       setState={setState}
       errorsOnChange={errors => setErrors(errors)}
-      htmlProps={{
-        onSubmit: event => {
-          event.preventDefault();
-          setFormSubmitted(true);
-        },
-      }}
       noValidate={true}
+      onSubmit={() => {
+        setFormSubmitted(true);
+        if (valid) {
+          window.alert('Skjemaet er gyldig!');
+        }
+      }}
     />
   );
 };

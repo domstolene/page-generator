@@ -7,6 +7,9 @@ export const useValidation = (errors: PageGeneratorErrors) => {
 
   useEffect(() => {
     const validateErrors = (): boolean => {
+      if (Object.keys(errors).length === 0) {
+        return false;
+      }
       let isValid = true;
       Object.keys(errors).forEach(key => {
         if (errors[key].errors.length > 0) {

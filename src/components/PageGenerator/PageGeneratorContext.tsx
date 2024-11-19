@@ -23,6 +23,7 @@ export interface PageGeneratorContextModel {
   ) => void;
   onBlurSelect: (name: string) => void;
   errorMessages: PageGeneratorErrorMessages;
+  validateAllFields: () => void;
 }
 
 export const PageGeneratorContext = createContext<PageGeneratorContextModel>({
@@ -34,4 +35,5 @@ export const PageGeneratorContext = createContext<PageGeneratorContextModel>({
   onBlur: () => {},
   onBlurSelect: () => {},
   errorMessages: {},
+  validateAllFields: () => {},
 });

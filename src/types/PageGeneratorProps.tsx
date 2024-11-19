@@ -22,5 +22,7 @@ export type PageGeneratorProps = BaseComponentPropsWithChildren<
     setState?: PageGeneratorSetState;
     /** Velge om man ønsker validering fra browser eller ikke. Bør kun brukes når `as` er satt til `form`. */
     noValidate?: boolean;
+    /** Submit-metode som skal kalles onSubmit */
+    onSubmit?: () => void;
   }
 >;

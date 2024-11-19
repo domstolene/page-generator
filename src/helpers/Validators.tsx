@@ -8,7 +8,7 @@ export const RequiredValidator = (
   return {
     message: message || 'Feltet er påkrevd',
     formMessage: formMessage || 'Feltet er påkrevd',
-    rule: (value: string) => value.length > 0,
+    rule: (value: string) => !!value && value.length > 0,
   };
 };
 
