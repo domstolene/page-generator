@@ -1,5 +1,11 @@
 # @norges-domstoler/dds-page-generator
 
+## 5.9.0
+
+### Minor Changes
+
+- 99ab0a8: Legg til støtte for onSubmit-property i PageGenerator. Dette gjør at man får validert skjemaet før man sender det inn
+
 ## 5.8.0
 
 ### Minor Changes
