@@ -30,13 +30,18 @@ export const PageGenerator = (props: PageGeneratorProps) => {
         as={as}
         rowGap={PageGeneratorTokens.rowGaps}
         htmlProps={{
-          onSubmit: (event: FormEvent) => {
-            event.preventDefault();
-            if (onSubmit) {
-              validateAllFields();
-              onSubmit();
-            }
-          },
+          ...htmlProps,
+          ...(onSubmit
+            ? {
+                onSubmit: (event: FormEvent) => {
+                  event.preventDefault();
+                  if (onSubmit) {
+                    validateAllFields();
+                    onSubmit();
+                  }
+                },
+              }
+            : {}),
         }}
       >
         <GenerateGridChildren />
