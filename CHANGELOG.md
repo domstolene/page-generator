@@ -1,5 +1,11 @@
 # @norges-domstoler/dds-page-generator
 
+## 5.9.1
+
+### Patch Changes
+
+- dbed7c6: Fix onSubmit via htmlProps
+
 ## 5.9.0
 
 ### Minor Changes
