@@ -1,5 +1,11 @@
 # @norges-domstoler/dds-page-generator
 
+## 5.9.2
+
+### Patch Changes
+
+- c2b45d9: Oppdater tredjeparts bibliotek for riktig validering av fødselsnummer
+
 ## 5.9.1
 
 ### Patch Changes
