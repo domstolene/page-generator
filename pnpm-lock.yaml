@@ -21,8 +21,8 @@ importers:
         specifier: ^2.1.5
         version: 2.1.5
       '@norges-domstoler/dds-components':
-        specifier: ^17.5.1
-        version: 17.5.1(@internationalized/date@3.5.6)(@norges-domstoler/dds-design-tokens@6.0.1)(@types/react@18.3.12)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)(styled-components@6.1.8(react-dom@18.3.1(react@18.3.1))(react@18.3.1))
+        specifier: ^17.6.0
+        version: 17.6.0(@internationalized/date@3.5.6)(@norges-domstoler/dds-design-tokens@6.0.1)(@types/react@18.3.12)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)(styled-components@6.1.8(react-dom@18.3.1(react@18.3.1))(react@18.3.1))
       '@norges-domstoler/dds-design-tokens':
         specifier: ^6.0.1
         version: 6.0.1
@@ -901,22 +901,21 @@ packages:
     resolution: {integrity: sha512-oGB+UxlgWcgQkgwo8GcEGwemoTFt3FIO9ababBmaGwXIoBKZ+GTy0pP185beGg7Llih/NSHSV2XAs1lnznocSg==}
     engines: {node: '>= 8'}
 
-  '@norges-domstoler/dds-components@17.5.1':
-    resolution: {integrity: sha512-dQ7fA0IO3Xf3kcWIbmK+sHryh2ukc0kMUuZV4w775nVOhrnA9aFG/OOE2GFIqlfW7dw22uMcwQWpoBZkVZfGXA==}
+  '@norges-domstoler/dds-components@17.6.0':
+    resolution: {integrity: sha512-t8IIRDFyIuHsTFIHo9XgIF//ReFaTjdOZ2Hw47PPa/djzRefidsdcc9nRGzbrcv37AbYuDVd+FO+dChUXXjqcg==}
     peerDependencies:
       '@internationalized/date': ^3
       '@norges-domstoler/dds-design-tokens': '>=5.0.0'
-      react: ^16 || ^17 || ^18
-      react-dom: ^16 || ^17 || ^18
+      react: ^16 || ^17 || ^18 || ^19
+      react-dom: ^16 || ^17 || ^18 || ^19
 
   '@norges-domstoler/dds-design-tokens@6.0.1':
     resolution: {integrity: sha512-PO4Zb2yuuPi1RgvnFHme7fEdCe5b16AnszMAqQ7doPTO/j4SjrVKWALNjhaT7RWYdauNMrivMLDsNQEzlaeDNA==}
 
-  '@norges-domstoler/development-utils@1.3.0':
-    resolution: {integrity: sha512-y5qSYGQ+EXtTpQD/cniXXwRmI0LcnTWMfAHAYpsSZjXWT6IphRuV/j3MYjZPXnUJdbfGxR6rVn1yflUwHUPLfw==}
+  '@norges-domstoler/development-utils@1.3.1':
+    resolution: {integrity: sha512-ev22C/cB8W2+t5KnoWtFfcLr4qmJQEPFw7I7YvTDntrF483Q4YukstbEUx5G0vjKaULWD/VT48UxImX544HiDw==}
     peerDependencies:
-      react: ^16 || ^17 || ^18
-      react-dom: ^16 || ^17 || ^18
+      react: ^16 || ^17 || ^18 || ^19
       styled-components: ^5 || ^6
 
   '@pkgjs/parseargs@0.11.0':
@@ -2079,8 +2078,8 @@ packages:
     resolution: {integrity: sha512-XXTUwCvisa5oacNGRP9SfNtYBNAMi+RPwBFmblZEF7N7swHYQS6/Zfk7SRwx4D5j3CH211YNRco1DEMNVfZCnQ==}
     engines: {node: '>=16.0.0'}
 
-  file-selector@1.2.0:
-    resolution: {integrity: sha512-49855884Jfcij/ec+RGkUYmZo45CwBpN+gfxuOTiOGCBTwvr5p8ZpfBQo1n2sdJz8Pl6FCmNDxyltjptHVPFNQ==}
+  file-selector@2.1.2:
+    resolution: {integrity: sha512-QgXo+mXTe8ljeqUFaX3QVHc5osSItJ/Km+xpocx0aSqWGMSCf6qYs/VnzZgS864Pjn5iceMRFigeAV7AfTlaig==}
     engines: {node: '>= 12'}
 
   fill-range@7.0.1:
@@ -2885,6 +2884,12 @@ packages:
 
   react-select@5.8.2:
     resolution: {integrity: sha512-a/LkOckoI62710gGPQSQqUp7A10fGbH/ya3/IR49qaq3XoBvwymgD5mJgtiHxBDsutyEQfdKNycWVh8Cg8UCjw==}
+    peerDependencies:
+      react: ^16.8.0 || ^17.0.0 || ^18.0.0
+      react-dom: ^16.8.0 || ^17.0.0 || ^18.0.0
+
+  react-select@5.8.3:
+    resolution: {integrity: sha512-lVswnIq8/iTj1db7XCG74M/3fbGB6ZaluCzvwPGT5ZOjCdL/k0CLWhEK0vCBLuU5bHTEf6Gj8jtSvi+3v+tO1w==}
     peerDependencies:
       react: ^16.8.0 || ^17.0.0 || ^18.0.0
       react-dom: ^16.8.0 || ^17.0.0 || ^18.0.0
@@ -4146,26 +4151,26 @@ snapshots:
   '@formatjs/ecma402-abstract@1.18.2':
     dependencies:
       '@formatjs/intl-localematcher': 0.5.4
-      tslib: 2.6.2
+      tslib: 2.8.1
 
   '@formatjs/fast-memoize@2.2.0':
     dependencies:
-      tslib: 2.6.2
+      tslib: 2.8.1
 
   '@formatjs/icu-messageformat-parser@2.7.6':
     dependencies:
       '@formatjs/ecma402-abstract': 1.18.2
       '@formatjs/icu-skeleton-parser': 1.8.0
-      tslib: 2.6.2
+      tslib: 2.8.1
 
   '@formatjs/icu-skeleton-parser@1.8.0':
     dependencies:
       '@formatjs/ecma402-abstract': 1.18.2
-      tslib: 2.6.2
+      tslib: 2.8.1
 
   '@formatjs/intl-localematcher@0.5.4':
     dependencies:
-      tslib: 2.6.2
+      tslib: 2.8.1
 
   '@humanfs/core@0.19.1': {}
 
@@ -4271,12 +4276,12 @@ snapshots:
       '@nodelib/fs.scandir': 2.1.5
       fastq: 1.17.1
 
-  '@norges-domstoler/dds-components@17.5.1(@internationalized/date@3.5.6)(@norges-domstoler/dds-design-tokens@6.0.1)(@types/react@18.3.12)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)(styled-components@6.1.8(react-dom@18.3.1(react@18.3.1))(react@18.3.1))':
+  '@norges-domstoler/dds-components@17.6.0(@internationalized/date@3.5.6)(@norges-domstoler/dds-design-tokens@6.0.1)(@types/react@18.3.12)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)(styled-components@6.1.8(react-dom@18.3.1(react@18.3.1))(react@18.3.1))':
     dependencies:
       '@floating-ui/react-dom': 2.1.2(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
       '@internationalized/date': 3.5.6
       '@norges-domstoler/dds-design-tokens': 6.0.1
-      '@norges-domstoler/development-utils': 1.3.0(react-dom@18.3.1(react@18.3.1))(react@18.3.1)(styled-components@6.1.8(react-dom@18.3.1(react@18.3.1))(react@18.3.1))
+      '@norges-domstoler/development-utils': 1.3.1(react@18.3.1)(styled-components@6.1.8(react-dom@18.3.1(react@18.3.1))(react@18.3.1))
       '@react-aria/button': 3.10.1(react@18.3.1)
       '@react-aria/calendar': 3.5.13(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
       '@react-aria/datepicker': 3.11.4(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
@@ -4284,10 +4289,10 @@ snapshots:
       '@react-aria/i18n': 3.12.3(react@18.3.1)
       '@react-stately/calendar': 3.5.5(react@18.3.1)
       '@react-stately/datepicker': 3.10.3(react@18.3.1)
-      file-selector: 1.2.0
+      file-selector: 2.1.2
       react: 18.3.1
       react-dom: 18.3.1(react@18.3.1)
-      react-select: 5.8.2(@types/react@18.3.12)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
+      react-select: 5.8.3(@types/react@18.3.12)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
     transitivePeerDependencies:
       - '@types/react'
       - styled-components
@@ -4295,10 +4300,9 @@ snapshots:
 
   '@norges-domstoler/dds-design-tokens@6.0.1': {}
 
-  '@norges-domstoler/development-utils@1.3.0(react-dom@18.3.1(react@18.3.1))(react@18.3.1)(styled-components@6.1.8(react-dom@18.3.1(react@18.3.1))(react@18.3.1))':
+  '@norges-domstoler/development-utils@1.3.1(react@18.3.1)(styled-components@6.1.8(react-dom@18.3.1(react@18.3.1))(react@18.3.1))':
     dependencies:
       react: 18.3.1
-      react-dom: 18.3.1(react@18.3.1)
       styled-components: 6.1.8(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
 
   '@pkgjs/parseargs@0.11.0':
@@ -5789,7 +5793,7 @@ snapshots:
     dependencies:
       flat-cache: 4.0.1
 
-  file-selector@1.2.0:
+  file-selector@2.1.2:
     dependencies:
       tslib: 2.8.1
 
@@ -6024,7 +6028,7 @@ snapshots:
       '@formatjs/ecma402-abstract': 1.18.2
       '@formatjs/fast-memoize': 2.2.0
       '@formatjs/icu-messageformat-parser': 2.7.6
-      tslib: 2.6.2
+      tslib: 2.8.1
 
   is-arguments@1.1.1:
     dependencies:
@@ -6570,6 +6574,23 @@ snapshots:
   react-is@17.0.2: {}
 
   react-select@5.8.2(@types/react@18.3.12)(react-dom@18.3.1(react@18.3.1))(react@18.3.1):
+    dependencies:
+      '@babel/runtime': 7.24.0
+      '@emotion/cache': 11.11.0
+      '@emotion/react': 11.11.3(@types/react@18.3.12)(react@18.3.1)
+      '@floating-ui/dom': 1.6.3
+      '@types/react-transition-group': 4.4.10
+      memoize-one: 6.0.0
+      prop-types: 15.8.1
+      react: 18.3.1
+      react-dom: 18.3.1(react@18.3.1)
+      react-transition-group: 4.4.5(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
+      use-isomorphic-layout-effect: 1.1.2(@types/react@18.3.12)(react@18.3.1)
+    transitivePeerDependencies:
+      - '@types/react'
+      - supports-color
+
+  react-select@5.8.3(@types/react@18.3.12)(react-dom@18.3.1(react@18.3.1))(react@18.3.1):
     dependencies:
       '@babel/runtime': 7.24.0
       '@emotion/cache': 11.11.0

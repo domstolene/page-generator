@@ -1,5 +1,10 @@
 import { idnr } from '@navikt/fnrvalidator';
-import { PageGeneratorSelectOption, PageGeneratorValidation } from '../types';
+import {
+  PageGeneratorErrors,
+  PageGeneratorSelectOption,
+  PageGeneratorValidation,
+} from '../types';
+import { Paragraph, List, ListItem } from '@norges-domstoler/dds-components';
 
 export const RequiredValidator = (
   message?: string,
@@ -66,4 +71,30 @@ export const EmailValidator: PageGeneratorValidation = {
     value.length > 0
       ? value.match(/^[\w-.]+@([\w-]+\.)+[\w-]{2,4}$/) !== null
       : true,
+};
+
+export const getFormErrorMessage = (
+  errors: PageGeneratorErrors,
+  leadText?: string,
+): JSX.Element => {
+  const actualErrors = Object.keys(errors).filter(
+    key => errors[key].errors.length > 0,
+  );
+  const formMessages = actualErrors.map(e => {
+    const obj = errors[e];
+    return obj.errors[0].formMessage || obj.errors[0].message;
+  });
+
+  return (
+    <>
+      <Paragraph>
+        {leadText || 'Disse feilene må rettes før du kan lagre:'}
+      </Paragraph>
+      <List>
+        {formMessages.map((formMessage, index) => {
+          return <ListItem key={index}>{formMessage}</ListItem>;
+        })}
+      </List>
+    </>
+  );
 };
