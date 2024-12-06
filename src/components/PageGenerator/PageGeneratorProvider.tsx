@@ -242,7 +242,7 @@ export const PageGeneratorProvider = ({
     }
   };
 
-  const datePickerOnChange = (value: CalendarDate, name: string) => {
+  const datePickerOnChange = (value: CalendarDate | null, name: string) => {
     const newState = {
       ...state,
       [name]: value,
