@@ -35,7 +35,7 @@ export const GenerateGridChild = (props: GenerateGridChildProps) => {
     datePickerOnChange,
     onBlur,
     onBlurSelect,
-    errorMessages,
+    formData,
   } = useContext(PageGeneratorContext);
   const screenSize = useScreenSize();
   const { obj, index } = props;
@@ -48,10 +48,10 @@ export const GenerateGridChild = (props: GenerateGridChildProps) => {
     onBlurSelect,
     screenSize,
   };
-  if (isFieldWithValidations(obj) && obj.props.name) {
+  if (isFieldWithValidations(obj) && obj.props.name && formData.errorMessages) {
     obj.props = {
       ...obj.props,
-      errorMessage: errorMessages[obj.props.name],
+      errorMessage: formData.errorMessages[obj.props.name],
     };
   }
   return (

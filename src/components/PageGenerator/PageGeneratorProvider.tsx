@@ -1,7 +1,8 @@
 import { PageGeneratorContext } from './PageGeneratorContext';
 import {
-  PageGeneratorErrorMessages,
+  PageGeneratorErrors,
   PageGeneratorField,
+  PageGeneratorFormData,
   PageGeneratorProps,
   PageGeneratorRow,
   PageGeneratorSelectOption,
@@ -15,12 +16,11 @@ import {
   isFieldWithValidations,
   isMultiValue,
 } from '../../helpers';
-import { PageGeneratorErrors } from '../../types/PageGeneratorErrors';
 
 interface PageGeneratorProviderProps {
   fields: PageGeneratorProps['fields'];
-  errorsOnChange: PageGeneratorProps['errorsOnChange'];
-  children: (validateAllFields: () => void) => JSX.Element;
+  formDataOnChange: PageGeneratorProps['formDataOnChange'];
+  children: (validateAllFields: (next: () => void) => void) => JSX.Element;
   state?: PageGeneratorProps['state'];
   setState?: PageGeneratorProps['setState'];
 }
@@ -28,37 +28,69 @@ interface PageGeneratorProviderProps {
 export const PageGeneratorProvider = ({
   children,
   fields,
-  errorsOnChange,
+  formDataOnChange,
   state,
   setState,
 }: PageGeneratorProviderProps) => {
-  const [errors, setErrors] = useState<PageGeneratorErrors>({});
-  const [errorMessages, setErrorMessages] =
-    useState<PageGeneratorErrorMessages>({});
+  const [formData, setFormData] = useState<PageGeneratorFormData>({
+    errors: null,
+    errorMessages: null,
+    submitted: false,
+    touched: false,
+    valid: false,
+  });
 
   useEffect(() => {
-    let myErrorMessages = {
-      ...errorMessages,
-    };
-    Object.keys(errors).forEach((key: string) => {
-      const error = errors[key];
-      if (error.errors.length > 0) {
-        myErrorMessages = {
-          ...myErrorMessages,
-          [key]: error.errors[0].message,
-        };
-      } else {
-        myErrorMessages = {
-          ...myErrorMessages,
-          [key]: '',
-        };
-      }
+    setFormData({
+      ...formData,
+      submitted: false,
     });
-    setErrorMessages(myErrorMessages);
-    if (errorsOnChange) {
-      errorsOnChange(errors);
+  }, [state]);
+
+  useEffect(() => {
+    let newErrorMessages = { ...formData.errorMessages };
+    if (formData.errors && Object.keys(formData.errors).length > 0) {
+      Object.keys(formData.errors).forEach((key: string) => {
+        if (formData.errors) {
+          const error = formData.errors[key];
+          if (error && error.errors.length > 0) {
+            newErrorMessages = {
+              ...newErrorMessages,
+              [key]: error.errors[0].message,
+            };
+          } else {
+            newErrorMessages = {
+              ...newErrorMessages,
+              [key]: '',
+            };
+          }
+        }
+      });
+      let valid = true;
+      Object.keys(formData.errors).forEach(key => {
+        if (formData.errors && formData.errors[key].errors.length > 0) {
+          valid = false;
+          return;
+        }
+      });
+
+      if (newErrorMessages && (formData.touched || formData.submitted)) {
+        setFormData({
+          ...formData,
+          errorMessages: newErrorMessages,
+          valid,
+        });
+      } else {
+        setFormData({
+          ...formData,
+          valid,
+        });
+      }
+      if (formDataOnChange) {
+        formDataOnChange(formData);
+      }
     }
-  }, [errors]);
+  }, [formData.errors]);
 
   const findFieldByNameInternal = (
     name: string,
@@ -80,48 +112,52 @@ export const PageGeneratorProvider = ({
     return null;
   };
 
-  const getFieldByName = (name: string) => {
-    return findFieldByNameInternal(name, fields);
-  };
-
-  const updateErrors = (
-    fieldErrors: PageGeneratorValidation[],
+  const getFieldErrors = (
     name: string,
-    value: string | PageGeneratorSelectOption,
+    value: PageGeneratorValidationValue,
   ) => {
-    const newErrors = {
-      ...errors,
-      [name]: {
-        value,
-        errors: fieldErrors,
-      },
-    };
-    setErrors(newErrors);
-  };
-
-  const validateField = (name: string, value: PageGeneratorValidationValue) => {
-    const field = getFieldByName(name);
+    const field = findFieldByNameInternal(name, fields);
     if (field && isFieldWithValidations(field)) {
       const fieldErrors =
         field.validations?.filter(
           (v: PageGeneratorValidation) => !v.rule(value),
         ) ?? [];
-      updateErrors(fieldErrors, name, value);
+      return fieldErrors;
+    }
+    return [];
+  };
+
+  const validateField = (name: string, value: PageGeneratorValidationValue) => {
+    const field = findFieldByNameInternal(name, fields);
+    if (field && isFieldWithValidations(field)) {
+      const fieldErrors =
+        field.validations?.filter(
+          (v: PageGeneratorValidation) => !v.rule(value),
+        ) ?? [];
+      const newErrors = {
+        ...formData.errors,
+        [name]: {
+          value,
+          errors: fieldErrors,
+        },
+      };
+      setFormData({
+        ...formData,
+        errors: newErrors,
+        touched: true,
+      });
     }
   };
 
-  const validateAllFields = () => {
-    let myErrors = {};
+  const validateAllFields = (next: () => void) => {
+    let newErrors: PageGeneratorErrors = {};
     fields.forEach(field => {
       if (isFieldWithValidations(field) && state && field.props?.name) {
         const value = state[field.props.name] as PageGeneratorValidationValue;
         const name = field.props.name;
-        const fieldErrors =
-          field.validations?.filter(
-            (v: PageGeneratorValidation) => !v.rule(value),
-          ) ?? [];
-        myErrors = {
-          ...myErrors,
+        const fieldErrors = getFieldErrors(name, value);
+        newErrors = {
+          ...newErrors,
           [name]: {
             value,
             errors: fieldErrors,
@@ -129,7 +165,23 @@ export const PageGeneratorProvider = ({
         };
       }
     });
-    setErrors(myErrors);
+
+    let valid = true;
+    Object.keys(newErrors).forEach(key => {
+      if (newErrors[key].errors.length > 0) {
+        valid = false;
+        return;
+      }
+    });
+    setFormData({
+      ...formData,
+      submitted: true,
+      errors: newErrors,
+      valid,
+    });
+    if (valid) {
+      next();
+    }
   };
 
   const onBlur = <
@@ -152,9 +204,13 @@ export const PageGeneratorProvider = ({
   ) => {
     const { id, name, value } = event.target;
     const checked = (event as ChangeEvent<HTMLInputElement>).target?.checked;
-    setErrorMessages({
-      ...errorMessages,
-      [name]: '', //clear errormessage when user types
+    setFormData({
+      ...formData,
+      touched: true,
+      errorMessages: {
+        ...formData.errorMessages,
+        [name]: '',
+      },
     });
     const newState = {
       ...state,
@@ -172,6 +228,10 @@ export const PageGeneratorProvider = ({
     } else {
       value = chosen ?? null;
     }
+    setFormData({
+      ...formData,
+      touched: true,
+    });
     const newState = {
       ...state,
       [name]: value,
@@ -187,6 +247,10 @@ export const PageGeneratorProvider = ({
       ...state,
       [name]: value,
     };
+    setFormData({
+      ...formData,
+      touched: true,
+    });
     if (setState) {
       setState(newState);
     }
@@ -202,7 +266,7 @@ export const PageGeneratorProvider = ({
         datePickerOnChange,
         onBlur,
         onBlurSelect,
-        errorMessages,
+        formData,
         validateAllFields,
       }}
     >

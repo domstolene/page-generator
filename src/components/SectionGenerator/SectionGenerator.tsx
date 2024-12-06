@@ -22,7 +22,7 @@ import { GenerateGridChildProperties } from '../Generate/GenerateGridChild';
 export const SectionGenerator = (props: SectionGeneratorProps) => {
   const {
     fields = [],
-    errorsOnChange,
+    formDataOnChange,
     state,
     setState,
     as,
@@ -69,7 +69,7 @@ export const SectionGenerator = (props: SectionGeneratorProps) => {
     }
   };
 
-  const children = (validateAllFields: () => void) => {
+  const children = (validateAllFields: (next: () => void) => void) => {
     return (
       <Parent>
         {fields.map((obj, index) => {
@@ -102,7 +102,7 @@ export const SectionGenerator = (props: SectionGeneratorProps) => {
   return (
     <PageGeneratorProvider
       fields={fields}
-      errorsOnChange={errorsOnChange}
+      formDataOnChange={formDataOnChange}
       state={state}
       setState={setState}
       children={children}
