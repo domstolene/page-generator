@@ -3,8 +3,7 @@ import { PageGenerator, SectionGenerator } from '.';
 import { FieldsetFields } from '../storybook/FieldsetFields';
 import { FormFields } from '../storybook/FormFields';
 import { OtherFields } from '../storybook/OtherFields';
-import { PageGeneratorState } from '../types';
-import { useValidation } from './Validation/useValidation';
+import { PageGeneratorFormData, PageGeneratorState } from '../types';
 
 export default {
   title: 'dds-page-generator/PageGenerator',
@@ -18,15 +17,8 @@ export const Form = () => {
     email: '',
     adresse: '',
   });
-  const [errors, setErrors] = useState({});
-  const [formSubmitted, setFormSubmitted] = useState(false);
-  const fields = FormFields(state, setState, errors, formSubmitted);
-  const { valid } = useValidation(errors);
-
-  useEffect(() => {
-    setFormSubmitted(false);
-    setErrors({});
-  }, [state]);
+  const [formData, setFormData] = useState<PageGeneratorFormData>();
+  const fields = FormFields(state, setState, formData);
 
   return (
     <PageGenerator
@@ -34,13 +26,12 @@ export const Form = () => {
       fields={fields}
       state={state}
       setState={setState}
-      errorsOnChange={errors => setErrors(errors)}
+      formDataOnChange={formData => {
+        setFormData(formData);
+      }}
       noValidate={true}
       onSubmit={() => {
-        setFormSubmitted(true);
-        if (valid) {
-          window.alert('Skjemaet er gyldig!');
-        }
+        window.alert('Skjemaet er gyldig!');
       }}
     />
   );
@@ -56,10 +47,5 @@ export const Other = () => {
 
 export const Section = () => {
   const [state, setState] = useState<PageGeneratorState>({});
-  return (
-    <SectionGenerator
-      as="form"
-      fields={FormFields(state, setState, {}, false)}
-    />
-  );
+  return <SectionGenerator as="form" fields={FormFields(state, setState)} />;
 };

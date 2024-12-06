@@ -1,4 +1,3 @@
-import { useValidation } from '../components/Validation/useValidation';
 import {
   DateOfBirthDatepicker,
   EmailInput,
@@ -7,15 +6,16 @@ import {
 } from '../helpers';
 import {
   PageGeneratorField,
+  PageGeneratorFormData,
   PageGeneratorRow,
   PageGeneratorSetState,
   PageGeneratorState,
   PageGeneratorSupportedFields,
 } from '../types';
 import { CalendarDate } from '@internationalized/date';
-import { PageGeneratorErrors } from '../types/PageGeneratorErrors';
 import {
   EmailValidator,
+  getFormErrorMessage,
   NinValidator,
   PhoneNumberValidator,
   RequiredSelectValidator,
@@ -25,11 +25,8 @@ import {
 export const FormFields = (
   state: PageGeneratorState,
   setState: PageGeneratorSetState,
-  errors: PageGeneratorErrors,
-  formSubmitted: boolean,
+  formData?: PageGeneratorFormData,
 ): (PageGeneratorField | PageGeneratorRow)[] => {
-  const { valid, getFormErrorMessage } = useValidation(errors);
-
   return [
     {
       component: PageGeneratorSupportedFields.Heading,
@@ -199,8 +196,8 @@ export const FormFields = (
       props: {
         purpose: 'danger',
       },
-      innerHTML: getFormErrorMessage(),
-      hide: !(formSubmitted && !valid),
+      innerHTML: getFormErrorMessage(formData?.errors || {}),
+      hide: !(formData?.submitted && !formData?.valid),
     },
     {
       fields: [
