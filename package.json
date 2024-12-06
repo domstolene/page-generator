@@ -73,7 +73,7 @@
     "@eslint/js": "^9.14.0",
     "@internationalized/date": "^3.5.6",
     "@navikt/fnrvalidator": "^2.1.5",
-    "@norges-domstoler/dds-components": "^17.5.1",
+    "@norges-domstoler/dds-components": "^17.6.0",
     "@norges-domstoler/dds-design-tokens": "^6.0.1",
     "react-select": "^5.8.2"
   },
