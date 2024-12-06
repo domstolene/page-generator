@@ -15,7 +15,7 @@ export const PageGenerator = (props: PageGeneratorProps) => {
     className,
     htmlProps,
     fields = [],
-    errorsOnChange,
+    formDataOnChange,
     state,
     setState,
     as,
@@ -23,7 +23,7 @@ export const PageGenerator = (props: PageGeneratorProps) => {
     ...rest
   } = props;
 
-  const children = (validateAllFields: () => void) => {
+  const children = (validateAllFields: (next: () => void) => void) => {
     return (
       <Grid
         {...getBaseHTMLProps(id, className, htmlProps, rest)}
@@ -36,8 +36,7 @@ export const PageGenerator = (props: PageGeneratorProps) => {
                 onSubmit: (event: FormEvent) => {
                   event.preventDefault();
                   if (onSubmit) {
-                    validateAllFields();
-                    onSubmit();
+                    validateAllFields(onSubmit);
                   }
                 },
               }
@@ -52,7 +51,7 @@ export const PageGenerator = (props: PageGeneratorProps) => {
   return (
     <PageGeneratorProvider
       fields={fields}
-      errorsOnChange={errorsOnChange}
+      formDataOnChange={formDataOnChange}
       state={state}
       setState={setState}
       children={children}
