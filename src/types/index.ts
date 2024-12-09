@@ -1,6 +1,7 @@
 export * from './PageGeneratorErrorMessages';
 export * from './PageGeneratorErrors';
 export * from './PageGeneratorField';
+export * from './PageGeneratorFormData';
 export * from './PageGeneratorProps';
 export * from './PageGeneratorRow';
 export * from './PageGeneratorSelectOption';

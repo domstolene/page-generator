@@ -5,15 +5,15 @@ import {
   PageGeneratorSetState,
   PageGeneratorState,
 } from './PageGeneratorState';
-import { PageGeneratorErrors } from './PageGeneratorErrors';
+import { PageGeneratorFormData } from './PageGeneratorFormData';
 
 export type PageGeneratorProps = BaseComponentPropsWithChildren<
   HTMLElement,
   {
     /** Definere liste med felt/komponenter og/eller rader med felt/komponenter */
     fields: (PageGeneratorField | PageGeneratorRow)[];
-    /** For å hente ut eventuelle errors etter endringer */
-    errorsOnChange?: (errors: PageGeneratorErrors) => void;
+    /** For å hente ut formData etter endringer */
+    formDataOnChange?: (formData: PageGeneratorFormData) => void;
     /** Setter form eller div på Grid-komponenten */
     as: 'div' | 'form';
     /** Sende inn state slik at verdier kan oppdateres. */

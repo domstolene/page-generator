@@ -15,7 +15,7 @@ interface GenerateRowProps {
 
 export const GenerateRow = (props: GenerateRowProps) => {
   const { index, fields, gridChildProps } = props;
-  const { errorMessages } = useContext(PageGeneratorContext);
+  const { formData } = useContext(PageGeneratorContext);
   return (
     <HStack
       gap={PageGeneratorTokens.Stack[gridChildProps.screenSize] || 0}
@@ -24,10 +24,14 @@ export const GenerateRow = (props: GenerateRowProps) => {
       key={index}
     >
       {fields.map((field, childIndex) => {
-        if (isFieldWithValidations(field) && field.props.name) {
+        if (
+          isFieldWithValidations(field) &&
+          field.props.name &&
+          formData.errorMessages
+        ) {
           field.props = {
             ...field.props,
-            errorMessage: errorMessages[field.props.name],
+            errorMessage: formData.errorMessages[field.props.name],
           };
         }
         return (
