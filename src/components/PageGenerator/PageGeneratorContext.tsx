@@ -17,7 +17,7 @@ export interface PageGeneratorContextModel {
       | MultiValue<SelectOption<unknown>>,
     name: string,
   ) => void;
-  datePickerOnChange: (value: CalendarDate, name: string) => void;
+  datePickerOnChange: (value: CalendarDate | null, name: string) => void;
   onBlur: <T extends HTMLInputElement | HTMLTextAreaElement>(
     event: FocusEvent<T>,
   ) => void;
