@@ -1,5 +1,11 @@
 # @norges-domstoler/dds-page-generator
 
+## 5.9.3
+
+### Patch Changes
+
+- 4fdfd9b: Fix validering
+
 ## 5.9.2
 
 ### Patch Changes
