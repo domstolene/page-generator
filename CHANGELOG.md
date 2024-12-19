@@ -1,5 +1,11 @@
 # @norges-domstoler/dds-page-generator
 
+## 6.0.0
+
+### Major Changes
+
+- 9d91f72: Oppdater @norges-domstoler/dds-components til v18
+
 ## 5.9.3
 
 ### Patch Changes
