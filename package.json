@@ -40,7 +40,7 @@
     "norges domstoler"
   ],
   "devDependencies": {
-    "@changesets/cli": "^2.27.10",
+    "@changesets/cli": "^2.27.11",
     "@storybook/addon-docs": "^8.4.7",
     "@storybook/addon-essentials": "^8.4.7",
     "@storybook/addon-storysource": "^8.4.7",
@@ -53,9 +53,9 @@
     "@testing-library/react": "^16.1.0",
     "@types/react": "^18.3.12",
     "@types/react-dom": "^18.3.1",
-    "@typescript-eslint/eslint-plugin": "^8.17.0",
-    "@typescript-eslint/parser": "^8.17.0",
-    "eslint": "^9.16.0",
+    "@typescript-eslint/eslint-plugin": "^8.18.1",
+    "@typescript-eslint/parser": "^8.18.1",
+    "eslint": "^9.17.0",
     "eslint-plugin-react": "^7.37.2",
     "eslint-plugin-react-hooks": "^5.1.0",
     "jsdom": "^25.0.1",
@@ -70,14 +70,14 @@
   },
   "dependencies": {
     "@eslint/eslintrc": "^3.2.0",
-    "@eslint/js": "^9.16.0",
+    "@eslint/js": "^9.17.0",
     "@internationalized/date": "^3.6.0",
     "@navikt/fnrvalidator": "^2.1.5",
     "@norges-domstoler/dds-components": "^17.6.0",
     "@norges-domstoler/dds-design-tokens": "^6.0.1",
     "install": "^0.13.0",
     "npm": "^10.9.2",
-    "react-select": "^5.8.3"
+    "react-select": "^5.9.0"
   },
   "peerDependencies": {
     "react": "^16 || ^17 || ^18",
