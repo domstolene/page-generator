@@ -264,6 +264,7 @@ export const DetailList = (
     component: PageGeneratorSupportedFields.DetailList,
     props: {
       striped: false,
+      size: 'small',
     },
     children: rows.map(row => {
       return {
