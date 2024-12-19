@@ -1,5 +1,11 @@
 # @norges-domstoler/dds-page-generator
 
+## 6.0.1
+
+### Patch Changes
+
+- e3391dd: Legg til manglende prop for DetailList
+
 ## 6.0.0
 
 ### Major Changes
