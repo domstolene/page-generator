@@ -1,5 +1,11 @@
 # @norges-domstoler/dds-page-generator
 
+## 6.1.1
+
+### Patch Changes
+
+- c6d250c: Fjern validering for eksportert DateOfBirthDatePicker
+
 ## 6.1.0
 
 ### Minor Changes
