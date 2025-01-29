@@ -1,10 +1,10 @@
 import { PageGeneratorValidation } from './PageGeneratorValidation';
-import { PageGeneratorSelectOption } from './PageGeneratorSelectOption';
+import { PageGeneratorValidationValue } from './PageGeneratorValidationValue';
 
 export type PageGeneratorErrors = Record<
   string,
   {
-    value: string | PageGeneratorSelectOption;
+    value: PageGeneratorValidationValue;
     errors: PageGeneratorValidation[];
   }
 >;

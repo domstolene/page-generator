@@ -127,6 +127,9 @@ export const GenerateComponent = (props: GenerateComponentProps) => {
           {...field.props}
           key={index}
           onChange={value => datePickerOnChange(value, field.name)}
+          onBlur={_event => {
+            onBlurSelect(field.name);
+          }}
         />
       );
     case PageGeneratorSupportedFields.DescriptionList:

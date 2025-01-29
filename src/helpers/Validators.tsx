@@ -5,6 +5,7 @@ import {
   PageGeneratorValidation,
 } from '../types';
 import { Paragraph, List, ListItem } from '@norges-domstoler/dds-components';
+import { CalendarDate } from '@internationalized/date';
 
 export const RequiredValidator = (
   message?: string,
@@ -30,6 +31,17 @@ export const RequiredSelectValidator = (
       }
       return !!value;
     },
+  };
+};
+
+export const RequiredDatePickerValidator = (
+  message?: string,
+  formMessage?: string,
+): PageGeneratorValidation => {
+  return {
+    message: message || 'Feltet er påkrevd',
+    formMessage: formMessage || 'Feltet er påkrevd',
+    rule: (value: CalendarDate) => !!value,
   };
 };
 

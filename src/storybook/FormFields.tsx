@@ -1,9 +1,4 @@
-import {
-  DateOfBirthDatepicker,
-  EmailInput,
-  NinInput,
-  PhoneNumberRow,
-} from '../helpers';
+import { EmailInput, NinInput, PhoneNumberRow } from '../helpers';
 import {
   PageGeneratorField,
   PageGeneratorFormData,
@@ -12,15 +7,16 @@ import {
   PageGeneratorState,
   PageGeneratorSupportedFields,
 } from '../types';
-import { CalendarDate } from '@internationalized/date';
 import {
   EmailValidator,
   getFormErrorMessage,
   NinValidator,
   PhoneNumberValidator,
+  RequiredDatePickerValidator,
   RequiredSelectValidator,
   RequiredValidator,
 } from '../helpers/Validators';
+import { CalendarDate } from '@internationalized/date';
 
 export const FormFields = (
   state: PageGeneratorState,
@@ -55,10 +51,16 @@ export const FormFields = (
       },
     }),
     {
-      fields: [
-        DateOfBirthDatepicker({
-          value: state.dateOfBirth as CalendarDate,
-        }),
+      component: PageGeneratorSupportedFields.DatePicker,
+      props: {
+        label: 'Fødselsdato',
+        value: state.dateOfBirth as CalendarDate,
+        name: 'dateOfBirth',
+        isRequired: true,
+      },
+      name: 'dateOfBirth',
+      validations: [
+        RequiredDatePickerValidator(undefined, 'Fødselsdato er påkrevd'),
       ],
     },
     {

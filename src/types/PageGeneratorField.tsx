@@ -71,7 +71,6 @@ type FieldWithoutChildren =
   | ButtonField
   | CardField
   | CheckboxField
-  | DatepickerField
   | DescriptionListTermField
   | DescriptionListDescField
   | DetailListDescField
@@ -94,7 +93,11 @@ type FieldWithoutChildren =
   | TypographyField
   | VisuallyHiddenField;
 
-export type FieldWithValidations = TextInputField | TextAreaField | SelectField;
+export type FieldWithValidations =
+  | DatepickerField
+  | TextInputField
+  | TextAreaField
+  | SelectField;
 
 interface ButtonField {
   component: PageGeneratorSupportedFields.Button;
@@ -129,6 +132,7 @@ interface DatepickerField {
   props: DatePickerProps;
   name: string;
   hide?: boolean;
+  validations?: PageGeneratorValidation[];
 }
 
 interface DescriptionListField {

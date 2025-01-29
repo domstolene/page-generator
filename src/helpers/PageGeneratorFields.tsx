@@ -11,6 +11,7 @@ import {
   PageGeneratorSupportedFields,
   TextInputField,
 } from '../types';
+import { RequiredDatePickerValidator } from './Validators';
 
 interface TextInputAndFieldProps {
   props?: TextInputProps;
@@ -78,6 +79,7 @@ export const DateOfBirthDatepicker = (
       ...props,
     },
     name: 'dateOfBirth',
+    validations: [RequiredDatePickerValidator()],
   };
 };
 
