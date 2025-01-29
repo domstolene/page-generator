@@ -1,5 +1,11 @@
 # @norges-domstoler/dds-page-generator
 
+## 6.1.0
+
+### Minor Changes
+
+- 511b971: Legg til støtte for validering for DatePicker
+
 ## 6.0.1
 
 ### Patch Changes
