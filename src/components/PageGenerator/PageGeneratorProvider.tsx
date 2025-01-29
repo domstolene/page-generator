@@ -231,6 +231,10 @@ export const PageGeneratorProvider = ({
     setFormData({
       ...formData,
       touched: true,
+      errorMessages: {
+        ...formData.errorMessages,
+        [name]: '',
+      },
     });
     const newState = {
       ...state,
@@ -250,7 +254,12 @@ export const PageGeneratorProvider = ({
     setFormData({
       ...formData,
       touched: true,
+      errorMessages: {
+        ...formData.errorMessages,
+        [name]: '',
+      },
     });
+    validateField(name, value as PageGeneratorValidationValue);
     if (setState) {
       setState(newState);
     }
