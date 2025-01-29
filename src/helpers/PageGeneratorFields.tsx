@@ -79,7 +79,6 @@ export const DateOfBirthDatepicker = (
       ...props,
     },
     name: 'dateOfBirth',
-    validations: [RequiredDatePickerValidator()],
   };
 };
 
