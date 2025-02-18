@@ -1,5 +1,11 @@
 # @norges-domstoler/dds-page-generator
 
+## 6.1.2
+
+### Patch Changes
+
+- 57fbb8b: Oppdater formdata når selectOnChange trigges
+
 ## 6.1.1
 
 ### Patch Changes
