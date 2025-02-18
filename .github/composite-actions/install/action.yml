@@ -4,18 +4,13 @@ description: 'Sets up Node.js and runs install'
 runs:
   using: composite
   steps:
-    - name: Install dependencies
-      uses: pnpm/action-setup@v3
-      with:
-        version: 8
-
     - name: Setup Node.js
       uses: actions/setup-node@v4
       with:
         node-version: 20
         registry-url: 'https://registry.npmjs.org'
-        cache: 'pnpm'
+        cache: npm
 
     - name: Install dependencies
       shell: bash
-      run: pnpm install
+      run: npm install
