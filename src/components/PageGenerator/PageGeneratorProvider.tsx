@@ -74,20 +74,17 @@ export const PageGeneratorProvider = ({
         }
       });
 
+      let newFormData = { ...formData, valid };
+
       if (newErrorMessages && (formData.touched || formData.submitted)) {
-        setFormData({
-          ...formData,
+        newFormData = {
+          ...newFormData,
           errorMessages: newErrorMessages,
-          valid,
-        });
-      } else {
-        setFormData({
-          ...formData,
-          valid,
-        });
+        };
       }
+      setFormData(newFormData);
       if (formDataOnChange) {
-        formDataOnChange(formData);
+        formDataOnChange(newFormData);
       }
     }
   }, [formData.errors]);
@@ -231,6 +228,7 @@ export const PageGeneratorProvider = ({
     setFormData({
       ...formData,
       touched: true,
+      submitted: false,
       errorMessages: {
         ...formData.errorMessages,
         [name]: '',
@@ -254,6 +252,7 @@ export const PageGeneratorProvider = ({
     setFormData({
       ...formData,
       touched: true,
+      submitted: false,
       errorMessages: {
         ...formData.errorMessages,
         [name]: '',
