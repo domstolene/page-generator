@@ -15,7 +15,7 @@ jobs:
         uses: ./.github/composite-actions/install
 
       - name: Build
-        run: pnpm build
+        run: npm run build
 
   tests:
     name: Tests
@@ -28,7 +28,7 @@ jobs:
         uses: ./.github/composite-actions/install
 
       - name: Run tests
-        run: pnpm test
+        run: npm run test
 
   eslint:
     name: ESLint
@@ -41,7 +41,7 @@ jobs:
         uses: ./.github/composite-actions/install
 
       - name: Run ESLint
-        run: pnpm lint
+        run: npm run lint
 
   types:
     name: TypeScript
@@ -54,7 +54,7 @@ jobs:
         uses: ./.github/composite-actions/install
 
       - name: Run typecheck
-        run: pnpm typecheck
+        run: npm run typecheck
 
   prettier:
     name: Prettier
@@ -67,4 +67,4 @@ jobs:
         uses: ./.github/composite-actions/install
 
       - name: Run prettier
-        run: pnpm format:check
+        run: npm run format:check
