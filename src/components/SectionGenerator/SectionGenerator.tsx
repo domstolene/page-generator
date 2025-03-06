@@ -7,7 +7,7 @@ import {
   PageGeneratorRow,
   SectionGeneratorProps,
 } from '../../types';
-import React, { useContext } from 'react';
+import React, { JSX, useContext } from 'react';
 import { isSectionGeneratorRow } from '../../helpers';
 import { GenerateRow } from '../Generate/GenerateRow';
 import { GenerateComponent } from '../Generate/GenerateComponent';

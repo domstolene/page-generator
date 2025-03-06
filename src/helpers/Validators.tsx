@@ -6,6 +6,7 @@ import {
 } from '../types';
 import { Paragraph, List, ListItem } from '@norges-domstoler/dds-components';
 import { CalendarDate } from '@internationalized/date';
+import { JSX } from 'react';
 
 export const RequiredValidator = (
   message?: string,

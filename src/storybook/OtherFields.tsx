@@ -1,3 +1,4 @@
+import { JSX } from 'react';
 import { DetailList } from '../helpers';
 import {
   DescriptionListGroupField,

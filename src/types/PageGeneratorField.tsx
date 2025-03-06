@@ -42,7 +42,7 @@ import {
   DetailListProps,
 } from '@norges-domstoler/dds-components';
 import { PageGeneratorSupportedFields } from './PageGeneratorSupportedFields';
-import { ComponentProps } from 'react';
+import { ComponentProps, JSX } from 'react';
 import { SectionGeneratorRow } from './SectionGeneratorRow';
 import { PageGeneratorRow } from './PageGeneratorRow';
 import { PageGeneratorValidation } from './PageGeneratorValidation';
