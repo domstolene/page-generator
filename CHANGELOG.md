@@ -1,5 +1,11 @@
 # @norges-domstoler/dds-page-generator
 
+## 6.2.0
+
+### Minor Changes
+
+- 3d7312f: Oppgrader til React v19 og Designsystem v20
+
 ## 6.1.2
 
 ### Patch Changes
