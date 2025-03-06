@@ -9,7 +9,7 @@ import {
   PageGeneratorValidation,
   PageGeneratorValidationValue,
 } from '../../types';
-import { ChangeEvent, FocusEvent, useEffect, useState } from 'react';
+import { ChangeEvent, FocusEvent, JSX, useEffect, useState } from 'react';
 import { CalendarDate } from '@internationalized/date';
 import {
   isPageGeneratorRow,
