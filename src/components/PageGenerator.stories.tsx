@@ -17,6 +17,7 @@ export const Form = () => {
     dateOfBirth: null,
     email: '',
     adresse: '',
+    search: '',
   });
   const [formData, setFormData] = useState<PageGeneratorFormData>();
   const fields = FormFields(state, setState, formData);

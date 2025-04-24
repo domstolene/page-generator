@@ -29,6 +29,7 @@ export enum PageGeneratorSupportedFields {
   Paragraph = 'Paragraph',
   RadioButton = 'RadioButton',
   RadioButtonGroup = 'RadioButtonGroup',
+  Search = 'Search',
   Select = 'Select',
   Spinner = 'Spinner',
   TextArea = 'TextArea',
