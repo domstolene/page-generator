@@ -40,6 +40,7 @@ import {
   DetailListTermProps,
   DetailListRowProps,
   DetailListProps,
+  SearchProps,
 } from '@norges-domstoler/dds-components';
 import { PageGeneratorSupportedFields } from './PageGeneratorSupportedFields';
 import { ComponentProps, JSX } from 'react';
@@ -87,6 +88,7 @@ type FieldWithoutChildren =
   | LocalMessageField
   | ParagraphField
   | RadioButtonField
+  | SearchField
   | SpinnerField
   | ToggleButtonField
   | ToggleRadioField
@@ -305,6 +307,12 @@ interface RadioButtonGroupField {
   props: RadioButtonGroupProps<string | number>;
   hide?: boolean;
   children: RadioButtonField[];
+}
+
+interface SearchField {
+  component: PageGeneratorSupportedFields.Search;
+  props: SearchProps;
+  hide?: boolean;
 }
 
 interface SelectField {

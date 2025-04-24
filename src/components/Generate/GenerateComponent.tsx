@@ -41,6 +41,7 @@ import {
   DetailListRow,
   DetailListDesc,
   DetailListTerm,
+  Search,
 } from '@norges-domstoler/dds-components';
 import { PageGeneratorField, PageGeneratorSupportedFields } from '../../types';
 import { ChangeEvent } from 'react';
@@ -50,6 +51,7 @@ import {
   GenerateGridChildProperties,
 } from './GenerateGridChild';
 import '../../styles/page-generator-fieldset.css';
+import '../../styles/search-icon.css';
 
 interface GenerateComponentProps {
   index: number;
@@ -394,6 +396,17 @@ export const GenerateComponent = (props: GenerateComponentProps) => {
           })}
         </RadioButtonGroup>
       );
+    case PageGeneratorSupportedFields.Search:
+      return (
+        <Search
+          {...field.props}
+          key={index}
+          onChange={inputFieldOnChange}
+          onBlur={onBlur}
+          className="page-generator-search"
+        />
+      );
+
     case PageGeneratorSupportedFields.Select:
       return (
         <Select

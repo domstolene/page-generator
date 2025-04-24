@@ -38,6 +38,14 @@ export const FormFields = (
       },
       innerHTML: 'Personinformasjon',
     },
+    {
+      component: PageGeneratorSupportedFields.Search,
+      props: {
+        label: 'Søk',
+        value: state.search as string,
+        name: 'search',
+      },
+    },
     NinInput({
       props: {
         value: state.nin as string,
