@@ -1,5 +1,11 @@
 # @norges-domstoler/dds-page-generator
 
+## 6.3.0
+
+### Minor Changes
+
+- eaed55b: Legg til Search-komponent
+
 ## 6.2.0
 
 ### Minor Changes
