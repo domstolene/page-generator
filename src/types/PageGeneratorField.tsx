@@ -41,6 +41,7 @@ import {
   DetailListRowProps,
   DetailListProps,
   SearchProps,
+  SplitButton,
 } from '@norges-domstoler/dds-components';
 import { PageGeneratorSupportedFields } from './PageGeneratorSupportedFields';
 import { ComponentProps, JSX } from 'react';
@@ -90,6 +91,7 @@ type FieldWithoutChildren =
   | RadioButtonField
   | SearchField
   | SpinnerField
+  | SplitButtonField
   | ToggleButtonField
   | ToggleRadioField
   | TypographyField
@@ -326,6 +328,12 @@ interface SelectField {
 interface SpinnerField {
   component: PageGeneratorSupportedFields.Spinner;
   props: SpinnerProps;
+  hide?: boolean;
+}
+
+interface SplitButtonField {
+  component: PageGeneratorSupportedFields.SplitButton;
+  props: ComponentProps<typeof SplitButton>;
   hide?: boolean;
 }
 

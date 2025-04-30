@@ -219,6 +219,22 @@ export const FormFields = (
           innerHTML: 'Lagre',
         },
         {
+          component: PageGeneratorSupportedFields.SplitButton,
+          props: {
+            primaryAction: {
+              children: 'Lagre',
+              type: 'submit',
+            },
+            secondaryActions: [
+              {
+                children: 'Lagre sekundær',
+                type: 'button',
+                onClick: event => window.alert('Lagret sekundært!'),
+              },
+            ],
+          },
+        },
+        {
           component: PageGeneratorSupportedFields.Button,
           props: {
             purpose: 'secondary',

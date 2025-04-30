@@ -32,6 +32,7 @@ export enum PageGeneratorSupportedFields {
   Search = 'Search',
   Select = 'Select',
   Spinner = 'Spinner',
+  SplitButton = 'SplitButton',
   TextArea = 'TextArea',
   TextInput = 'TextInput',
   ToggleBar = 'ToggleBar',
