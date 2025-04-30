@@ -42,6 +42,7 @@ import {
   DetailListDesc,
   DetailListTerm,
   Search,
+  SplitButton,
 } from '@norges-domstoler/dds-components';
 import { PageGeneratorField, PageGeneratorSupportedFields } from '../../types';
 import { ChangeEvent } from 'react';
@@ -406,7 +407,6 @@ export const GenerateComponent = (props: GenerateComponentProps) => {
           className="page-generator-search"
         />
       );
-
     case PageGeneratorSupportedFields.Select:
       return (
         <Select
@@ -420,6 +420,8 @@ export const GenerateComponent = (props: GenerateComponentProps) => {
       );
     case PageGeneratorSupportedFields.Spinner:
       return <Spinner {...field.props} key={index} />;
+    case PageGeneratorSupportedFields.SplitButton:
+      return <SplitButton {...field.props} key={index} />;
     case PageGeneratorSupportedFields.TextArea:
       return (
         <TextArea
