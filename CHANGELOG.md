@@ -1,5 +1,11 @@
 # @norges-domstoler/dds-page-generator
 
+## 6.4.0
+
+### Minor Changes
+
+- 7abd256: Legg til SplitButton komponent
+
 ## 6.3.0
 
 ### Minor Changes
