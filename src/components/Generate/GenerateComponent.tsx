@@ -43,6 +43,7 @@ import {
   DetailListTerm,
   Search,
   SplitButton,
+  Tooltip,
 } from '@norges-domstoler/dds-components';
 import { PageGeneratorField, PageGeneratorSupportedFields } from '../../types';
 import { ChangeEvent } from 'react';
@@ -489,6 +490,12 @@ export const GenerateComponent = (props: GenerateComponentProps) => {
           key={index}
           onChange={inputFieldOnChange}
         />
+      );
+    case PageGeneratorSupportedFields.Tooltip:
+      return (
+        <Tooltip {...field.props} key={index}>
+          {field.props.children}
+        </Tooltip>
       );
     case PageGeneratorSupportedFields.Typography:
       return (
