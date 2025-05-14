@@ -1,5 +1,11 @@
 # @norges-domstoler/dds-page-generator
 
+## 6.5.0
+
+### Minor Changes
+
+- 9c4d0de: Legg til Tooltip-komponent fra designsystemet
+
 ## 6.4.0
 
 ### Minor Changes
