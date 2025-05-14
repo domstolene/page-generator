@@ -73,7 +73,7 @@
     "@eslint/js": "^9.20.0",
     "@internationalized/date": "^3.7.0",
     "@navikt/fnrvalidator": "^2.1.5",
-    "@norges-domstoler/dds-components": "^20.0.0",
+    "@norges-domstoler/dds-components": "^21.2.1",
     "@norges-domstoler/dds-design-tokens": "^7.0.0",
     "install": "^0.13.0",
     "npm": "^11.1.0",
