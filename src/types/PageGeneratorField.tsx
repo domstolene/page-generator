@@ -42,6 +42,7 @@ import {
   DetailListProps,
   SearchProps,
   SplitButton,
+  TooltipProps,
 } from '@norges-domstoler/dds-components';
 import { PageGeneratorSupportedFields } from './PageGeneratorSupportedFields';
 import { ComponentProps, JSX } from 'react';
@@ -94,6 +95,7 @@ type FieldWithoutChildren =
   | SplitButtonField
   | ToggleButtonField
   | ToggleRadioField
+  | TooltipField
   | TypographyField
   | VisuallyHiddenField;
 
@@ -375,6 +377,12 @@ interface ToggleButtonGroupField {
   props: ToggleButtonGroupProps;
   hide?: boolean;
   children: ToggleButtonField[];
+}
+
+interface TooltipField {
+  component: PageGeneratorSupportedFields.Tooltip;
+  props: TooltipProps;
+  hide?: boolean;
 }
 
 interface TypographyField {

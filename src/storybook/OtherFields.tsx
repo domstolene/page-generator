@@ -6,6 +6,11 @@ import {
   PageGeneratorRow,
   PageGeneratorSupportedFields,
 } from '../types';
+import {
+  Button,
+  HelpIcon,
+  QuestionAnswerIcon,
+} from '@norges-domstoler/dds-components';
 
 const getHeading = (innerHTML: string): PageGeneratorField => {
   return {
@@ -241,6 +246,13 @@ export const OtherFields = (): (PageGeneratorField | PageGeneratorRow)[] => {
           innerHTML: 'Item 2',
         },
       ],
+    },
+    {
+      component: PageGeneratorSupportedFields.Tooltip,
+      props: {
+        text: 'Dette er en tooltip',
+        children: <Button icon={HelpIcon}></Button>,
+      },
     },
   ];
 };
