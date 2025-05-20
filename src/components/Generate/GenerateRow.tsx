@@ -19,8 +19,7 @@ export const GenerateRow = (props: GenerateRowProps) => {
   return (
     <HStack
       gap={PageGeneratorTokens.Stack[gridChildProps.screenSize] || 0}
-      align="flex-start"
-      htmlProps={{ style: { flexWrap: 'wrap' } }}
+      htmlProps={{ style: { alignItems: 'flex-start', flexWrap: 'wrap' } }}
       key={index}
     >
       {fields.map((field, childIndex) => {

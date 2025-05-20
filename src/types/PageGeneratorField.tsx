@@ -25,7 +25,6 @@ import {
   ToggleButtonGroupProps,
   VisuallyHiddenProps,
   DrawerGroupProps,
-  StackProps,
   Button,
   HeadingProps,
   LabelProps,
@@ -43,6 +42,8 @@ import {
   SearchProps,
   SplitButton,
   TooltipProps,
+  HStackProps,
+  VStackProps,
 } from '@norges-domstoler/dds-components';
 import { PageGeneratorSupportedFields } from './PageGeneratorSupportedFields';
 import { ComponentProps, JSX } from 'react';
@@ -240,7 +241,7 @@ interface HeadingField {
 
 interface HStackField {
   component: PageGeneratorSupportedFields.HStack;
-  props: StackProps;
+  props: HStackProps;
   hide?: boolean;
   children: PageGeneratorField[];
 }
@@ -401,7 +402,7 @@ interface VisuallyHiddenField {
 
 interface VStackField {
   component: PageGeneratorSupportedFields.VStack;
-  props: StackProps;
+  props: VStackProps;
   hide?: boolean;
   children: PageGeneratorField[];
 }
