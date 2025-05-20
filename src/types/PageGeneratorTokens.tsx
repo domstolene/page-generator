@@ -1,12 +1,12 @@
-import { ScreenSize, StackProps } from '@norges-domstoler/dds-components';
+import { ScreenSize, HStackProps } from '@norges-domstoler/dds-components';
 
 export interface PageGeneratorTokens {
   Stack: {
-    [ScreenSize.XSmall]: StackProps['gap'];
-    [ScreenSize.Small]: StackProps['gap'];
-    [ScreenSize.Medium]: StackProps['gap'];
-    [ScreenSize.Large]: StackProps['gap'];
-    [ScreenSize.XLarge]: StackProps['gap'];
+    [ScreenSize.XSmall]: HStackProps['gap'];
+    [ScreenSize.Small]: HStackProps['gap'];
+    [ScreenSize.Medium]: HStackProps['gap'];
+    [ScreenSize.Large]: HStackProps['gap'];
+    [ScreenSize.XLarge]: HStackProps['gap'];
   };
   rowGaps: {
     xs: string;
