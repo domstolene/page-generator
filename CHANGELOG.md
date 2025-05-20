@@ -1,5 +1,11 @@
 # @norges-domstoler/dds-page-generator
 
+## 6.6.0
+
+### Minor Changes
+
+- ce3c762: Oppgrader designsystem
+
 ## 6.5.0
 
 ### Minor Changes
