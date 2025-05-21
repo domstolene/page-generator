@@ -18,6 +18,7 @@ export const Form = () => {
     email: '',
     adresse: '',
     search: '',
+    fritekst: '',
   });
   const [formData, setFormData] = useState<PageGeneratorFormData>();
   const fields = FormFields(state, setState, formData);
