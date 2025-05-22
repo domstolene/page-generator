@@ -1,5 +1,11 @@
 # @norges-domstoler/dds-page-generator
 
+## 6.7.0
+
+### Minor Changes
+
+- 6feb370: Legg til invalidCharacter validator
+
 ## 6.6.0
 
 ### Minor Changes
