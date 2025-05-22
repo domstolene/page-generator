@@ -8,6 +8,7 @@ import {
   PageGeneratorSupportedFields,
 } from '../types';
 import {
+  InvalidCharacterValidator,
   EmailValidator,
   getFormErrorMessage,
   NinValidator,
@@ -58,6 +59,16 @@ export const FormFields = (
         ],
       },
     }),
+    {
+      component: PageGeneratorSupportedFields.TextInput,
+      props: {
+        label: 'Fritekst',
+        type: 'text',
+        name: 'fritekst',
+        value: state.fritekst as string,
+      },
+      validations: [InvalidCharacterValidator()],
+    },
     {
       component: PageGeneratorSupportedFields.DatePicker,
       props: {

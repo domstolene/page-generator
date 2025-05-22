@@ -58,6 +58,20 @@ export const NumbersOnlyValidator = (
   };
 };
 
+export const InvalidCharacterValidator = (
+  message?: string,
+  formMessage?: string,
+) => {
+  return {
+    message: message || 'Feltet inneholder ugyldige tegn',
+    formMessage: formMessage || 'Feltet inneholder ugyldige tegn',
+    rule: (value: string) =>
+      value.length > 0
+        ? value.match(/[_:;<>§€!©"™#£$%∞&§/\\|[{}\]=≈+?±´`¨^@*'~]/g) === null
+        : true,
+  };
+};
+
 export const NinValidator: PageGeneratorValidation = {
   message: 'Fødselsnummer er ugyldig',
   formMessage: 'Fødselsnummer er ugyldig',
