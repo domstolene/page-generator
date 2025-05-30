@@ -67,7 +67,7 @@ export const InvalidCharacterValidator = (
     formMessage: formMessage || 'Feltet inneholder ugyldige tegn',
     rule: (value: string) =>
       value.length > 0
-        ? value.match(/[_:;<>§€!©"™#£$%∞&§/\\|[{}\]=≈+?±´`¨^@*'~]/g) === null
+        ? value.match(/[_:;<>§€!©"™£$%∞§\\|[{}\]=≈+?±¨^@*~]/g) === null
         : true,
   };
 };
