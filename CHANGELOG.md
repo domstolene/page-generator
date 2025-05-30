@@ -1,5 +1,11 @@
 # @norges-domstoler/dds-page-generator
 
+## 6.7.1
+
+### Patch Changes
+
+- 68cb379: Oppdater lovlige tegn for CharacterValidator
+
 ## 6.7.0
 
 ### Minor Changes
