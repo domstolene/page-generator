@@ -47,7 +47,7 @@
     "@storybook/blocks": "^8.5.6",
     "@storybook/core-common": "^8.5.6",
     "@storybook/react": "^8.5.6",
-    "@storybook/react-vite": "^8.5.6",
+    "@storybook/react-vite": "^9.0.16",
     "@storybook/testing-library": "^0.2.2",
     "@testing-library/jest-dom": "^6.6.3",
     "@testing-library/react": "^16.1.0",
