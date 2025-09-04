@@ -210,7 +210,7 @@ export const OtherFields = (): (PageGeneratorField | PageGeneratorRow)[] => {
     {
       component: PageGeneratorSupportedFields.VisuallyHidden,
       props: {
-        as: 'div',
+        as: 'span',
       },
       innerHTML: 'Dette er en VisuallyHidden',
     },
