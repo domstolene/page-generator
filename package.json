@@ -71,6 +71,7 @@
     "@navikt/fnrvalidator": "^2.1.5",
     "@norges-domstoler/dds-components": "^21.11.0",
     "@norges-domstoler/dds-design-tokens": "^8.0.2",
+    "@types/node": "^24.3.0",
     "install": "^0.13.0",
     "npm": "^11.6.0",
     "react-select": "^5.9.0"
