@@ -1,5 +1,11 @@
 # @norges-domstoler/dds-page-generator
 
+## 6.8.0
+
+### Minor Changes
+
+- a07499a: Oppgrader til siste versjon av designsystem
+
 ## 6.7.1
 
 ### Patch Changes
@@ -217,7 +223,6 @@
 
 - 608a8f3: Legg til støtte for Fieldset og Legend, og fjern unødvendig støtte for rowType og breakpoint i PageGeneratorRow.
   Hva må gjøres etter oppdatering:
-
   - Fjern all bruk av feltene `rowType` og `breakpoint` for PageGeneratorRow.
 
 ## 3.1.2
