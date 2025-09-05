@@ -1,5 +1,11 @@
 # @norges-domstoler/dds-page-generator
 
+## 6.8.1
+
+### Patch Changes
+
+- fc63d0f: Oppgrader designsystem
+
 ## 6.8.0
 
 ### Minor Changes
