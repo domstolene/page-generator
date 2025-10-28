@@ -18,9 +18,11 @@ import {
   RequiredValidator,
 } from '../helpers/Validators';
 import { CalendarDate } from '@internationalized/date';
+import { ScreenSize } from '@norges-domstoler/dds-components';
 
 export const FormFields = (
   state: PageGeneratorState,
+  screenSize: ScreenSize,
   setState: PageGeneratorSetState,
   formData?: PageGeneratorFormData,
 ): (PageGeneratorField | PageGeneratorRow)[] => {
@@ -112,6 +114,7 @@ export const FormFields = (
       },
     }),
     PhoneNumberRow(
+      screenSize,
       {
         fieldProps: {
           validations: [RequiredValidator(undefined, 'Landkode er påkrevd')],
