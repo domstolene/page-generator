@@ -1,5 +1,11 @@
 # @norges-domstoler/dds-page-generator
 
+## 7.1.0
+
+### Minor Changes
+
+- 6e5166c: Skjermstørrelse må sendes inn som prop til PhoneNumberInput og PostalCodeInput
+
 ## 7.0.0
 
 ### Major Changes
