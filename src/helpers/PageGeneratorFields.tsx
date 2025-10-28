@@ -1,7 +1,6 @@
 import {
   TextInputProps,
   DatePickerProps,
-  useScreenSize,
   ScreenSize,
 } from '@norges-domstoler/dds-components';
 import {
@@ -11,7 +10,6 @@ import {
   PageGeneratorSupportedFields,
   TextInputField,
 } from '../types';
-import { RequiredDatePickerValidator } from './Validators';
 
 interface TextInputAndFieldProps {
   props?: TextInputProps;
@@ -150,13 +148,14 @@ export const CountryCodeInput = ({
 export const PhoneNumberInput = ({
   props,
   fieldProps,
-}: TextInputAndFieldProps): PageGeneratorField => {
-  const actualScreenSize = useScreenSize();
+  screenSize,
+}: TextInputAndFieldProps & { screenSize: ScreenSize }): PageGeneratorField => {
+  const width = screenSize >= ScreenSize.XLarge ? '206px' : '214px';
   return {
     component: PageGeneratorSupportedFields.TextInput,
     props: {
       label: 'Telefon',
-      width: actualScreenSize >= ScreenSize.XLarge ? '206px' : '214px',
+      width: width,
       name: 'phoneNumber',
       ...props,
     },
@@ -183,14 +182,15 @@ export const PostalNumberInput = ({
 export const PostalCodeInput = ({
   props,
   fieldProps,
-}: TextInputAndFieldProps): PageGeneratorField => {
-  const actualScreenSize = useScreenSize();
+  screenSize,
+}: TextInputAndFieldProps & { screenSize: ScreenSize }): PageGeneratorField => {
+  const width = screenSize >= ScreenSize.XLarge ? '206px' : '214px';
   return {
     component: PageGeneratorSupportedFields.TextInput,
     props: {
       label: 'Poststed',
       type: 'text',
-      width: actualScreenSize >= ScreenSize.XLarge ? '206px' : '214px',
+      width: width,
       name: 'postalCode',
       ...props,
     },
@@ -229,6 +229,7 @@ export const StreetAddressRow = (
 };
 
 export const PhoneNumberRow = (
+  screenSize: ScreenSize,
   countryCodeProps?: TextInputAndFieldProps,
   phoneNumberProps?: TextInputAndFieldProps,
   rowProps?: PageGeneratorRow,
@@ -236,13 +237,14 @@ export const PhoneNumberRow = (
   return {
     fields: [
       CountryCodeInput(countryCodeProps || {}),
-      PhoneNumberInput(phoneNumberProps || {}),
+      PhoneNumberInput({ ...phoneNumberProps, screenSize }),
     ],
     ...rowProps,
   };
 };
 
 export const PostalRow = (
+  screenSize: ScreenSize,
   postalNumberProps?: TextInputAndFieldProps,
   postalCodeProps?: TextInputAndFieldProps,
   rowProps?: Pick<PageGeneratorRow, 'hide'>,
@@ -250,7 +252,7 @@ export const PostalRow = (
   return {
     fields: [
       PostalNumberInput(postalNumberProps || {}),
-      PostalCodeInput(postalCodeProps || {}),
+      PostalCodeInput({ ...postalCodeProps, screenSize }),
     ],
     ...rowProps,
   };

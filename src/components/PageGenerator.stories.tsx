@@ -4,7 +4,7 @@ import { FieldsetFields } from '../storybook/FieldsetFields';
 import { FormFields } from '../storybook/FormFields';
 import { OtherFields } from '../storybook/OtherFields';
 import { PageGeneratorFormData, PageGeneratorState } from '../types';
-import { ThemeProvider } from '@norges-domstoler/dds-components';
+import { ThemeProvider, useScreenSize } from '@norges-domstoler/dds-components';
 
 export default {
   title: 'dds-page-generator/PageGenerator',
@@ -12,6 +12,7 @@ export default {
 };
 
 export const Form = () => {
+  const screenSize = useScreenSize();
   const [state, setState] = useState<PageGeneratorState>({
     nin: '',
     dateOfBirth: null,
@@ -21,7 +22,7 @@ export const Form = () => {
     fritekst: '',
   });
   const [formData, setFormData] = useState<PageGeneratorFormData>();
-  const fields = FormFields(state, setState, formData);
+  const fields = FormFields(state, screenSize, setState, formData);
 
   return (
     <ThemeProvider>
@@ -60,9 +61,13 @@ export const Other = () => {
 
 export const Section = () => {
   const [state, setState] = useState<PageGeneratorState>({});
+  const screenSize = useScreenSize();
   return (
     <ThemeProvider>
-      <SectionGenerator as="form" fields={FormFields(state, setState)} />
+      <SectionGenerator
+        as="form"
+        fields={FormFields(state, screenSize, setState)}
+      />
     </ThemeProvider>
   );
 };
