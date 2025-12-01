@@ -26,3 +26,6 @@ dist
 .eslintcache
 
 storybook-static
+doctor-storybook.log
+build-storybook.log
+debug-storybook.log
