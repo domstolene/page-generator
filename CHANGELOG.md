@@ -1,5 +1,11 @@
 # @norges-domstoler/dds-page-generator
 
+## 7.2.0
+
+### Minor Changes
+
+- 55ed951: Oppdater storybook til v10
+
 ## 7.1.0
 
 ### Minor Changes
