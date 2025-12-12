@@ -19,6 +19,7 @@ export enum PageGeneratorSupportedFields {
   GlobalMessage = 'GlobalMessage',
   Heading = 'Heading',
   HStack = 'HStack',
+  InlineButton = 'InlineButton',
   InputMessage = 'InputMessage',
   Label = 'Label',
   Legend = 'Legend',

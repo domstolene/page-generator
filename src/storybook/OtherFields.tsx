@@ -254,5 +254,10 @@ export const OtherFields = (): (PageGeneratorField | PageGeneratorRow)[] => {
         children: <Button icon={HelpIcon}></Button>,
       },
     },
+    {
+      component: PageGeneratorSupportedFields.InlineButton,
+      props: {},
+      innerHTML: 'Dette er en InlineButton',
+    },
   ];
 };
