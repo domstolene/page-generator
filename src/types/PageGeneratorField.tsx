@@ -44,6 +44,7 @@ import {
   TooltipProps,
   HStackProps,
   VStackProps,
+  InlineButtonProps,
 } from '@norges-domstoler/dds-components';
 import { PageGeneratorSupportedFields } from './PageGeneratorSupportedFields';
 import { ComponentProps, JSX } from 'react';
@@ -83,6 +84,7 @@ type FieldWithoutChildren =
   | DrawerField
   | GlobalMessageField
   | HeadingField
+  | InlineButtonField
   | InputMessageField
   | LabelField
   | LegendField
@@ -244,6 +246,13 @@ interface HStackField {
   props: HStackProps;
   hide?: boolean;
   children: PageGeneratorField[];
+}
+
+interface InlineButtonField {
+  component: PageGeneratorSupportedFields.InlineButton;
+  props: InlineButtonProps;
+  hide?: boolean;
+  innerHTML: JSX.Element | string;
 }
 
 interface InputMessageField {

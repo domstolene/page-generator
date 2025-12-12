@@ -44,6 +44,7 @@ import {
   Search,
   SplitButton,
   Tooltip,
+  InlineButton,
 } from '@norges-domstoler/dds-components';
 import { PageGeneratorField, PageGeneratorSupportedFields } from '../../types';
 import { ChangeEvent } from 'react';
@@ -316,6 +317,12 @@ export const GenerateComponent = (props: GenerateComponentProps) => {
             );
           })}
         </HStack>
+      );
+    case PageGeneratorSupportedFields.InlineButton:
+      return (
+        <InlineButton {...field.props} key={index}>
+          {field.innerHTML}
+        </InlineButton>
       );
     case PageGeneratorSupportedFields.InputMessage:
       return <InputMessage {...field.props} key={index} />;
