@@ -1,5 +1,11 @@
 # @norges-domstoler/dds-page-generator
 
+## 7.3.0
+
+### Minor Changes
+
+- 1c9795e: Legg til InlineButton-komponent fra designsystemet
+
 ## 7.2.0
 
 ### Minor Changes
