@@ -34,6 +34,7 @@ jobs:
   report-elsa-designsystem-usage:
     needs: release
     runs-on: ubuntu-latest
+    permissions: {}
 
     env:
       ZEROHEIGHT_CLIENT_ID: "${{ secrets.ZEROHEIGHT_CLIENT_ID }}"
