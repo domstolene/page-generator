@@ -1,5 +1,11 @@
 # @norges-domstoler/dds-page-generator
 
+## 7.3.2
+
+### Patch Changes
+
+- 4df112e: Oppdater pakke
+
 ## 7.3.1
 
 ### Patch Changes
