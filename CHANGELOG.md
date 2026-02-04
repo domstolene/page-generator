@@ -1,5 +1,11 @@
 # @norges-domstoler/dds-page-generator
 
+## 7.3.1
+
+### Patch Changes
+
+- 41e126e: Oppdater pakker
+
 ## 7.3.0
 
 ### Minor Changes
