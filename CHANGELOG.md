@@ -1,5 +1,11 @@
 # @norges-domstoler/dds-page-generator
 
+## 7.3.3
+
+### Patch Changes
+
+- 9470f26: Publiser ny patch-versjon
+
 ## 7.3.2
 
 ### Patch Changes
