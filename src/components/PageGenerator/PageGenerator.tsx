@@ -13,6 +13,7 @@ export const PageGenerator = (props: PageGeneratorProps) => {
   const {
     id,
     className,
+    style,
     htmlProps,
     fields = [],
     formDataOnChange,
@@ -26,7 +27,7 @@ export const PageGenerator = (props: PageGeneratorProps) => {
   const children = (validateAllFields: (next: () => void) => void) => {
     return (
       <Grid
-        {...getBaseHTMLProps(id, className, htmlProps, rest)}
+        {...getBaseHTMLProps(id, className, style, htmlProps, rest)}
         as={as}
         rowGap={PageGeneratorTokens.rowGaps}
         htmlProps={{

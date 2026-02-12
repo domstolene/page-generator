@@ -4,7 +4,7 @@ import { FieldsetFields } from '../storybook/FieldsetFields';
 import { FormFields } from '../storybook/FormFields';
 import { OtherFields } from '../storybook/OtherFields';
 import { PageGeneratorFormData, PageGeneratorState } from '../types';
-import { ThemeProvider, useScreenSize } from '@norges-domstoler/dds-components';
+import { DdsProvider, useScreenSize } from '@norges-domstoler/dds-components';
 
 export default {
   title: 'dds-page-generator/PageGenerator',
@@ -25,7 +25,7 @@ export const Form = () => {
   const fields = FormFields(state, screenSize, setState, formData);
 
   return (
-    <ThemeProvider>
+    <DdsProvider language="no">
       <PageGenerator
         as="form"
         fields={fields}
@@ -39,23 +39,23 @@ export const Form = () => {
           window.alert('Skjemaet er gyldig!');
         }}
       />
-    </ThemeProvider>
+    </DdsProvider>
   );
 };
 
 export const Fieldset = () => {
   return (
-    <ThemeProvider>
+    <DdsProvider language="no">
       <PageGenerator as="form" fields={FieldsetFields} />
-    </ThemeProvider>
+    </DdsProvider>
   );
 };
 
 export const Other = () => {
   return (
-    <ThemeProvider>
+    <DdsProvider language="no">
       <PageGenerator as="form" fields={OtherFields()} />
-    </ThemeProvider>
+    </DdsProvider>
   );
 };
 
@@ -63,11 +63,11 @@ export const Section = () => {
   const [state, setState] = useState<PageGeneratorState>({});
   const screenSize = useScreenSize();
   return (
-    <ThemeProvider>
+    <DdsProvider language="no">
       <SectionGenerator
         as="form"
         fields={FormFields(state, screenSize, setState)}
       />
-    </ThemeProvider>
+    </DdsProvider>
   );
 };

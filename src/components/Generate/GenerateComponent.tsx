@@ -258,12 +258,10 @@ export const GenerateComponent = (props: GenerateComponentProps) => {
       return (
         <Fieldset
           {...field.props}
+          className="page-generator-fieldset"
+          style={GridStyling}
           htmlProps={{
             ...field.props.htmlProps,
-            className: 'page-generator-fieldset',
-            style: {
-              ...GridStyling,
-            },
           }}
           key={index}
         >
@@ -325,7 +323,11 @@ export const GenerateComponent = (props: GenerateComponentProps) => {
         </InlineButton>
       );
     case PageGeneratorSupportedFields.InputMessage:
-      return <InputMessage {...field.props} key={index} />;
+      return (
+        <InputMessage {...field.props} key={index}>
+          {field.innerHTML}
+        </InputMessage>
+      );
     case PageGeneratorSupportedFields.Label:
       return (
         <Label {...field.props} key={index}>

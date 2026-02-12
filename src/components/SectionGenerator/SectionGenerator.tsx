@@ -28,6 +28,7 @@ export const SectionGenerator = (props: SectionGeneratorProps) => {
     as,
     id,
     className,
+    style,
     htmlProps,
     ...rest
   } = props;
@@ -52,13 +53,13 @@ export const SectionGenerator = (props: SectionGeneratorProps) => {
   const Parent = (props: { children: (false | JSX.Element)[] }) => {
     if (as === 'div') {
       return (
-        <div {...getBaseHTMLProps(id, className, htmlProps, rest)}>
+        <div {...getBaseHTMLProps(id, className, style, htmlProps, rest)}>
           {props.children}
         </div>
       );
     } else if (as === 'form') {
       return (
-        <form {...getBaseHTMLProps(id, className, htmlProps, rest)}>
+        <form {...getBaseHTMLProps(id, className, style, htmlProps, rest)}>
           {props.children}
         </form>
       );

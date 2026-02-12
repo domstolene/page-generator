@@ -6,11 +6,7 @@ import {
   PageGeneratorRow,
   PageGeneratorSupportedFields,
 } from '../types';
-import {
-  Button,
-  HelpIcon,
-  QuestionAnswerIcon,
-} from '@norges-domstoler/dds-components';
+import { Button, HelpIcon } from '@norges-domstoler/dds-components';
 
 const getHeading = (innerHTML: string): PageGeneratorField => {
   return {
@@ -177,9 +173,9 @@ export const OtherFields = (): (PageGeneratorField | PageGeneratorRow)[] => {
     {
       component: PageGeneratorSupportedFields.InputMessage,
       props: {
-        message: 'Dette er en InputMessage',
         messageType: 'error',
       },
+      innerHTML: 'Dette er en InputMessage',
     },
     {
       component: PageGeneratorSupportedFields.Label,

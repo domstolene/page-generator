@@ -259,6 +259,7 @@ interface InputMessageField {
   component: PageGeneratorSupportedFields.InputMessage;
   props: InputMessageProps;
   hide?: boolean;
+  innerHTML?: JSX.Element | string;
 }
 
 interface LabelField {

@@ -11,10 +11,10 @@ export const PageGeneratorTokens: PageGeneratorTokensType = {
     [ScreenSize.XLarge]: 'x1.5',
   },
   rowGaps: {
-    xs: ddsTokens.core.ddsSpacingX1,
-    sm: ddsTokens.core.ddsSpacingX1,
-    md: ddsTokens.core.ddsSpacingX1,
-    lg: ddsTokens.core.ddsSpacingX1,
-    xl: ddsTokens.core.ddsSpacingX15,
+    xs: ddsTokens['core-light'].ddsSpacingX1,
+    sm: ddsTokens['core-light'].ddsSpacingX1,
+    md: ddsTokens['core-light'].ddsSpacingX1,
+    lg: ddsTokens['core-light'].ddsSpacingX1,
+    xl: ddsTokens['core-light'].ddsSpacingX15,
   },
 };
