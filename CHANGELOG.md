@@ -1,5 +1,11 @@
 # @norges-domstoler/dds-page-generator
 
+## 7.3.5
+
+### Patch Changes
+
+- 43b60f5: oppdater .npmrc
+
 ## 7.3.4
 
 ### Patch Changes
