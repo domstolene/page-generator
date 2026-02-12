@@ -1,5 +1,11 @@
 # @norges-domstoler/dds-page-generator
 
+## 7.3.4
+
+### Patch Changes
+
+- 6c9596a: Oppdater release.yml
+
 ## 7.3.3
 
 ### Patch Changes
