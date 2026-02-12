@@ -1,5 +1,11 @@
 # @norges-domstoler/dds-page-generator
 
+## 7.3.1
+
+### Patch Changes
+
+- 4c4fc17: Publiser ny versjon via trusted publisher
+
 ## 7.3.5
 
 ### Patch Changes
