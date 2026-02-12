@@ -18,6 +18,8 @@ jobs:
     name: Release
     runs-on: ubuntu-latest
     steps:
+      - name: Who am I
+        run: npm whoami
       - name: Checkout Repo
         uses: actions/checkout@v6
         with:
@@ -29,6 +31,6 @@ jobs:
         id: changesets
         uses: changesets/action@v1
         with:
-          publish: pnpm run release
+          publish: pnpm release
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
