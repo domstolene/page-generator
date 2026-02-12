@@ -1,5 +1,11 @@
 # @norges-domstoler/dds-page-generator
 
+## 8.0.0
+
+### Major Changes
+
+- 725a768: Oppgrader @norges-domstoler/dds-components og @norges-domstoler/dds-design-tokens til siste major versjon
+
 ## 7.3.1
 
 ### Patch Changes
