@@ -219,6 +219,7 @@ export const PageGeneratorProvider = ({
   };
 
   const selectOnChange = (chosen: PageGeneratorSelectOption, name: string) => {
+    // eslint-disable-next-line no-useless-assignment
     let value = null;
     if (isMultiValue(chosen)) {
       value = Array.isArray(chosen) ? chosen : null;
