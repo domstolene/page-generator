@@ -1,5 +1,11 @@
 # @norges-domstoler/dds-page-generator
 
+## 8.1.0
+
+### Minor Changes
+
+- 3a2c459: Oppdater dds-components, design-tokens og andre pakker
+
 ## 8.0.0
 
 ### Major Changes
