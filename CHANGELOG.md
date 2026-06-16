@@ -1,5 +1,11 @@
 # @norges-domstoler/dds-page-generator
 
+## 8.1.1
+
+### Patch Changes
+
+- 2ad2d01: Oppdater pakker med patches
+
 ## 8.1.0
 
 ### Minor Changes
