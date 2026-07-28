@@ -55,6 +55,7 @@ import {
 } from './GenerateGridChild';
 import '../../styles/page-generator-fieldset.css';
 import '../../styles/search-icon.css';
+import { CalendarDate } from '@internationalized/date';
 
 interface GenerateComponentProps {
   index: number;
@@ -131,8 +132,10 @@ export const GenerateComponent = (props: GenerateComponentProps) => {
         <DatePicker
           {...field.props}
           key={index}
-          onChange={value => datePickerOnChange(value, field.name)}
-          onBlur={_event => {
+          onChange={(value: CalendarDate | null) =>
+            datePickerOnChange(value, field.name)
+          }
+          onBlur={(_event: unknown) => {
             onBlurSelect(field.name);
           }}
         />
