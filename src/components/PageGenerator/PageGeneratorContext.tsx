@@ -13,8 +13,7 @@ export interface PageGeneratorContextModel {
   ) => void;
   selectOnChange: (
     chosen:
-      | SingleValue<SelectOption<unknown>>
-      | MultiValue<SelectOption<unknown>>,
+      SingleValue<SelectOption<unknown>> | MultiValue<SelectOption<unknown>>,
     name: string,
   ) => void;
   datePickerOnChange: (value: CalendarDate | null, name: string) => void;

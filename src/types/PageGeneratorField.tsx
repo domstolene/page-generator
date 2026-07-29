@@ -53,9 +53,7 @@ import { PageGeneratorRow } from './PageGeneratorRow';
 import { PageGeneratorValidation } from './PageGeneratorValidation';
 
 export type PageGeneratorField =
-  | FieldWithChildren
-  | FieldWithoutChildren
-  | FieldWithValidations;
+  FieldWithChildren | FieldWithoutChildren | FieldWithValidations;
 
 type FieldWithChildren =
   | CheckboxGroupField
@@ -103,10 +101,7 @@ type FieldWithoutChildren =
   | VisuallyHiddenField;
 
 export type FieldWithValidations =
-  | DatepickerField
-  | TextInputField
-  | TextAreaField
-  | SelectField;
+  DatepickerField | TextInputField | TextAreaField | SelectField;
 
 interface ButtonField {
   component: PageGeneratorSupportedFields.Button;
