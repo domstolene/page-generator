@@ -1,5 +1,12 @@
 # @norges-domstoler/dds-page-generator
 
+## 8.1.2
+
+### Patch Changes
+
+- b0d8008: oppdater pakker
+- 93d2f47: Update react to latest patch
+
 ## 8.1.1
 
 ### Patch Changes
