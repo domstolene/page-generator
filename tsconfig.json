@@ -14,6 +14,7 @@
     "esModuleInterop": true,
     "resolveJsonModule": true,
     "allowSyntheticDefaultImports": true,
+    "ignoreDeprecations": "6.0",
     "downlevelIteration": true
   },
   "include": ["packages", "stories", "src", "vitest.config.ts"],
