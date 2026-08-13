@@ -94,7 +94,7 @@
       "brace-expansion": "1.1.18",
       "yaml": "1.10.3",
       "esbuild": "^0.28.1",
-      "js-yaml": "^4.2.0",
+      "js-yaml": "^4.3.1",
       "@babel/core": "^7.29.6",
       "undici": "^7.28.0"
     }
