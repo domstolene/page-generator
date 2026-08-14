@@ -1,5 +1,11 @@
 # @norges-domstoler/dds-page-generator
 
+## 8.1.3
+
+### Patch Changes
+
+- 201aa26: chore(app): bump js-yaml til 4.3.1
+
 ## 8.1.2
 
 ### Patch Changes
