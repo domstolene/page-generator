@@ -1,5 +1,15 @@
 # @norges-domstoler/dds-page-generator
 
+## 8.2.0
+
+### Minor Changes
+
+- a0fb33c: Oppdater designsystem fra v22 til v24
+
+### Patch Changes
+
+- 201aa26: chore(app): bump js-yaml til 4.3.1
+
 ## 8.1.2
 
 ### Patch Changes
