@@ -80,9 +80,5 @@
   },
   "publishConfig": {
     "provenance": true
-  },
-  "volta": {
-    "node": "24.19.0",
-    "pnpm": "11.24.0"
   }
 }

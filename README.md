@@ -4,6 +4,12 @@
 
 Side- og skjemagenerering basert på JSON-input for bruk i domstolenes tjenester.
 
+## Utvikling
+
+Installer [mise](https://mise.jdx.dev/), og kjør `mise install` og `mise run install` i prosjektmappen. Node og pnpm hentes fra `mise.toml`. Kjør for eksempel `mise run test`, `mise run build` eller `mise tasks` for å se tilgjengelige oppgaver.
+
+Hvis mise ber deg godkjenne prosjektkonfigurasjonen, se gjennom `mise.toml` og kjør `mise trust` i prosjektmappen før du installerer verktøy eller kjører oppgaver.
+
 ## 📦 Installasjon
 
 ```sh

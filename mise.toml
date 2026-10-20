@@ -1,0 +1,17 @@
+[tools]
+node = "24.19.0"
+pnpm = "11.24.0"
+
+[settings]
+idiomatic_version_file_enable_tools = ["pnpm"]
+
+[tasks]
+install = "pnpm install --frozen-lockfile"
+build = "pnpm run build"
+test = "pnpm run test"
+lint = "pnpm run lint"
+typecheck = "pnpm run typecheck"
+"format:check" = "pnpm run format:check"
+"build:storybook" = "pnpm run build:storybook"
+release = "pnpm release"
+changeset = "pnpm changeset"
