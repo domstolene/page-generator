@@ -21,7 +21,7 @@ jobs:
         uses: ./.github/composite-actions/install
 
       - name: Build 🔧
-        run: pnpm run build:storybook
+        run: mise run build:storybook
 
       - name: Setup Pages
         uses: actions/configure-pages@v6
@@ -30,7 +30,7 @@ jobs:
         uses: actions/upload-pages-artifact@v5
         with:
           # Upload entire repository
-          path: './storybook-static'
+          path: "./storybook-static"
 
       - name: Deploy 🚀
         uses: actions/deploy-pages@v5
