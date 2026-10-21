@@ -10,3 +10,4 @@ overrides:
   js-yaml: ^4.3.2
   '@babel/core': ^7.29.6
   undici: ^7.30.0
+  shell-quote: ^1.11.0
