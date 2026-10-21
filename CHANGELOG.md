@@ -1,5 +1,11 @@
 # @norges-domstoler/dds-page-generator
 
+## 8.3.0
+
+### Minor Changes
+
+- 66d00f1: Migrer til mise
+
 ## 8.2.0
 
 ### Minor Changes
