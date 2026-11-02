@@ -38,8 +38,6 @@ export enum PageGeneratorSupportedFields {
   TextInput = 'TextInput',
   ToggleBar = 'ToggleBar',
   ToggleRadio = 'ToggleRadio',
-  ToggleButton = 'ToggleButton',
-  ToggleButtonGroup = 'ToggleButtonGroup',
   Tooltip = 'Tooltip',
   Typography = 'Typography',
   VisuallyHidden = 'VisuallyHidden',

@@ -211,26 +211,6 @@ export const OtherFields = (): (PageGeneratorField | PageGeneratorRow)[] => {
       innerHTML: 'Dette er en VisuallyHidden',
     },
     {
-      component: PageGeneratorSupportedFields.ToggleButtonGroup,
-      props: {
-        label: 'Dette er ToggleButtonGroup',
-      },
-      children: [
-        {
-          component: PageGeneratorSupportedFields.ToggleButton,
-          props: {
-            label: 'ToggleButton 1',
-          },
-        },
-        {
-          component: PageGeneratorSupportedFields.ToggleButton,
-          props: {
-            label: 'ToggleButton 2',
-          },
-        },
-      ],
-    },
-    {
       component: PageGeneratorSupportedFields.List,
       children: [
         {

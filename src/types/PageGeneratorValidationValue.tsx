@@ -1,6 +1,3 @@
-import { PageGeneratorSelectOption } from './PageGeneratorSelectOption';
-import { CalendarDate } from '@internationalized/date';
+import { PageGeneratorStateOptionTypes } from './PageGeneratorState';
 
-export type PageGeneratorValidationValue = string &
-  PageGeneratorSelectOption &
-  CalendarDate;
+export type PageGeneratorValidationValue = PageGeneratorStateOptionTypes;

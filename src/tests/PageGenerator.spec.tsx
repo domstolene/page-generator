@@ -1,7 +1,7 @@
 import { describe, test, expect, vi, beforeEach } from 'vitest';
 import { render, screen, fireEvent } from '@testing-library/react';
 import { DdsProvider } from '@norges-domstoler/dds-components';
-import { ReactElement } from 'react';
+import { ReactElement, useState } from 'react';
 import { PageGenerator } from '../components';
 import {
   PageGeneratorField,
@@ -153,6 +153,37 @@ describe('<PageGenerator />', () => {
   });
 
   describe('Input Components', () => {
+    test('updates a precisely typed text state without casts', () => {
+      const TextForm = () => {
+        const [textState, setTextState] = useState({ firstName: '' });
+        const fields: PageGeneratorField[] = [
+          {
+            component: PageGeneratorSupportedFields.TextInput,
+            props: {
+              name: 'firstName',
+              label: 'First Name',
+              value: textState.firstName,
+            },
+          },
+        ];
+
+        return (
+          <PageGenerator
+            as="div"
+            fields={fields}
+            state={textState}
+            setState={setTextState}
+          />
+        );
+      };
+
+      renderWithProvider(<TextForm />);
+      fireEvent.change(screen.getByLabelText('First Name'), {
+        target: { value: 'Jane' },
+      });
+      expect(screen.getByLabelText('First Name')).toHaveValue('Jane');
+    });
+
     test('renders TextInput and handles onChange', () => {
       const fields: PageGeneratorField[] = [
         {
@@ -620,6 +651,33 @@ describe('<PageGenerator />', () => {
       expect(screen.getByText('Card content')).toBeInTheDocument();
     });
 
+    test('renders Card with children', () => {
+      const fields: PageGeneratorField[] = [
+        {
+          component: PageGeneratorSupportedFields.Card,
+          props: { cardType: 'info' },
+          children: [
+            {
+              component: PageGeneratorSupportedFields.Paragraph,
+              props: {},
+              innerHTML: 'Nested card content',
+            },
+          ],
+        },
+      ];
+
+      renderWithProvider(
+        <PageGenerator
+          as="div"
+          fields={fields}
+          state={state}
+          setState={setState}
+        />,
+      );
+
+      expect(screen.getByText('Nested card content')).toBeInTheDocument();
+    });
+
     test('renders CheckboxGroup with children', () => {
       const fields: PageGeneratorField[] = [
         {
@@ -652,6 +710,34 @@ describe('<PageGenerator />', () => {
       // Check checkboxes are rendered
       const checkboxes = screen.getAllByRole('checkbox');
       expect(checkboxes).toHaveLength(2);
+    });
+
+    test('does not mutate RadioButtonGroup props during render', () => {
+      const props = Object.freeze({ direction: 'column' as const });
+      const fields: PageGeneratorField[] = [
+        {
+          component: PageGeneratorSupportedFields.RadioButtonGroup,
+          props,
+          children: [
+            {
+              component: PageGeneratorSupportedFields.RadioButton,
+              props: { name: 'choice', label: 'Option', value: 'option' },
+            },
+          ],
+        },
+      ];
+
+      renderWithProvider(
+        <PageGenerator
+          as="div"
+          fields={fields}
+          state={state}
+          setState={setState}
+        />,
+      );
+
+      expect(screen.getByRole('radio')).toBeInTheDocument();
+      expect(props.direction).toBe('column');
     });
   });
 

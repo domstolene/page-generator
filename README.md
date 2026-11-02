@@ -22,46 +22,50 @@ npm install @norges-domstoler/dds-page-generator
 
 ## 🔨 Bruk
 
-```js
+```tsx
+import { useState } from 'react';
 import {
   PageGenerator,
-  SectionGenerator,
-  PageGeneratorState
+  PageGeneratorSupportedFields,
+  type PageGeneratorField,
 } from '@norges-domstoler/dds-page-generator';
 
-const [myState, setMyState] = useState<PageGeneratorState>({
+export function Example() {
+  const [myState, setMyState] = useState({
     firstName: '',
     lastName: '',
-});
+  });
 
-const fields = [{
-    fields: [
+  const fields: PageGeneratorField[] = [
     {
-        component: FormGeneratorSupportedFields.TextInput,
-        props: {
-            label: 'Fornavn',
-            type: 'text',
-            name: 'firstName',
-            value: myState.firstName as string
-        },
+      component: PageGeneratorSupportedFields.TextInput,
+      props: {
+        label: 'Fornavn',
+        type: 'text',
+        name: 'firstName',
+        value: myState.firstName,
+      },
     },
     {
-        component: FormGeneratorSupportedFields.TextInput,
-        props: {
-            label: 'Etternavn',
-            type: 'text',
-            name: 'lastName',
-            value: myState.lastName as string
-        },
-    }],
-}];
+      component: PageGeneratorSupportedFields.TextInput,
+      props: {
+        label: 'Etternavn',
+        type: 'text',
+        name: 'lastName',
+        value: myState.lastName,
+      },
+    },
+  ];
 
-useEffect(() => {
-    console.log('updated state', state);
-}, [state]);
-
-<PageGenerator as="form" fields={fields} state={myState} setState={setMyState} />
-<SectionGenerator as="form" fields={fields} state={myState} setState={setMyState} />
+  return (
+    <PageGenerator
+      as="form"
+      fields={fields}
+      state={myState}
+      setState={setMyState}
+    />
+  );
+}
 ```
 
 ## Migreringsguide fra v4 til v5
@@ -70,8 +74,8 @@ Det er gjort endringer i state-håndtering for å unngå duplikater av state. I 
 
 - `stateOnChange` er ikke lenger støttet som property.
 - `state` og `setState` må settes som property.
-- Man bør bruke typen `PageGeneratorState`.
-- Man bør bruke property'en `value` for en skjema-komponent og den bør castes til riktig type. Alle aktuelle typer kan finnes i `PageGeneratorStateOptionTypes`
+- La gjerne `useState` utlede typen fra startverdiene, eller angi en konkret state-type for felt med flere mulige verdityper. `PageGeneratorState` kan brukes når feltene er dynamiske.
+- Bruk property-en `value` for skjema-komponenter; med konkret state-type trengs normalt ingen typekonvertering.
 - Om man vil fange opp endringer på state, kan man bruke `useEffect`.
 
 Se i eksempelet over for hvordan dette kan gjøres.

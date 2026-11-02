@@ -25,8 +25,6 @@ import {
   Spinner,
   TextArea,
   TextInput,
-  ToggleButton,
-  ToggleButtonGroup,
   VisuallyHidden,
   HStack,
   VStack,
@@ -101,9 +99,11 @@ export const GenerateComponent = (props: GenerateComponentProps) => {
           </Card>
         );
       } else if (field.children) {
-        <Card {...field.props} key={index}>
-          <SectionGenerator as="fragment" fields={field.children} />
-        </Card>;
+        return (
+          <Card {...field.props} key={index}>
+            <SectionGenerator as="fragment" fields={field.children} />
+          </Card>
+        );
       }
       return <></>;
     case PageGeneratorSupportedFields.Checkbox:
@@ -135,9 +135,7 @@ export const GenerateComponent = (props: GenerateComponentProps) => {
           onChange={(value: CalendarDate | null) =>
             datePickerOnChange(value, field.name)
           }
-          onBlur={(_event: unknown) => {
-            onBlurSelect(field.name);
-          }}
+          onBlur={() => onBlurSelect(field.name)}
         />
       );
     case PageGeneratorSupportedFields.DescriptionList:
@@ -393,9 +391,12 @@ export const GenerateComponent = (props: GenerateComponentProps) => {
         />
       );
     case PageGeneratorSupportedFields.RadioButtonGroup:
-      field.props.direction = screenSize > ScreenSize.XSmall ? 'row' : 'column';
       return (
-        <RadioButtonGroup {...field.props} key={index}>
+        <RadioButtonGroup
+          {...field.props}
+          direction={screenSize > ScreenSize.XSmall ? 'row' : 'column'}
+          key={index}
+        >
           {field.children.map((child, childIndex) => {
             return (
               !child.hide && (
@@ -469,31 +470,6 @@ export const GenerateComponent = (props: GenerateComponentProps) => {
             );
           })}
         </ToggleBar>
-      );
-    case PageGeneratorSupportedFields.ToggleButton:
-      return (
-        <ToggleButton
-          {...field.props}
-          key={index}
-          onChange={inputFieldOnChange}
-        />
-      );
-    case PageGeneratorSupportedFields.ToggleButtonGroup:
-      return (
-        <ToggleButtonGroup {...field.props} key={index}>
-          {field.children.map((child, childIndex) => {
-            return (
-              !child.hide && (
-                <GenerateComponent
-                  key={childIndex}
-                  index={childIndex}
-                  field={child}
-                  gridChildProps={props.gridChildProps}
-                />
-              )
-            );
-          })}
-        </ToggleButtonGroup>
       );
     case PageGeneratorSupportedFields.ToggleRadio:
       return (

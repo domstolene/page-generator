@@ -1,12 +1,12 @@
 /// <reference types="vitest" />
 
-import path from 'path';
+import { fileURLToPath } from 'node:url';
 import { defineConfig } from 'vitest/config';
 
 export default defineConfig({
   test: {
     globals: true,
     environment: 'jsdom',
-    setupFiles: [path.resolve(__dirname, 'src/setupTests.ts')],
+    setupFiles: [fileURLToPath(new URL('./src/setupTests.ts', import.meta.url))],
   },
 });

@@ -48,15 +48,12 @@ export default [{
         "@typescript-eslint/no-unused-vars": "off",
     },
 }, {
-    files: ["packages/**/*.ts", "packages/**/*.tsx"],
+    files: ["src/**/*.ts", "src/**/*.tsx"],
 
     languageOptions: {
-        ecmaVersion: 5,
-        sourceType: "script",
-
         parserOptions: {
             project: true,
-            tsconfigRootDir: "/Users/oivindjenssen/dev/page-generator",
+            tsconfigRootDir: __dirname,
         },
     },
 }];
