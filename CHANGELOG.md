@@ -1,5 +1,11 @@
 # @norges-domstoler/dds-page-generator
 
+## 9.0.0
+
+### Major Changes
+
+- 6775430: Oppdater til siste versjon av designsystem
+
 ## 8.3.0
 
 ### Minor Changes
