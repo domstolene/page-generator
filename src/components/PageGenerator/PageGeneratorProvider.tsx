@@ -9,6 +9,7 @@ import {
   PageGeneratorValidation,
   PageGeneratorValidationValue,
   PageGeneratorState,
+  FieldWithValidations,
 } from '../../types';
 import { ChangeEvent, FocusEvent, JSX, useEffect, useState } from 'react';
 import { CalendarDate } from '@internationalized/date';
@@ -25,6 +26,23 @@ interface PageGeneratorProviderProps<TState extends PageGeneratorState> {
   state?: TState;
   setState?: PageGeneratorProps<TState>['setState'];
 }
+
+const getValidationFields = (
+  fields: (PageGeneratorField | PageGeneratorRow)[],
+): FieldWithValidations[] => {
+  const validationFields: FieldWithValidations[] = [];
+  for (const field of fields) {
+    if (isFieldWithValidations(field)) {
+      validationFields.push(field);
+    }
+    if (isPageGeneratorRow(field)) {
+      validationFields.push(...getValidationFields(field.fields));
+    } else if ('children' in field && Array.isArray(field.children)) {
+      validationFields.push(...getValidationFields(field.children));
+    }
+  }
+  return validationFields;
+};
 
 export const PageGeneratorProvider = <TState extends PageGeneratorState>({
   children,
@@ -89,31 +107,15 @@ export const PageGeneratorProvider = <TState extends PageGeneratorState>({
     }
   }, [formData.errors]);
 
-  const findFieldByNameInternal = (
-    name: string,
-    fieldsToSearch: (PageGeneratorField | PageGeneratorRow)[],
-  ): PageGeneratorField | PageGeneratorRow | null => {
-    for (const f of fieldsToSearch) {
-      // Search for fields with validation named name
-      if (isFieldWithValidations(f) && f.props && f.props.name === name) {
-        return f;
-      }
-      // If it's a row, search through it's fields recursively
-      if (isPageGeneratorRow(f) && f.fields && Array.isArray(f.fields)) {
-        const result = findFieldByNameInternal(name, f.fields);
-        if (result) {
-          return result;
-        }
-      }
-    }
-    return null;
-  };
+  const validationFields = getValidationFields(fields);
+  const findFieldByNameInternal = (name: string) =>
+    validationFields.find(field => field.props.name === name);
 
   const getFieldErrors = (
     name: string,
     value: PageGeneratorValidationValue,
   ) => {
-    const field = findFieldByNameInternal(name, fields);
+    const field = findFieldByNameInternal(name);
     if (field && isFieldWithValidations(field)) {
       const fieldErrors =
         field.validations?.filter(
@@ -125,7 +127,7 @@ export const PageGeneratorProvider = <TState extends PageGeneratorState>({
   };
 
   const validateField = (name: string, value: PageGeneratorValidationValue) => {
-    const field = findFieldByNameInternal(name, fields);
+    const field = findFieldByNameInternal(name);
     if (field && isFieldWithValidations(field)) {
       const fieldErrors = getFieldErrors(name, value);
       setFormData(previous => ({
@@ -138,7 +140,7 @@ export const PageGeneratorProvider = <TState extends PageGeneratorState>({
 
   const validateAllFields = (next: () => void) => {
     let newErrors: PageGeneratorErrors = {};
-    fields.forEach(field => {
+    validationFields.forEach(field => {
       if (isFieldWithValidations(field) && state && field.props?.name) {
         const value = state[field.props.name];
         const name = field.props.name;
