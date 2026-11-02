@@ -7,7 +7,9 @@ import {
 } from './PageGeneratorState';
 import { PageGeneratorFormData } from './PageGeneratorFormData';
 
-export type PageGeneratorProps = BaseComponentPropsWithChildren<
+export type PageGeneratorProps<
+  TState extends PageGeneratorState = PageGeneratorState,
+> = BaseComponentPropsWithChildren<
   HTMLElement,
   {
     /** Definere liste med felt/komponenter og/eller rader med felt/komponenter */
@@ -17,9 +19,9 @@ export type PageGeneratorProps = BaseComponentPropsWithChildren<
     /** Setter form eller div på Grid-komponenten */
     as: 'div' | 'form';
     /** Sende inn state slik at verdier kan oppdateres. */
-    state?: PageGeneratorState;
+    state?: TState;
     /** Sende inn state slik at verdier kan oppdateres. */
-    setState?: PageGeneratorSetState;
+    setState?: PageGeneratorSetState<TState>;
     /** Velge om man ønsker validering fra browser eller ikke. Bør kun brukes når `as` er satt til `form`. */
     noValidate?: boolean;
     /** Submit-metode som skal kalles onSubmit */

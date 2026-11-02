@@ -1,7 +1,7 @@
 import { describe, test, expect, vi, beforeEach } from 'vitest';
 import { render, screen, fireEvent } from '@testing-library/react';
 import { DdsProvider } from '@norges-domstoler/dds-components';
-import { ReactElement } from 'react';
+import { ReactElement, useState } from 'react';
 import { PageGenerator } from '../components';
 import {
   PageGeneratorField,
@@ -153,6 +153,37 @@ describe('<PageGenerator />', () => {
   });
 
   describe('Input Components', () => {
+    test('updates a precisely typed text state without casts', () => {
+      const TextForm = () => {
+        const [textState, setTextState] = useState({ firstName: '' });
+        const fields: PageGeneratorField[] = [
+          {
+            component: PageGeneratorSupportedFields.TextInput,
+            props: {
+              name: 'firstName',
+              label: 'First Name',
+              value: textState.firstName,
+            },
+          },
+        ];
+
+        return (
+          <PageGenerator
+            as="div"
+            fields={fields}
+            state={textState}
+            setState={setTextState}
+          />
+        );
+      };
+
+      renderWithProvider(<TextForm />);
+      fireEvent.change(screen.getByLabelText('First Name'), {
+        target: { value: 'Jane' },
+      });
+      expect(screen.getByLabelText('First Name')).toHaveValue('Jane');
+    });
+
     test('renders TextInput and handles onChange', () => {
       const fields: PageGeneratorField[] = [
         {
@@ -620,6 +651,181 @@ describe('<PageGenerator />', () => {
       expect(screen.getByText('Card content')).toBeInTheDocument();
     });
 
+    test('renders Card with children', () => {
+      const fields: PageGeneratorField[] = [
+        {
+          component: PageGeneratorSupportedFields.Card,
+          props: { cardType: 'info' },
+          children: [
+            {
+              component: PageGeneratorSupportedFields.Paragraph,
+              props: {},
+              innerHTML: 'Nested card content',
+            },
+          ],
+        },
+      ];
+
+      renderWithProvider(
+        <PageGenerator
+          as="div"
+          fields={fields}
+          state={state}
+          setState={setState}
+        />,
+      );
+
+      expect(screen.getByText('Nested card content')).toBeInTheDocument();
+    });
+
+    test.each(['direct', 'fieldset', 'card', 'row'] as const)(
+      'preserves input focus and state inside a Card with %s children',
+      nesting => {
+        const Form = () => {
+          const [state, setState] = useState({ firstName: '' });
+          const inputField: PageGeneratorField = {
+            component: PageGeneratorSupportedFields.TextInput,
+            props: {
+              label: 'First name',
+              name: 'firstName',
+              value: state.firstName,
+            },
+          };
+          const fields: PageGeneratorField[] = [
+            {
+              component: PageGeneratorSupportedFields.Card,
+              props: { cardType: 'info' },
+              children:
+                nesting === 'fieldset'
+                  ? [
+                      {
+                        component: PageGeneratorSupportedFields.Fieldset,
+                        props: {},
+                        children: [inputField],
+                      },
+                    ]
+                  : nesting === 'card'
+                    ? [
+                        {
+                          component: PageGeneratorSupportedFields.Card,
+                          props: { cardType: 'info' },
+                          children: [inputField],
+                        },
+                      ]
+                    : nesting === 'row'
+                      ? [{ fields: [inputField], as: 'fragment' }]
+                      : [inputField],
+            },
+          ];
+
+          return (
+            <PageGenerator
+              as="form"
+              fields={fields}
+              state={state}
+              setState={setState}
+            />
+          );
+        };
+
+        renderWithProvider(<Form />);
+
+        const input = screen.getByRole('textbox', { name: 'First name' });
+        input.focus();
+        expect(input).toHaveFocus();
+
+        fireEvent.change(input, { target: { value: 'A' } });
+
+        expect(screen.getByRole('textbox', { name: 'First name' })).toBe(input);
+        expect(input).toHaveFocus();
+        expect(input).toHaveValue('A');
+
+        fireEvent.change(input, { target: { value: 'Ada' } });
+
+        expect(screen.getByRole('textbox', { name: 'First name' })).toBe(input);
+        expect(input).toHaveFocus();
+        expect(input).toHaveValue('Ada');
+      },
+    );
+
+    test.each(['direct', 'fieldset', 'card', 'row'] as const)(
+      'validates a required Card input with %s children on blur and submit',
+      nesting => {
+        const onSubmit = vi.fn();
+        const Form = () => {
+          const [state, setState] = useState({ firstName: '' });
+          const inputField: PageGeneratorField = {
+            component: PageGeneratorSupportedFields.TextInput,
+            props: {
+              label: 'First name',
+              name: 'firstName',
+              value: state.firstName,
+            },
+            validations: [RequiredValidator('First name is required')],
+          };
+          const fields: PageGeneratorField[] = [
+            {
+              component: PageGeneratorSupportedFields.Card,
+              props: { cardType: 'info' },
+              children:
+                nesting === 'fieldset'
+                  ? [
+                      {
+                        component: PageGeneratorSupportedFields.Fieldset,
+                        props: {},
+                        children: [inputField],
+                      },
+                    ]
+                  : nesting === 'card'
+                    ? [
+                        {
+                          component: PageGeneratorSupportedFields.Card,
+                          props: { cardType: 'info' },
+                          children: [inputField],
+                        },
+                      ]
+                    : nesting === 'row'
+                      ? [{ fields: [inputField], as: 'fragment' }]
+                      : [inputField],
+            },
+          ];
+          return (
+            <PageGenerator
+              as="form"
+              fields={fields}
+              state={state}
+              setState={setState}
+              noValidate
+              onSubmit={onSubmit}
+            />
+          );
+        };
+
+        renderWithProvider(<Form />);
+        const input = screen.getByRole('textbox', { name: 'First name' });
+        const form = input.closest('form')!;
+
+        fireEvent.submit(form);
+        expect(onSubmit).not.toHaveBeenCalled();
+        expect(screen.getByText('First name is required')).toBeInTheDocument();
+
+        fireEvent.change(input, { target: { value: 'Ada' } });
+        fireEvent.blur(input);
+        expect(
+          screen.queryByText('First name is required'),
+        ).not.toBeInTheDocument();
+
+        fireEvent.change(input, { target: { value: '' } });
+        fireEvent.blur(input);
+        expect(screen.getByText('First name is required')).toBeInTheDocument();
+        expect(onSubmit).not.toHaveBeenCalled();
+
+        fireEvent.change(input, { target: { value: 'Ada' } });
+        fireEvent.submit(form);
+        expect(onSubmit).toHaveBeenCalledOnce();
+      },
+    );
+
     test('renders CheckboxGroup with children', () => {
       const fields: PageGeneratorField[] = [
         {
@@ -652,6 +858,34 @@ describe('<PageGenerator />', () => {
       // Check checkboxes are rendered
       const checkboxes = screen.getAllByRole('checkbox');
       expect(checkboxes).toHaveLength(2);
+    });
+
+    test('does not mutate RadioButtonGroup props during render', () => {
+      const props = Object.freeze({ direction: 'column' as const });
+      const fields: PageGeneratorField[] = [
+        {
+          component: PageGeneratorSupportedFields.RadioButtonGroup,
+          props,
+          children: [
+            {
+              component: PageGeneratorSupportedFields.RadioButton,
+              props: { name: 'choice', label: 'Option', value: 'option' },
+            },
+          ],
+        },
+      ];
+
+      renderWithProvider(
+        <PageGenerator
+          as="div"
+          fields={fields}
+          state={state}
+          setState={setState}
+        />,
+      );
+
+      expect(screen.getByRole('radio')).toBeInTheDocument();
+      expect(props.direction).toBe('column');
     });
   });
 

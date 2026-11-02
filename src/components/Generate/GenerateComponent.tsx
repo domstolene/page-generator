@@ -25,8 +25,6 @@ import {
   Spinner,
   TextArea,
   TextInput,
-  ToggleButton,
-  ToggleButtonGroup,
   VisuallyHidden,
   HStack,
   VStack,
@@ -47,8 +45,10 @@ import {
   InlineButton,
 } from '@norges-domstoler/dds-components';
 import { PageGeneratorField, PageGeneratorSupportedFields } from '../../types';
-import { ChangeEvent } from 'react';
-import { SectionGenerator } from '../../components';
+import { ChangeEvent, useContext } from 'react';
+import { isFieldWithValidations, isSectionGeneratorRow } from '../../helpers';
+import { PageGeneratorContext } from '../PageGenerator/PageGeneratorContext';
+import { GenerateRow } from './GenerateRow';
 import {
   GenerateGridChild,
   GenerateGridChildProperties,
@@ -65,6 +65,11 @@ interface GenerateComponentProps {
 
 export const GenerateComponent = (props: GenerateComponentProps) => {
   const { index, field, gridChildProps } = props;
+  const { formData } = useContext(PageGeneratorContext);
+  const validationErrorMessage =
+    isFieldWithValidations(field) && field.props.name && formData.errorMessages
+      ? formData.errorMessages[field.props.name]
+      : undefined;
   const {
     fieldOnChange,
     selectOnChange,
@@ -101,9 +106,27 @@ export const GenerateComponent = (props: GenerateComponentProps) => {
           </Card>
         );
       } else if (field.children) {
-        <Card {...field.props} key={index}>
-          <SectionGenerator as="fragment" fields={field.children} />
-        </Card>;
+        return (
+          <Card {...field.props} key={index}>
+            {field.children.map((child, childIndex) =>
+              child.hide ? null : isSectionGeneratorRow(child) ? (
+                <GenerateRow
+                  key={childIndex}
+                  index={childIndex}
+                  fields={child.fields}
+                  gridChildProps={gridChildProps}
+                />
+              ) : (
+                <GenerateComponent
+                  key={childIndex}
+                  index={childIndex}
+                  field={child}
+                  gridChildProps={gridChildProps}
+                />
+              ),
+            )}
+          </Card>
+        );
       }
       return <></>;
     case PageGeneratorSupportedFields.Checkbox:
@@ -131,13 +154,12 @@ export const GenerateComponent = (props: GenerateComponentProps) => {
       return (
         <DatePicker
           {...field.props}
+          errorMessage={validationErrorMessage ?? field.props.errorMessage}
           key={index}
           onChange={(value: CalendarDate | null) =>
             datePickerOnChange(value, field.name)
           }
-          onBlur={(_event: unknown) => {
-            onBlurSelect(field.name);
-          }}
+          onBlur={() => onBlurSelect(field.name)}
         />
       );
     case PageGeneratorSupportedFields.DescriptionList:
@@ -393,9 +415,12 @@ export const GenerateComponent = (props: GenerateComponentProps) => {
         />
       );
     case PageGeneratorSupportedFields.RadioButtonGroup:
-      field.props.direction = screenSize > ScreenSize.XSmall ? 'row' : 'column';
       return (
-        <RadioButtonGroup {...field.props} key={index}>
+        <RadioButtonGroup
+          {...field.props}
+          direction={screenSize > ScreenSize.XSmall ? 'row' : 'column'}
+          key={index}
+        >
           {field.children.map((child, childIndex) => {
             return (
               !child.hide && (
@@ -424,6 +449,7 @@ export const GenerateComponent = (props: GenerateComponentProps) => {
       return (
         <Select
           {...field.props}
+          errorMessage={validationErrorMessage ?? field.props.errorMessage}
           key={index}
           onChange={option => selectOnChange(option, field.name)}
           onBlur={_event => {
@@ -439,6 +465,7 @@ export const GenerateComponent = (props: GenerateComponentProps) => {
       return (
         <TextArea
           {...field.props}
+          errorMessage={validationErrorMessage ?? field.props.errorMessage}
           key={index}
           onChange={textAreaFieldOnChange}
           onBlur={onBlur}
@@ -448,6 +475,7 @@ export const GenerateComponent = (props: GenerateComponentProps) => {
       return (
         <TextInput
           {...field.props}
+          errorMessage={validationErrorMessage ?? field.props.errorMessage}
           key={index}
           onChange={inputFieldOnChange}
           onBlur={onBlur}
@@ -469,31 +497,6 @@ export const GenerateComponent = (props: GenerateComponentProps) => {
             );
           })}
         </ToggleBar>
-      );
-    case PageGeneratorSupportedFields.ToggleButton:
-      return (
-        <ToggleButton
-          {...field.props}
-          key={index}
-          onChange={inputFieldOnChange}
-        />
-      );
-    case PageGeneratorSupportedFields.ToggleButtonGroup:
-      return (
-        <ToggleButtonGroup {...field.props} key={index}>
-          {field.children.map((child, childIndex) => {
-            return (
-              !child.hide && (
-                <GenerateComponent
-                  key={childIndex}
-                  index={childIndex}
-                  field={child}
-                  gridChildProps={props.gridChildProps}
-                />
-              )
-            );
-          })}
-        </ToggleButtonGroup>
       );
     case PageGeneratorSupportedFields.ToggleRadio:
       return (

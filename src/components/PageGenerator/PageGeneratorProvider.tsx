@@ -8,6 +8,8 @@ import {
   PageGeneratorSelectOption,
   PageGeneratorValidation,
   PageGeneratorValidationValue,
+  PageGeneratorState,
+  FieldWithValidations,
 } from '../../types';
 import { ChangeEvent, FocusEvent, JSX, useEffect, useState } from 'react';
 import { CalendarDate } from '@internationalized/date';
@@ -17,21 +19,38 @@ import {
   isMultiValue,
 } from '../../helpers';
 
-interface PageGeneratorProviderProps {
+interface PageGeneratorProviderProps<TState extends PageGeneratorState> {
   fields: PageGeneratorProps['fields'];
   formDataOnChange: PageGeneratorProps['formDataOnChange'];
   children: (validateAllFields: (next: () => void) => void) => JSX.Element;
-  state?: PageGeneratorProps['state'];
-  setState?: PageGeneratorProps['setState'];
+  state?: TState;
+  setState?: PageGeneratorProps<TState>['setState'];
 }
 
-export const PageGeneratorProvider = ({
+const getValidationFields = (
+  fields: (PageGeneratorField | PageGeneratorRow)[],
+): FieldWithValidations[] => {
+  const validationFields: FieldWithValidations[] = [];
+  for (const field of fields) {
+    if (isFieldWithValidations(field)) {
+      validationFields.push(field);
+    }
+    if (isPageGeneratorRow(field)) {
+      validationFields.push(...getValidationFields(field.fields));
+    } else if ('children' in field && Array.isArray(field.children)) {
+      validationFields.push(...getValidationFields(field.children));
+    }
+  }
+  return validationFields;
+};
+
+export const PageGeneratorProvider = <TState extends PageGeneratorState>({
   children,
   fields,
   formDataOnChange,
   state,
   setState,
-}: PageGeneratorProviderProps) => {
+}: PageGeneratorProviderProps<TState>) => {
   const [formData, setFormData] = useState<PageGeneratorFormData>({
     errors: null,
     errorMessages: null,
@@ -41,10 +60,9 @@ export const PageGeneratorProvider = ({
   });
 
   useEffect(() => {
-    setFormData({
-      ...formData,
-      submitted: false,
-    });
+    setFormData(previous =>
+      previous.submitted ? { ...previous, submitted: false } : previous,
+    );
   }, [state]);
 
   useEffect(() => {
@@ -89,31 +107,15 @@ export const PageGeneratorProvider = ({
     }
   }, [formData.errors]);
 
-  const findFieldByNameInternal = (
-    name: string,
-    fieldsToSearch: (PageGeneratorField | PageGeneratorRow)[],
-  ): PageGeneratorField | PageGeneratorRow | null => {
-    for (const f of fieldsToSearch) {
-      // Search for fields with validation named name
-      if (isFieldWithValidations(f) && f.props && f.props.name === name) {
-        return f;
-      }
-      // If it's a row, search through it's fields recursively
-      if (isPageGeneratorRow(f) && f.fields && Array.isArray(f.fields)) {
-        const result = findFieldByNameInternal(name, f.fields);
-        if (result) {
-          return result;
-        }
-      }
-    }
-    return null;
-  };
+  const validationFields = getValidationFields(fields);
+  const findFieldByNameInternal = (name: string) =>
+    validationFields.find(field => field.props.name === name);
 
   const getFieldErrors = (
     name: string,
     value: PageGeneratorValidationValue,
   ) => {
-    const field = findFieldByNameInternal(name, fields);
+    const field = findFieldByNameInternal(name);
     if (field && isFieldWithValidations(field)) {
       const fieldErrors =
         field.validations?.filter(
@@ -125,32 +127,22 @@ export const PageGeneratorProvider = ({
   };
 
   const validateField = (name: string, value: PageGeneratorValidationValue) => {
-    const field = findFieldByNameInternal(name, fields);
+    const field = findFieldByNameInternal(name);
     if (field && isFieldWithValidations(field)) {
-      const fieldErrors =
-        field.validations?.filter(
-          (v: PageGeneratorValidation) => !v.rule(value),
-        ) ?? [];
-      const newErrors = {
-        ...formData.errors,
-        [name]: {
-          value,
-          errors: fieldErrors,
-        },
-      };
-      setFormData({
-        ...formData,
-        errors: newErrors,
+      const fieldErrors = getFieldErrors(name, value);
+      setFormData(previous => ({
+        ...previous,
+        errors: { ...previous.errors, [name]: { value, errors: fieldErrors } },
         touched: true,
-      });
+      }));
     }
   };
 
   const validateAllFields = (next: () => void) => {
     let newErrors: PageGeneratorErrors = {};
-    fields.forEach(field => {
+    validationFields.forEach(field => {
       if (isFieldWithValidations(field) && state && field.props?.name) {
-        const value = state[field.props.name] as PageGeneratorValidationValue;
+        const value = state[field.props.name];
         const name = field.props.name;
         const fieldErrors = getFieldErrors(name, value);
         newErrors = {
@@ -170,12 +162,12 @@ export const PageGeneratorProvider = ({
         return;
       }
     });
-    setFormData({
-      ...formData,
+    setFormData(previous => ({
+      ...previous,
       submitted: true,
       errors: newErrors,
       valid,
-    });
+    }));
     if (valid) {
       next();
     }
@@ -187,12 +179,12 @@ export const PageGeneratorProvider = ({
     event: FocusEvent<T>,
   ) => {
     const { name, value } = event.target;
-    validateField(name, value as PageGeneratorValidationValue);
+    validateField(name, value);
   };
 
   const onBlurSelect = (name: string) => {
     if (state) {
-      validateField(name, state[name] as PageGeneratorValidationValue);
+      validateField(name, state[name]);
     }
   };
 
@@ -201,67 +193,57 @@ export const PageGeneratorProvider = ({
   ) => {
     const { id, name, value } = event.target;
     const checked = (event as ChangeEvent<HTMLInputElement>).target?.checked;
-    setFormData({
-      ...formData,
+    setFormData(previous => ({
+      ...previous,
       touched: true,
       errorMessages: {
-        ...formData.errorMessages,
+        ...previous.errorMessages,
         [name]: '',
       },
-    });
-    const newState = {
-      ...state,
-      [name || id]: event.target.type === 'checkbox' ? checked : value,
-    };
+    }));
     if (setState) {
-      setState(newState);
+      setState(previous => ({
+        ...previous,
+        [name || id]: event.target.type === 'checkbox' ? checked : value,
+      }));
     }
   };
 
   const selectOnChange = (chosen: PageGeneratorSelectOption, name: string) => {
-    // eslint-disable-next-line no-useless-assignment
     let value = null;
     if (isMultiValue(chosen)) {
       value = Array.isArray(chosen) ? chosen : null;
     } else {
       value = chosen ?? null;
     }
-    setFormData({
-      ...formData,
+    setFormData(previous => ({
+      ...previous,
       touched: true,
       submitted: false,
       errorMessages: {
-        ...formData.errorMessages,
+        ...previous.errorMessages,
         [name]: '',
       },
-    });
-    const newState = {
-      ...state,
-      [name]: value,
-    };
-    validateField(name, chosen as PageGeneratorValidationValue);
+    }));
+    validateField(name, chosen);
     if (setState) {
-      setState(newState);
+      setState(previous => ({ ...previous, [name]: value }));
     }
   };
 
   const datePickerOnChange = (value: CalendarDate | null, name: string) => {
-    const newState = {
-      ...state,
-      [name]: value,
-    };
-    setFormData({
-      ...formData,
+    setFormData(previous => ({
+      ...previous,
       touched: true,
       submitted: false,
       errorMessages: {
-        ...formData.errorMessages,
+        ...previous.errorMessages,
         [name]: '',
       },
-    });
-    validateField(name, value as PageGeneratorValidationValue);
+    }));
+    validateField(name, value);
     if (setState) {
-      setState(newState);
+      setState(previous => ({ ...previous, [name]: value }));
     }
   };
 

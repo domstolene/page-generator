@@ -14,6 +14,6 @@ export type PageGeneratorStateOptionTypes =
 
 export type PageGeneratorState = Record<string, PageGeneratorStateOptionTypes>;
 
-export type PageGeneratorSetState = Dispatch<
-  SetStateAction<PageGeneratorState>
->;
+export type PageGeneratorSetState<
+  TState extends PageGeneratorState = PageGeneratorState,
+> = Dispatch<SetStateAction<TState>>;

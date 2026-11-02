@@ -1,11 +1,6 @@
 import { idnr } from '@navikt/fnrvalidator';
-import {
-  PageGeneratorErrors,
-  PageGeneratorSelectOption,
-  PageGeneratorValidation,
-} from '../types';
+import { PageGeneratorErrors, PageGeneratorValidation } from '../types';
 import { Paragraph, List, ListItem } from '@norges-domstoler/dds-components';
-import { CalendarDate } from '@internationalized/date';
 import { JSX } from 'react';
 
 export const RequiredValidator = (
@@ -15,7 +10,7 @@ export const RequiredValidator = (
   return {
     message: message || 'Feltet er påkrevd',
     formMessage: formMessage || 'Feltet er påkrevd',
-    rule: (value: string) => !!value && value.length > 0,
+    rule: value => typeof value === 'string' && value.length > 0,
   };
 };
 
@@ -26,7 +21,7 @@ export const RequiredSelectValidator = (
   return {
     message: message || 'Feltet er påkrevd',
     formMessage: formMessage || 'Feltet er påkrevd',
-    rule: (value: PageGeneratorSelectOption) => {
+    rule: value => {
       if (Array.isArray(value)) {
         return value.length > 0;
       }
@@ -42,7 +37,7 @@ export const RequiredDatePickerValidator = (
   return {
     message: message || 'Feltet er påkrevd',
     formMessage: formMessage || 'Feltet er påkrevd',
-    rule: (value: CalendarDate) => !!value,
+    rule: value => !!value,
   };
 };
 
@@ -53,20 +48,22 @@ export const NumbersOnlyValidator = (
   return {
     message: message || 'Feltet kan bare inneholde tall',
     formMessage: formMessage || 'Feltet kan bare inneholde tall',
-    rule: (value: string) =>
-      value.length > 0 ? value.match(/^\d+$/) !== null : true,
+    rule: value =>
+      typeof value === 'string' && value.length > 0
+        ? value.match(/^\d+$/) !== null
+        : true,
   };
 };
 
 export const InvalidCharacterValidator = (
   message?: string,
   formMessage?: string,
-) => {
+): PageGeneratorValidation => {
   return {
     message: message || 'Feltet inneholder ugyldige tegn',
     formMessage: formMessage || 'Feltet inneholder ugyldige tegn',
-    rule: (value: string) =>
-      value.length > 0
+    rule: value =>
+      typeof value === 'string' && value.length > 0
         ? value.match(/[_:;<>§€!©"™£$%∞§\\|[{}\]=≈+?±¨^@*~]/g) === null
         : true,
   };
@@ -75,8 +72,8 @@ export const InvalidCharacterValidator = (
 export const NinValidator: PageGeneratorValidation = {
   message: 'Fødselsnummer er ugyldig',
   formMessage: 'Fødselsnummer er ugyldig',
-  rule: (value: string) => {
-    if (value.length > 0) {
+  rule: value => {
+    if (typeof value === 'string' && value.length > 0) {
       const result = idnr(value);
       return result.status === 'valid';
     }
@@ -87,15 +84,17 @@ export const NinValidator: PageGeneratorValidation = {
 export const PhoneNumberValidator: PageGeneratorValidation = {
   message: 'Kan bare inneholde tall',
   formMessage: 'Telefonnummer kan bare inneholde tall',
-  rule: (value: string) =>
-    value.length > 0 ? value.match(/^\d+$/) !== null : true,
+  rule: value =>
+    typeof value === 'string' && value.length > 0
+      ? value.match(/^\d+$/) !== null
+      : true,
 };
 
 export const EmailValidator: PageGeneratorValidation = {
   message: 'E-post er ugyldig',
   formMessage: 'E-post er ugyldig',
-  rule: (value: string) =>
-    value.length > 0
+  rule: value =>
+    typeof value === 'string' && value.length > 0
       ? value.match(/^[\w-.]+@([\w-]+\.)+[\w-]{2,4}$/) !== null
       : true,
 };

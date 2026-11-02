@@ -17,6 +17,6 @@
     "ignoreDeprecations": "6.0",
     "downlevelIteration": true
   },
-  "include": ["packages", "stories", "src", "vitest.config.ts"],
+  "include": ["packages", "stories", "src", "vitest.config.mts"],
   "exclude": ["node_modules"]
 }

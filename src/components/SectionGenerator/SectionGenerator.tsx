@@ -6,6 +6,7 @@ import {
   PageGeneratorField,
   PageGeneratorRow,
   SectionGeneratorProps,
+  PageGeneratorState,
 } from '../../types';
 import React, { JSX, useContext } from 'react';
 import { isSectionGeneratorRow } from '../../helpers';
@@ -19,7 +20,9 @@ import { GenerateGridChildProperties } from '../Generate/GenerateGridChild';
  * Generer komponenter fra @norges-domstoler/dds-components, basert på `fields` propertien. SectionGenerator legger på en wrapper, basert på `as` propertien.
  * @param props - `fields` inneholder felter eller rader med felter. `errorsOnChange` er callback for statehåndtering. `as` setter HTML-element rundt hele SectionGenerator.
  */
-export const SectionGenerator = (props: SectionGeneratorProps) => {
+export const SectionGenerator = <TState extends PageGeneratorState>(
+  props: SectionGeneratorProps<TState>,
+) => {
   const {
     fields = [],
     formDataOnChange,

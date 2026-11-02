@@ -21,8 +21,6 @@ import {
   SpinnerProps,
   TextAreaProps,
   TextInputProps,
-  ToggleButtonProps,
-  ToggleButtonGroupProps,
   VisuallyHiddenProps,
   DrawerGroupProps,
   Button,
@@ -67,7 +65,6 @@ type FieldWithChildren =
   | ListField
   | RadioButtonGroupField
   | ToggleBarField
-  | ToggleButtonGroupField
   | VStackField;
 
 type FieldWithoutChildren =
@@ -94,7 +91,6 @@ type FieldWithoutChildren =
   | SearchField
   | SpinnerField
   | SplitButtonField
-  | ToggleButtonField
   | ToggleRadioField
   | TooltipField
   | TypographyField
@@ -370,19 +366,6 @@ interface ToggleRadioField {
   component: PageGeneratorSupportedFields.ToggleRadio;
   props: ToggleRadioProps;
   hide?: boolean;
-}
-
-interface ToggleButtonField {
-  component: PageGeneratorSupportedFields.ToggleButton;
-  props: ToggleButtonProps;
-  hide?: boolean;
-}
-
-interface ToggleButtonGroupField {
-  component: PageGeneratorSupportedFields.ToggleButtonGroup;
-  props: ToggleButtonGroupProps;
-  hide?: boolean;
-  children: ToggleButtonField[];
 }
 
 interface TooltipField {

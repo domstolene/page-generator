@@ -25,13 +25,13 @@ export const FieldsetFields: (PageGeneratorField | PageGeneratorRow)[] = [
         validations: [
           {
             message: 'Påkrevd',
-            rule: (value: string) => {
-              return value.length > 0;
+            rule: value => {
+              return typeof value === 'string' && value.length > 0;
             },
           },
           {
             message: 'Må være omg',
-            rule: (value: string) => {
+            rule: value => {
               return value === 'omg';
             },
           },
@@ -93,7 +93,7 @@ export const FieldsetFields: (PageGeneratorField | PageGeneratorRow)[] = [
             validations: [
               {
                 message: 'Må være +47',
-                rule: (value: string) => {
+                rule: value => {
                   return value === '+47';
                 },
               },
